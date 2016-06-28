@@ -1,0 +1,7 @@
+html.ios, html.ios body, .pusher {
+  height: 100% !important;
+}
+
+.transitions-content {
+  overflow-y: auto !important;
+}
