@@ -13,11 +13,16 @@ Template.simplePoll.events({
   'click .button' (evt) {
     let presentationId = Router.current().params.prez;
     if (presentationId) {
-      Presentations.update({ _id: presentationId }, { $set: { color: evt.currentTarget.innerText }});
+      Presentations.update({ _id: presentationId },
+        { $set: { color: evt.currentTarget.innerText }}
+      );
     }
-  }
+    Meteor.call('upsertVote', 'color', evt.currentTarget.innerText);
+    Session.set('currentStat', 'pieStat');
+    Session.set('currentVoteId', 'color');
+  },
 });
 
 Template.simplePoll.onRendered(function () {
   let editor = new MediumEditor('.editable');
-})
+});

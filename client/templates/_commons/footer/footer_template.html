@@ -1,9 +1,9 @@
 <template name='footer'>
   <div class="ui bottom fixed menu">
-    <div class="item">
+    <a class="item" href="{{pathFor 'home'}}">
       <i class="green pied piper icon"></i>
-    </div>
-    <a class="item previousSlide">Previous</a>
+    </a>
+    <a class="item previousSlide" data-transition-out="slideRightOut" data-transition-in="slideRightIn">Previous</a>
     <a class="item nextSlide">Next</a>
   </div>
 </template>

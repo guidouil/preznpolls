@@ -1,0 +1,3 @@
+Presentations.insert({name: 'Prez #1', slides: ['coverSlide', 'textSlide', 'imageSlide', 'simplePoll'], viewIndex: 0});
+Presentations.insert({name: 'Prez #2', slides: ['coverSlide', 'textSlide', 'imageSlide', 'simplePoll'], viewIndex: 0});
+Presentations.insert({name: 'Prez #3', slides: ['coverSlide', 'textSlide', 'imageSlide', 'simplePoll'], viewIndex: 0});

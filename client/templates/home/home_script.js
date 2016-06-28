@@ -1,4 +1,7 @@
 Template.home.helpers({
+  presentations () {
+    return Presentations.find({}).fetch();
+  },
 });
 
 Template.home.events({
