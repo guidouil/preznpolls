@@ -25,14 +25,17 @@ Template.pieStat.onRendered(function () {
             y: (voteCount * 100) / totalVotes,
           };
           votesData.push(vote);
-        })
+        });
+        votesData = _.sortBy(votesData, 'y');
         $(function () {
           $('#pieChart').highcharts({
             chart: {
-              plotBackgroundColor: null,
-              plotBorderWidth: null,
-              plotShadow: false,
-              type: 'pie'
+              type: 'pie',
+              options3d: {
+                enabled: true,
+                alpha: 45,
+                beta: 0
+              }
             },
             title: {
               text: 'Favorite colors'
@@ -42,6 +45,7 @@ Template.pieStat.onRendered(function () {
             },
             plotOptions: {
               pie: {
+                depth: 35,
                 allowPointSelect: true,
                 cursor: 'pointer',
                 dataLabels: {
@@ -54,7 +58,7 @@ Template.pieStat.onRendered(function () {
               }
             },
             series: [{
-              name: 'Share',
+              name: 'Value',
               colorByPoint: true,
               data: votesData
             }]
