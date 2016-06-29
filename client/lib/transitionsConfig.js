@@ -1,2 +1,2 @@
-Transitions.transitionIn = 'slideLeftIn';
-Transitions.transitionOut = 'slideLeftOut';
+Transitions.transitionIn = 'slideFadeDownIn';
+Transitions.transitionOut = 'scaleOut';
