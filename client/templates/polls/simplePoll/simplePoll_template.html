@@ -1,7 +1,7 @@
 <template name='simplePoll'>
   <div class="transitions-content">
     <div class="ui container">
-      <div class="ui basic segment">
+      <div class="ui basic segment simplePoll">
         <h1 class="ui center aligned header editable">What is your favorite color ?</h1>
         <button class="ui huge red button">Red</button>
         <button class="ui huge orange button">Orange</button>
@@ -16,9 +16,6 @@
         <button class="ui huge brown button">Brown</button>
         <button class="ui huge grey button">Grey</button>
         <button class="ui huge black button">Black</button>
-        {{#if color}}
-          <h2 class="ui {{toLowerCase color}} center aligned header editable">The color is {{color}}</h2>
-        {{/if}}
       </div>
     </div>
   </div>

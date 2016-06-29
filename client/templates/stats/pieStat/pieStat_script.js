@@ -1,6 +1,9 @@
 let Highcharts = require('highcharts');
 
 Template.pieStat.helpers({
+  voteId () {
+    return Session.get('currentVoteId');
+  },
 });
 
 Template.pieStat.events({
@@ -18,12 +21,14 @@ Template.pieStat.onRendered(function () {
         delete votes._id;
         let totalVotes = sum(votes);
         let votesData = [];
-        _.each( votes, function( voteCount, voteLabel){
+        _.each( votes, function( voteCount, voteLabel) {
           let vote = {
             name: voteLabel,
-            color: voteLabel,
             y: (voteCount * 100) / totalVotes,
           };
+          if (voteId === 'color') {
+            vote.color = voteLabel.toLowerCase();
+          }
           votesData.push(vote);
         });
         votesData = _.sortBy(votesData, 'y');
@@ -38,7 +43,7 @@ Template.pieStat.onRendered(function () {
               }
             },
             title: {
-              text: 'Favorite colors'
+              text: 'FAVORITE ' + voteId.toUpperCase()
             },
             tooltip: {
               pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
