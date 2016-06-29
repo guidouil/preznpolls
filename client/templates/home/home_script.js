@@ -1,6 +1,6 @@
 Template.home.helpers({
   presentations () {
-    return Presentations.find({}).fetch();
+    return Presentations.find({}, {sort: {name: 1}}).fetch();
   },
 });
 
