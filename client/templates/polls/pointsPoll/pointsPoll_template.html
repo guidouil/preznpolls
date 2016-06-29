@@ -1,3 +1,26 @@
 <template name='pointsPoll'>
-
+  <div class="transitions-content">
+    <div class="ui container">
+      <div class="ui basic center aligned segment">
+        <h1 class="ui header editable">Give points to your top three options please</h1>
+        <div class="ui four stackable cards">
+          {{#each pollOptions}}
+            <div class="card">
+              <div class="content">
+                <div class="header">{{title}}</div>
+                <div class="description">
+                  {{description}}
+                </div>
+              </div>
+              <div class="ui bottom attached buttons">
+                <button class="ui button threePoints">3 pts</button>
+                <button class="ui button twoPoints">2 pts</button>
+                <button class="ui button onePoint">1 pt</button>
+              </div>
+            </div>
+          {{/each}}
+        </div>
+      </div>
+    </div>
+  </div>
 </template>

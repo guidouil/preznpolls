@@ -4,6 +4,16 @@ Template.pieStat.helpers({
   voteId () {
     return Session.get('currentVoteId');
   },
+  totalVotes () {
+    let voteId = Session.get('currentVoteId');
+    let prezId = Router.current().params.prez;
+    let votes = Votes.findOne({ _id: prezId + '_' + voteId });
+    if (votes) {
+      delete votes._id;
+      return sum(votes);
+    }
+    return '#';
+  },
 });
 
 Template.pieStat.events({
@@ -14,9 +24,10 @@ Template.pieStat.events({
 
 Template.pieStat.onRendered(function () {
   let voteId = Session.get('currentVoteId');
+  let prezId = Router.current().params.prez;
   if (voteId) {
     Tracker.autorun(function () {
-      let votes = Votes.findOne({ _id: voteId });
+      let votes = Votes.findOne({ _id: prezId + '_' + voteId });
       if (votes) {
         delete votes._id;
         let totalVotes = sum(votes);

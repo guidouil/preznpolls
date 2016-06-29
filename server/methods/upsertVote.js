@@ -1,9 +1,13 @@
 Meteor.methods({
-  upsertVote (voteId, voteValue) {
+  upsertVote (prezId, voteId, voteValue, incValue) {
+    if (! incValue) {
+      incValue = 1;
+    }
+    check(prezId, String);
     check(voteId, String);
     check(voteValue, String);
     let update = {};
-    update[voteValue] = 1;
-    Votes.upsert({_id: voteId}, {$inc: update});
+    update[voteValue] = incValue;
+    Votes.upsert({_id: prezId + '_' + voteId}, {$inc: update});
   },
 });

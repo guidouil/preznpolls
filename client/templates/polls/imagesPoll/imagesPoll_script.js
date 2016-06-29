@@ -3,7 +3,8 @@ Template.imagesPoll.helpers({
 
 Template.imagesPoll.events({
   'click .card' (evt) {
-    Meteor.call('upsertVote', 'avatar', evt.currentTarget.dataset.ref);
+    let prezId = Router.current().params.prez;
+    Meteor.call('upsertVote', prezId, 'avatar', evt.currentTarget.dataset.ref);
     Session.set('currentStat', 'pieStat');
     Session.set('currentVoteId', 'avatar');
   },

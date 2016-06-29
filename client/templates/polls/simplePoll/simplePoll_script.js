@@ -16,10 +16,10 @@ Template.simplePoll.events({
       Presentations.update({ _id: presentationId },
         { $set: { color: evt.currentTarget.innerText }}
       );
+      Meteor.call('upsertVote', presentationId, 'color', evt.currentTarget.innerText);
+      Session.set('currentStat', 'pieStat');
+      Session.set('currentVoteId', 'color');
     }
-    Meteor.call('upsertVote', 'color', evt.currentTarget.innerText);
-    Session.set('currentStat', 'pieStat');
-    Session.set('currentVoteId', 'color');
   },
 });
 
