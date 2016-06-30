@@ -3,5 +3,5 @@ html.ios, html.ios body, .pusher {
 }
 
 .transitions-content {
-  overflow-y: hidden !important;
+  overflow-y: auto !important;
 }

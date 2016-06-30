@@ -1,3 +1,28 @@
 <template name='rangesPoll'>
-
+  <div class="transitions-content">
+    <div class="ui container">
+      <div class="ui basic center aligned segment">
+        <h1 class="ui header editable">Use ranges to set what is more or less important to you</h1>
+        <br>
+        <h3 class="ui header">Experience with this tool <small id="display-2"></small></h3>
+        <div class="ui grey range" id="range-2"></div>
+        <input type="hidden" id="input-2" data-ref="Experience">
+        <div class="ui divider"></div>
+        <h3 class="ui header">Wow effect of this tool <small id="display-3"></small></h3>
+        <div class="ui green range" id="range-3"></div>
+        <input type="hidden" id="input-3" data-ref="Waouh">
+        <div class="ui divider"></div>
+        <h3 class="ui header">Interest in this tool <small id="display-4"></small></h3>
+        <div class="ui orange range" id="range-4"></div>
+        <input type="hidden" id="input-4" data-ref="Interest">
+        <div class="ui divider"></div>
+        <h3 class="ui header">Lightness of this tool <small id="display-5"></small></h3>
+        <div class="ui red range" id="range-5"></div>
+        <input type="hidden" id="input-5" data-ref="Lightness">
+        <div class="ui divider"></div>
+        <div class="ui huge green icon labeled button submitRange"><i class="checkmark icon"></i>Submit</div>
+        <h4 class="ui header">(0 is not important, 10 is very important)</h4>
+      </div>
+    </div>
+  </div>
 </template>

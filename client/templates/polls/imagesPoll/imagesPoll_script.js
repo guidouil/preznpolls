@@ -11,4 +11,5 @@ Template.imagesPoll.events({
 });
 
 Template.imagesPoll.onRendered(function () {
+  let editor = new MediumEditor('.editable');
 });

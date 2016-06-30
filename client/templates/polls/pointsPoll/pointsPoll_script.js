@@ -66,6 +66,7 @@ Template.pointsPoll.onCreated(function () {
 });
 
 Template.pointsPoll.onRendered(function () {
+  let editor = new MediumEditor('.editable');
   let presentationId = Router.current().params.prez;
   Tracker.autorun(function () {
     if (Session.equals('clickCount', 3)) {
