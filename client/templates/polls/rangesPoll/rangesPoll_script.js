@@ -27,7 +27,7 @@ Template.rangesPoll.events({
     votes.totalVotes ++;
     delete votes._id;
     Votes.update({ _id: prezId + '_ranges' }, { $set: votes });
-    Session.set('currentStat', 'barStat');
+    Session.set('currentStat', 'gaugeStat');
     Session.set('currentVoteId', 'ranges');
   },
 });

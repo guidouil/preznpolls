@@ -1,7 +1,7 @@
-let Highcharts = require('highcharts', 'highcharts-more');
-
 Template.gaugeStat.helpers({
-
+  totalVotes () {
+    return Session.get('totalVotes');
+  },
 });
 
 Template.gaugeStat.events({
@@ -17,156 +17,32 @@ Template.gaugeStat.onRendered(function () {
     Tracker.autorun(function () {
       let votes = Votes.findOne({ _id: prezId + '_' + voteId });
       if (votes) {
-        console.log(votes);
+        Session.set('totalVotes', votes.totalVotes);
 
-        $(function () {
+        let votesData = [];
+        _.each(votes, function(pointsCount, voteLabel) {
+          if (! _.contains(['_id', 'totalVotes'], voteLabel)) {
+            let rateTotal = 0;
+            _.each( pointsCount, function(voteCount, index) {
+              rateTotal += voteCount * index;
+            });
+            let voteAverage = rateTotal / votes.totalVotes;
+            votesData.push({
+              title: voteLabel,
+              value: voteAverage,
+            });
+          }
+        });
 
-    var gaugeOptions = {
-
-        chart: {
-            type: 'gauge'
-        },
-
-        title: null,
-
-        pane: {
-            center: ['50%', '85%'],
-            size: '140%',
-            startAngle: -90,
-            endAngle: 90,
-            background: {
-                backgroundColor: (Highcharts.theme && Highcharts.theme.background2) || '#EEE',
-                innerRadius: '60%',
-                outerRadius: '100%',
-                shape: 'arc'
-            }
-        },
-
-        tooltip: {
-            enabled: false
-        },
-
-        // the value axis
-        yAxis: {
-            stops: [
-                [0.1, '#55BF3B'], // green
-                [0.5, '#DDDF0D'], // yellow
-                [0.9, '#DF5353'] // red
-            ],
-            lineWidth: 0,
-            minorTickInterval: null,
-            tickPixelInterval: 400,
-            tickWidth: 0,
-            title: {
-                y: -70
-            },
-            labels: {
-                y: 16
-            }
-        },
-
-        plotOptions: {
-            solidgauge: {
-                dataLabels: {
-                    y: 5,
-                    borderWidth: 0,
-                    useHTML: true
-                }
-            }
-        }
-    };
-
-    // The speed gauge
-    $('#gaugeChart2').highcharts(Highcharts.merge(gaugeOptions, {
-        yAxis: {
+        _.each( votesData, function(vote, index) {
+          let g = new JustGage({
+            id: 'gauge' + (index + 1),
+            value: vote.value,
             min: 0,
-            max: 200,
-            title: {
-                text: 'Speed'
-            }
-        },
-
-        credits: {
-            enabled: false
-        },
-
-        series: [{
-            name: 'Speed',
-            data: [80],
-            dataLabels: {
-                format: '<div style="text-align:center"><span style="font-size:25px;color:' +
-                    ((Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black') + '">{y}</span><br/>' +
-                       '<span style="font-size:12px;color:silver">km/h</span></div>'
-            },
-            tooltip: {
-                valueSuffix: ' km/h'
-            }
-        }]
-
-    }));
-
-    // The RPM gauge
-    $('#gaugeChart3').highcharts(Highcharts.merge(gaugeOptions, {
-        yAxis: {
-            min: 0,
-            max: 5,
-            title: {
-                text: 'RPM'
-            }
-        },
-
-        series: [{
-            name: 'RPM',
-            data: [1],
-            dataLabels: {
-                format: '<div style="text-align:center"><span style="font-size:25px;color:' +
-                    ((Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black') + '">{y:.1f}</span><br/>' +
-                       '<span style="font-size:12px;color:silver">* 1000 / min</span></div>'
-            },
-            tooltip: {
-                valueSuffix: ' revolutions/min'
-            }
-        }]
-
-    }));
-
-    // Bring life to the dials
-    setTimeout(function () {
-        // Speed
-        var chart = $('#gaugeChart2').highcharts(),
-            point,
-            newVal,
-            inc;
-
-        if (chart) {
-            point = chart.series[0].points[0];
-            inc = Math.round((Math.random() - 0.5) * 100);
-            newVal = point.y + inc;
-
-            if (newVal < 0 || newVal > 200) {
-                newVal = point.y - inc;
-            }
-
-            point.update(newVal);
-        }
-
-        // RPM
-        chart = $('#gaugeChart3').highcharts();
-        if (chart) {
-            point = chart.series[0].points[0];
-            inc = Math.random() - 0.5;
-            newVal = point.y + inc;
-
-            if (newVal < 0 || newVal > 5) {
-                newVal = point.y - inc;
-            }
-
-            point.update(newVal);
-        }
-    }, 2000);
-
-
-});
+            max: 10,
+            title: vote.title,
+          });
+        });
       }
     });
   }

@@ -1,7 +1,9 @@
 let Highcharts = require('highcharts');
 
 Template.barStat.helpers({
-
+  totalVotes () {
+    return Session.get('totalVotes');
+  },
 });
 
 Template.barStat.events({
@@ -17,9 +19,8 @@ Template.barStat.onRendered(function () {
     Tracker.autorun(function () {
       let votes = Votes.findOne({ _id: prezId + '_' + voteId });
       if (votes) {
-        console.log(votes);
         delete votes._id;
-        let totalVotes = votes.totalVotes;
+        Session.set('totalVotes', votes.totalVotes);
         delete votes.totalVotes;
         let votesData = [];
         let votesCateg = [];

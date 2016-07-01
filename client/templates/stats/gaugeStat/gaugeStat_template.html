@@ -3,10 +3,18 @@
     <div class="ui container">
       <div class="ui basic center aligned segment">
         <h1 class="ui header editable">Results</h1>
-        <div id="gaugeChart2"></div>
-        <div id="gaugeChart3"></div>
-        <div id="gaugeChart4"></div>
-        <div id="gaugeChart5"></div>
+        <h2 class="ui header">AVERAGE RATE FOR {{totalVotes}} VOTES</h2>
+        <div class="ui internally celled grid">
+          <div class="row">
+            <div class="height wide column" id="gauge1"></div>
+            <div class="height wide column" id="gauge2"></div>
+          </div>
+          <div class="row">
+            <div class="height wide column" id="gauge3"></div>
+            <div class="height wide column" id="gauge4"></div>
+          </div>
+        </div>
+        <br>
         <div class="ui labeled icon button backToPoll"><i class="angle double left icon"></i>Back to poll</div>
       </div>
     </div>
