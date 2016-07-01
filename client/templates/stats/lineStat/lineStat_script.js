@@ -1,3 +1,5 @@
+let Highcharts = require('highcharts');
+
 Template.lineStat.helpers({
 
 });
@@ -29,7 +31,7 @@ Template.lineStat.onRendered(function () {
         $(function () {
           $('#lineChart').highcharts({
             title: {
-                text: 'Ranges for ' + votes.totalVotes + 'voters',
+                text: 'Ranges for ' + votes.totalVotes + ' votes',
                 x: -20 //center
             },
 

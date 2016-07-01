@@ -1,3 +1,5 @@
+let Highcharts = require('highcharts');
+
 Template.columnStat.helpers({
 });
 
@@ -53,6 +55,9 @@ Template.columnStat.onRendered(function () {
             },
             tooltip: {
                 pointFormat: 'Points: <b>{point.y}</b>'
+            },
+            credits: {
+              enabled: false,
             },
             series: [{
                 name: 'Points',

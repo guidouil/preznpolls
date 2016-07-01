@@ -1,3 +1,5 @@
+let Highcharts = require('highcharts');
+
 Template.radarStat.helpers({
 
 });

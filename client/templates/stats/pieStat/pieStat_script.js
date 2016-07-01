@@ -73,6 +73,9 @@ Template.pieStat.onRendered(function () {
                 }
               }
             },
+            credits: {
+              enabled: false,
+            },
             series: [{
               name: 'Value',
               colorByPoint: true,
