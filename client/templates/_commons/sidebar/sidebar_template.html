@@ -1,3 +1,76 @@
 <template name='sidebar'>
+  <div class="ui left sidebar ui segment presentationSidebar">
+    {{#with presentation}}
+      <h1 class="ui header editable" data-field="title">{{title}}</h1>
+      <div class="ui divider"></div>
+      {{#each chapters}}
+        <h2 class="ui header editable" data-field="chapters.{{@index}}.title">{{title}}</h2>
+        {{#each slides}}
+          <div class="ui {{isActiveSlide ../order @index}} fluid buttons slideSideBtns">
+            <button class="ui labeled icon button sidebarSlide" data-index="{{@index}}"  data-chapter="{{../order}}">
+              <i class="{{slideIcon type}} icon"></i>
+              {{title}}
+            </button>
+            <button class="ui compact icon button deleteSlideBtn"  data-index="{{@index}}"  data-chapter="{{../order}}">
+              <i class="delete icon"></i>
+            </button>
+          </div>
+        {{/each}} <!-- slides end -->
+        <button class="ui grey fluid labeled icon button addSlide" data-chapter="{{@index}}">
+          <i class="plus icon"></i>
+          Add slide
+        </button>
+        <div class="ui divider"></div>
+      {{/each}} <!-- chapters end -->
+      <button class="ui basic fluid labeled icon button addChapter">
+        <i class="plus icon"></i>
+        Add chapter
+      </button>
+    {{/with}}
+  </div>
+
+  <div class="ui basic modal newSlideType">
+    <i class="close icon"></i>
+    <div class="header">
+      What type of slide do you want to add?
+    </div>
+    <div class="actions">
+      <div class="ui positive medium labeled icon button slideTypeBtn"
+        data-content="Large title & description"
+        data-position="top center"
+        data-ref="coverSlide">
+        <i class="header icon"></i>
+        Cover slide
+      </div>
+      <div class="ui positive medium labeled icon button slideTypeBtn"
+        data-content="Title & multilines text"
+        data-position="top center"
+        data-ref="textSlide">
+        <i class="file text outline icon"></i>
+        Text slide
+      </div>
+      <div class="ui positive medium labeled icon button slideTypeBtn"
+        data-content="Title & large image"
+        data-position="top center"
+        data-ref="imageSlide">
+        <i class="file image outline icon"></i>
+        Image slide
+      </div>
+      <div class="ui positive medium labeled icon button slideTypeBtn"
+        data-content="Title & large video"
+        data-position="top center"
+        data-ref="videoSlide">
+        <i class="film icon"></i>
+        Video slide
+      </div>
+      <div class="ui positive medium labeled icon button slideTypeBtn"
+        data-content="Ask questions & get stats"
+        data-position="top center"
+        data-ref="pollSlide">
+        <i class="pie chart icon"></i>
+        Poll slide
+      </div>
+    </div>
+  </div>
 
 </template>

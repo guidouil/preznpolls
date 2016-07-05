@@ -1,0 +1,9 @@
+.showPrezSidebar {
+  position: absolute;
+  top: 5px;
+  left: 4px;
+  z-index: 999;
+}
+.editContainer .editable {
+  border: 1px dashed grey;
+}

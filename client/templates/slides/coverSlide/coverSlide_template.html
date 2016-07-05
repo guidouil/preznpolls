@@ -3,10 +3,9 @@
     <div class="ui container coverSlideConatainer">
       <div class="ui one column stackable center aligned page grid ">
         <div class="column twelve wide">
-
-          <h1 class="ui header editable">The Cover</h1>
-          <h3 class="ui header editable">Every prez need a starting point.</h3>
-
+          <br>
+          <h1 class="ui header editable" data-field="chapters.{{chapterIndex}}.slides.{{slideIndex}}.title">{{title}}</h1>
+          <h2 class="ui header editable" data-field="chapters.{{chapterIndex}}.slides.{{slideIndex}}.description">{{description}}</h2>
         </div>
       </div>
     </div>

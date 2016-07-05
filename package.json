@@ -6,6 +6,7 @@
   },
   "dependencies": {
     "highcharts": "^4.2.5",
-    "meteor-node-stubs": "~0.2.0"
+    "meteor-node-stubs": "~0.2.0",
+    "sweetalert2": "^4.0.7"
   }
 }

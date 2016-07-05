@@ -6,6 +6,17 @@
         Home
       </a>
     </div>
+    {{#if isEditing}}
+      <a class="center header item" href="{{pathFor 'play' prez=prez}}">
+        <i class="play icon"></i>
+        Play
+      </a>
+    {{else}}
+      <a class="center header item" href="{{pathFor 'edit' prez=prez}}">
+        <i class="edit icon"></i>
+        Edit
+      </a>
+    {{/if}}
     <div class="right menu">
       <a class="item previousSlide">
         <i class="angle double left icon"></i>

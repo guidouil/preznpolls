@@ -1,26 +1,13 @@
 Template.play.helpers({
-  dynamicTemplate () {
-    if (Session.get('currentStat')) {
-      return Session.get('currentStat');
+  slide () {
+    let prez = Presentations.findOne({ _id: Router.current().params.prez });
+    if (prez && prez.chapterViewIndex >= 0 && prez.slideViewIndex >= 0) {
+      let slide = prez.chapters[prez.chapterViewIndex].slides[prez.slideViewIndex];
+      slide.chapterIndex = prez.chapterViewIndex;
+      slide.slideIndex = prez.slideViewIndex;
+      return slide;
     }
-    let presentationId = Router.current().params.prez;
-    let presentation = Presentations.findOne({_id: presentationId});
-    if (presentation && presentation.slides.length > 0) {
-      // infinite loop forward
-      if (presentation.viewIndex >= presentation.slides.length) {
-        Presentations.update({ _id: presentationId },
-          { $set: { viewIndex: 0 }}
-        );
-      }
-      // infinite loop backward
-      if (presentation.viewIndex < 0) {
-        Presentations.update({ _id: presentationId },
-          { $set: { viewIndex: presentation.slides.length - 1 }}
-        );
-      }
-      return presentation.slides[presentation.viewIndex];
-    }
-    return 'coverSlide'; // Default fallback
+    return false;
   },
 });
 

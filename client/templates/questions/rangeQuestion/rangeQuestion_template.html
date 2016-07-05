@@ -1,0 +1,10 @@
+<template name='rangeQuestion'>
+  <h3 class="ui header editable" data-field="chapters.{{chapterIndex}}.slides.{{slideIndex}}.questions.{{questionIndex}}.answers.{{answerIndex}}.text">
+    {{text}}
+    {{#unless isEditing}}
+      <small id="display_{{chapterIndex}}_{{slideIndex}}_{{questionIndex}}_{{answerIndex}}"></small>
+    {{/unless}}
+  </h3>
+  <div class="ui {{color}} range" id="range_{{chapterIndex}}_{{slideIndex}}_{{questionIndex}}_{{answerIndex}}"></div>
+  <input type="hidden" id="{{chapterIndex}}_{{slideIndex}}_{{questionIndex}}_{{answerIndex}}" data-ref="{{text}}" class="answerInput">
+</template>

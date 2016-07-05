@@ -1,12 +1,40 @@
 <template name='home'>
   <div class="ui basic center aligned segment">
     <h1 class="ui header">Welcome to Prez&Polls!</h1>
+    <i class="huge  "></i>
+    <button class="ui blue labeled icon button createPrez">
+      <i class="plus icon"></i>
+      New presentation
+    </button>
     <div class="ui bulleted list">
       {{#each presentations}}
       <a class="item" href="{{pathFor 'play' prez=_id}}">
-        {{name}}
+        {{title}}
       </a>
       {{/each}}
     </div>
   </div>
+
+  <div class="ui basic modal prezTitleModal">
+    <i class="close icon"></i>
+    <div class="header">
+      What's the title of your presentation?
+    </div>
+    <div class="content">
+      <div class="description">
+        <div class="ui fluid input">
+          <input type="text" placeholder="Presentation title" id="prezTitle">
+        </div>
+      </div>
+    </div>
+    <div class="actions">
+      <div class="one fluid ui inverted buttons">
+        <div class="ui ok green basic inverted button createPrezBtn">
+          <i class="checkmark icon"></i>
+          Let's create it
+        </div>
+      </div>
+    </div>
+  </div>
+
 </template>

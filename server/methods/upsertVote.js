@@ -1,13 +1,14 @@
 Meteor.methods({
-  upsertVote (prezId, voteId, voteValue, incValue) {
-    if (! incValue) {
-      incValue = 1;
+  upsertVote (prezId, chapterIndex, slideIndex, questionIndex, votes) {
+    if (this.userId) {
+      check(prezId, String);
+      check(chapterIndex, Number);
+      check(slideIndex, Number);
+      check(questionIndex, Number);
+      check(votes, Array);
+      let update = {};
+      update['presentations.' + prezId + '.chapters.' + chapterIndex + '.slides.' + slideIndex + '.questions.' + questionIndex + '.answers'] = votes;
+      Votes.upsert({ _id: this.userId }, { $set: update });
     }
-    check(prezId, String);
-    check(voteId, String);
-    check(voteValue, String);
-    let update = {};
-    update[voteValue] = incValue;
-    Votes.upsert({_id: prezId + '_' + voteId}, {$inc: update});
   },
 });
