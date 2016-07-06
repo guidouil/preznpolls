@@ -57,6 +57,13 @@ Template.footer.events({
       }
     }
   },
+  'click .viewStat' () {
+    if (Session.equals('showMeTheStat', true)) {
+      Session.set('showMeTheStat', false);
+    } else {
+      Session.set('showMeTheStat', true);
+    }
+  }
 });
 
 Template.footer.onRendered(function () {

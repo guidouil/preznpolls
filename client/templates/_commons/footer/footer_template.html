@@ -1,28 +1,32 @@
 <template name='footer'>
   <div class="ui bottom fixed inverted labeled icon menu">
     <div class="left menu">
-      <a class="item" href="{{pathFor 'home'}}">
-        <i class="home icon"></i>
-        Home
-      </a>
-    </div>
-    {{#if isEditing}}
-      <a class="center header item" href="{{pathFor 'play' prez=prez}}">
+      {{#if isEditing}}
+      <a class="item" href="{{pathFor 'play' prez=prez}}">
         <i class="play icon"></i>
         Play
       </a>
-    {{else}}
-      <a class="center header item" href="{{pathFor 'edit' prez=prez}}">
+      {{else}}
+      <a class="item" href="{{pathFor 'edit' prez=prez}}">
         <i class="edit icon"></i>
         Edit
       </a>
-    {{/if}}
+      {{/if}}
+      <a class="item viewStat" >
+        <i class="pie chart icon"></i>
+        Stat
+      </a>
+    </div>
+    <a class="center header item" href="{{pathFor 'home'}}">
+      <i class="home icon"></i>
+      Prez&Polls
+    </a>
     <div class="right menu">
-      <a class="item previousSlide">
+      <a class="item previousSlide" data-transition-out="scaleOut" data-transition-in="slideFadeDownIn">
         <i class="angle double left icon"></i>
         Previous
       </a>
-      <a class="item nextSlide">
+      <a class="item nextSlide" data-transition-out="scaleOut" data-transition-in="slideFadeDownIn">
         <i class="angle double right icon"></i>
         Next
       </a>

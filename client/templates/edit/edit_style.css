@@ -6,4 +6,5 @@
 }
 .editContainer .editable {
   border: 1px dashed grey;
+  min-height: 1em !important;
 }

@@ -1,7 +1,11 @@
 <template name='gaugeStat'>
-  <div class="ui internally celled grid">
+  <div class="ui centered stackable grid">
     {{#each answers}}
-      <div class="column gauge" id="gauge_{{questionIndex}}_{{@index}}"></div>
+      <div class="height wide column">
+        <div class="gauge" id="gauge_{{answerId}}">
+
+        </div>
+      </div>
     {{/each}}
   </div>
 </template>

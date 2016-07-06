@@ -1,10 +1,43 @@
 <template name='rangeQuestion'>
-  <h3 class="ui header editable" data-field="chapters.{{chapterIndex}}.slides.{{slideIndex}}.questions.{{questionIndex}}.answers.{{answerIndex}}.text">
-    {{text}}
-    {{#unless isEditing}}
-      <small id="display_{{chapterIndex}}_{{slideIndex}}_{{questionIndex}}_{{answerIndex}}"></small>
-    {{/unless}}
-  </h3>
-  <div class="ui {{color}} range" id="range_{{chapterIndex}}_{{slideIndex}}_{{questionIndex}}_{{answerIndex}}"></div>
-  <input type="hidden" id="{{chapterIndex}}_{{slideIndex}}_{{questionIndex}}_{{answerIndex}}" data-ref="{{text}}" class="answerInput">
+  {{#each betterAnswer answers indexes.questionIndex indexes.slideIndex indexes.chapterIndex}}
+    <h3 class="ui header editable" data-field="chapters.{{chapterIndex}}.slides.{{slideIndex}}.questions.{{questionIndex}}.answers.{{@index}}.text">
+      {{text}}
+      {{#unless isEditing}}
+      <small id="display_{{answerId}}"></small>
+      {{/unless}}
+    </h3>
+    <div class="ui {{color}} range" id="range_{{answerId}}"></div>
+    <input type="hidden" id="{{answerId}}" data-ref="{{text}}" data-question="{{questionId}}" class="answerInput">
+    {{#if isEditing}}
+    <div class="ui four column middle aligned stackable grid">
+      <div class="column">
+        <div class="field">
+          <small>Minimum value</small>
+          <p class="editable" data-field="chapters.{{chapterIndex}}.slides.{{slideIndex}}.questions.{{questionIndex}}.answers.{{@index}}.minValue">{{minValue}}</p>
+        </div>
+      </div>
+      <div class="column">
+        <div class="field">
+          <small>Maximum value</small>
+          <p class="editable" data-field="chapters.{{chapterIndex}}.slides.{{slideIndex}}.questions.{{questionIndex}}.answers.{{@index}}.maxValue">{{maxValue}}</p>
+        </div>
+      </div>
+      <div class="column">
+        <input type="hidden" class="colorInput" id="colorInput_{{answerId}}" value="chapters.{{chapterIndex}}.slides.{{slideIndex}}.questions.{{questionIndex}}.answers.{{@index}}.color">
+        <select class="ui fluid labeled icon dropdown answerColor" id="color_{{answerId}}">
+          <option value="">Color</option>
+          {{#each colors}}
+          <option {{isSelectedColor ../color this}} value="{{this}}"><div class="ui {{this}} empty circular label"></div>{{capitalize this}}</option>
+          {{/each}}
+        </select>
+      </div>
+      <div class="column">
+        <div class="ui orange fluid icon labeled button deleteAnswerBtn" data-ref="{{@index}}" data-index="{{questionIndex}}">
+          <i class="delete icon"></i>
+          Delete answer
+        </div>
+      </div>
+    </div>
+    {{/if}}
+  {{/each}}
 </template>

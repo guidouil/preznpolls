@@ -1,3 +1,64 @@
 <template name='multiChoicesQuestion'>
+  {{#if isEditing}}
+    <div class="ui two column grid">
+      <div class="column">
+        <div class="field">
+          <small>Minimum answers to validate</small>
+          <p class="editable" data-field="chapters.{{indexes.chapterIndex}}.slides.{{indexes.slideIndex}}.questions.{{indexes.questionIndex}}.minAnswers">{{question.minAnswers}}</p>
+        </div>
+      </div>
+      <div class="column">
+        <div class="field">
+          <small>Maximum answers to validate</small>
+          <p class="editable" data-field="chapters.{{indexes.chapterIndex}}.slides.{{indexes.slideIndex}}.questions.{{indexes.questionIndex}}.maxAnswers">{{question.maxAnswers}}</p>
+        </div>
+      </div>
+    </div>
+    {{#each answers}}
+      <div class="ui four column middle aligned stackable grid">
+        <div class="column">
+          <h3 class="ui header editable" data-field="chapters.{{indexes.chapterIndex}}.slides.{{indexes.slideIndex}}.questions.{{indexes.questionIndex}}.answers.{{@index}}.text">
+            {{text}}
+          </h3>
+        </div>
+        <div class="column">
+          <div class="ui toggle checkbox isRightAnswer">
+            <input type="checkbox" id="isRightAnswer_{{answerId}}" value="chapters.{{indexes.chapterIndex}}.slides.{{indexes.slideIndex}}.questions.{{indexes.questionIndex}}.answers.{{@index}}.isRightAnswer" {{isChecked}}>
+            <label for="isRightAnswer_{{answerId}}">This is a right answer</label>
+          </div>
+        </div>
+        <div class="column">
+          <input type="hidden" class="colorInput" id="colorInput_{{answerId}}" value="chapters.{{indexes.chapterIndex}}.slides.{{indexes.slideIndex}}.questions.{{indexes.questionIndex}}.answers.{{@index}}.color">
+          <select class="ui fluid labeled icon dropdown answerColor" id="color_{{answerId}}">
+            <option value="">Color</option>
+            {{#each colors}}
+            <option {{isSelectedColor ../color this}} value="{{this}}"><div class="ui {{this}} empty circular label"></div>{{capitalize this}}</option>
+            {{/each}}
+          </select>
+        </div>
+        <div class="column">
+          <div class="ui orange fluid icon labeled button deleteAnswerBtn" data-ref="{{@index}}" data-index="{{indexes.questionIndex}}">
+            <i class="delete icon"></i>
+            Delete answer
+          </div>
+        </div>
+      </div>
+    {{/each}}
 
+  {{else}}
+
+    <div class="ui form">
+      <div class="inline  fields">
+        {{#each answers}}
+          <div class="field">
+            <div class="ui checkbox">
+              <input type="checkbox" name="{{questionId}}" id="{{answerId}}" data-ref="{{text}}" data-question="{{questionId}}" class="answerInput" value="">
+              <label class="ui {{color}} header" for="{{answerId}}">{{text}}</label>
+            </div>
+          </div>
+        {{/each}}
+      </div>
+    </div>
+
+  {{/if}}
 </template>
