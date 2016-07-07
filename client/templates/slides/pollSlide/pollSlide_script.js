@@ -91,6 +91,7 @@ Template.pollSlide.events({
     if (Meteor.userId() && prez) {
       $('.submitAnswersBtn').addClass('loading');
       let answers = {};
+      // regular question answers
       $('.answerInput').each(function(index, answer) {
         if (answer.value) {
           if (! answers[answer.dataset.question]) {
@@ -104,6 +105,14 @@ Template.pollSlide.events({
           });
         }
       });
+      // Words question answer
+      $('.wordsAnswer').each(function(index, answer) {
+        if (answer.value) {
+          let words = answer.value.split(',').map(Function.prototype.call, String.prototype.trim);
+          answers[answer.dataset.question] = _.uniq(words);
+        }
+      });
+
       let questions = prez.chapters[prez.chapterViewIndex].slides[prez.slideViewIndex].questions;
       if (questions) {
         _.each(questions, function(question) {
@@ -115,7 +124,7 @@ Template.pollSlide.events({
             }
             if (question && question.maxAnswers && answers[question.questionId].length > question.maxAnswers) {
               $('.submitAnswersBtn').removeClass('loading');
-              alert('To many answers for question: ' + question.text);
+              alert('Maximum of ' + question.maxAnswers + ' answers for question: ' + question.text);
               return false;
             }
             Meteor.call('upsertVote', Router.current().params.prez, question.questionId, answers[question.questionId]);
