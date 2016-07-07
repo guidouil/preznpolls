@@ -62,11 +62,12 @@ Template.multiChoicesQuestion.events({
   },
   'change .answerInput' (event) {
     let answerId = this.answerId;
-    let questionId = event.currentTarget.name;
-    $( "input[name='" + questionId + "']" ).each(function(index, el) {
-      el.value = '';
-    });
-    $('#' + answerId).val(1);
+    let checked = event.currentTarget.checked;
+    if (checked) {
+      $('#' + answerId).val(1);
+    } else {
+      $('#' + answerId).val('');
+    }
   },
 });
 
