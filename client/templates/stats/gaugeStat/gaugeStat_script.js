@@ -39,7 +39,7 @@ Template.gaugeStat.onRendered(function () {
           answerTotal += Number(answer.value);
         });
         let answersCount = usersAnswers[answer.answerId].length
-        let answerAverage = answerTotal / answersCount;
+        let answerAverage = Math.round(answerTotal / answersCount * 100) / 100;
         $('#gauge_' + answer.answerId).html('');
         let gauge = new JustGage({
           id: 'gauge_' + answer.answerId,
