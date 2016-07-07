@@ -36,36 +36,32 @@ Template.pollSlide.helpers({
 
 Template.pollSlide.events({
   'click .addQuestionBtn' () {
-    $('.questionTitleModal').modal({
-      onApprove: function() {
-        let questionTitle = $('#questionTitle').val();
-        let prez = Presentations.findOne({ _id: Router.current().params.prez });
-        if (prez) {
-          let questions = prez.chapters[prez.chapterViewIndex].slides[prez.slideViewIndex].questions
-          let questionsLength = (questions ? questions.length : 0);
-          let newQuestion = {};
-          newQuestion['chapters.' + prez.chapterViewIndex + '.slides.' + prez.slideViewIndex + '.questions'] = {
-            questionId: Random.id(),
-            text: questionTitle,
-            type: 'rangeQuestion',
-            stat: 'gaugeStat',
-            order: questionsLength,
-            description: '',
-            help: '',
-            answers: [{
-              answerId: Random.id(),
-              text: 'Answer text',
-              minValue: 0,
-              maxValue: 5,
-              order: 0,
-              value: 1,
-              isRightAnswer: false,
-            }],
-          };
-          Presentations.update({ _id: Router.current().params.prez }, { $push: newQuestion });
-        }
-      },
-    }).modal('show');
+    let prez = Presentations.findOne({ _id: Router.current().params.prez });
+    if (prez) {
+      let questionTitle = 'On a scale from 1 to 5, how would you rate the following options?';
+      let questions = prez.chapters[prez.chapterViewIndex].slides[prez.slideViewIndex].questions
+      let questionsLength = (questions ? questions.length : 0);
+      let newQuestion = {};
+      newQuestion['chapters.' + prez.chapterViewIndex + '.slides.' + prez.slideViewIndex + '.questions'] = {
+        questionId: Random.id(),
+        text: questionTitle,
+        type: 'rangeQuestion',
+        stat: 'gaugeStat',
+        order: questionsLength,
+        description: '',
+        help: '',
+        answers: [{
+          answerId: Random.id(),
+          text: 'Awesomeness',
+          minValue: 0,
+          maxValue: 5,
+          order: 0,
+          value: 1,
+          isRightAnswer: false,
+        }],
+      };
+      Presentations.update({ _id: Router.current().params.prez }, { $push: newQuestion });
+    }
   },
   'click .addAnswerBtn' (event) {
     let questionIndex = event.currentTarget.dataset.ref;
@@ -76,7 +72,7 @@ Template.pollSlide.events({
       let newAnswer = {};
       newAnswer['chapters.' + prez.chapterViewIndex + '.slides.' + prez.slideViewIndex + '.questions.' + questionIndex + '.answers'] = {
         answerId: Random.id(),
-        text: 'Answer text',
+        text: 'Answer',
         minValue: 0,
         maxValue: 5,
         order: answersLength,
