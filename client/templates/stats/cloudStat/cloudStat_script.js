@@ -39,7 +39,7 @@ Template.cloudStat.onRendered(function () {
     WordCloud(document.getElementById('wordscloud_' + questionId), {
       list: usersAnswers,
       gridSize: 8,
-      weightFactor: 40,
+      weightFactor: 32,
       fontFamily: 'Lato, Helvetica Neue, Arial, Helvetica, sans-serif',
       color: 'random-dark',
       backgroundColor: '#f0f0f0',

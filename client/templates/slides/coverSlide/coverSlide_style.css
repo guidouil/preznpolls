@@ -1,6 +1,17 @@
 .coverSlideConatainer h1 {
-  font-size: 5rem !important;
+  font-size: 6rem !important;
 }
 .coverSlideConatainer h2 {
   font-size: 4rem !important;
+}
+
+.coverSlideConatainer {
+  -webkit-transform-style: preserve-3d;
+  -moz-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+}
+
+.coverSlide {
+  position: relative;
+  transform: translateY(70%);
 }
