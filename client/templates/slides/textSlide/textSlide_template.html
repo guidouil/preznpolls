@@ -5,13 +5,13 @@
       <h1 class="ui center aligned header editable" data-field="chapters.{{chapterIndex}}.slides.{{slideIndex}}.title">{{title}}</h1>
       <h3 class="ui header editable" data-field="chapters.{{chapterIndex}}.slides.{{slideIndex}}.description">{{description}}</h3>
     </div>
-    {{#if isEditingOr description}}
+    {{#if isEditingOr help}}
       <div class="ui {{color}} center aligned segment">
-        <h3 class="ui header editable" data-field="chapters.{{chapterIndex}}.slides.{{slideIndex}}.description">{{description}}</h3>
+        <h3 class="ui header editable" data-field="chapters.{{chapterIndex}}.slides.{{slideIndex}}.help">{{help}}</h3>
       </div>
     {{/if}}
     {{#if isEditing}}
-      <div class="ui basic center aligned segment">
+      <div class="ui center aligned segment">
         <div class="ui two column grid">
           <div class="column">
             <div class="field">

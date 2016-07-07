@@ -20,3 +20,4 @@ export MONGO_URL='mongodb://127.0.0.1:27017/preznpolls'
 export PORT=3000
 export ROOT_URL='http://preprod-remote.linkly.fr:3000'
 forever start --append --uid "preznpolls" preznpolls/main.js
+date

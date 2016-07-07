@@ -18,4 +18,5 @@ Template.textSlide.events({
 
 Template.textSlide.onRendered(function () {
   makeEditable();
+  $('.dropdown').dropdown();
 });
