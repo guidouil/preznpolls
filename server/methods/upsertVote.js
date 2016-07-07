@@ -4,9 +4,9 @@ Meteor.methods({
       check(prezId, String);
       check(questionId, String);
       check(answers, Array);
-      let update = {};
-      update[prezId + '.' + questionId] = answers;
-      Votes.upsert({ _id: this.userId }, { $set: update });
+      let query = {};
+      query[prezId + '.' + questionId] = answers;
+      Votes.upsert({ _id: this.userId }, { $set: query });
     }
   },
 });

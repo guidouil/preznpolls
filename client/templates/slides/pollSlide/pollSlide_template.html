@@ -1,141 +1,147 @@
 <template name='pollSlide'>
-  <div class="transitions-content">
 
-    <div class="ui container">
-      <div class="ui basic segment">
+  <div class="ui container">
+    <div class="ui basic segment">
 
-        <h1 class="ui center aligned header editable" data-field="chapters.{{chapterIndex}}.slides.{{slideIndex}}.title">{{title}}</h1>
+      <h1 class="ui center aligned header editable" data-field="chapters.{{chapterIndex}}.slides.{{slideIndex}}.title">{{title}}</h1>
 
-        {{#each questions}}
-          <div class="ui basic segment">
-            <h2 class="ui header editable" data-field="chapters.{{../chapterIndex}}.slides.{{../slideIndex}}.questions.{{@index}}.text">{{text}}</h2>
-
-            {{#if isEditing}}
-            <div class="ui middle aligned stackable grid">
-              <div class="four wide column">
-                <input type="hidden" id="type_{{questionId}}" value="chapters.{{../chapterIndex}}.slides.{{../slideIndex}}.questions.{{@index}}.type">
-                <select class="ui fluid dropdown questionType" id="typeSelect_{{questionId}}">
-                  <option value="rangeQuestion" {{isQuestionType 'rangeQuestion'}}>Range question</option>
-                  <option value="singleChoiceQuestion" {{isQuestionType 'singleChoiceQuestion'}}>Single answer question</option>
-                  <option value="multiChoicesQuestion" {{isQuestionType 'multiChoicesQuestion'}}>Multiple answers question</option>
-                  <option value="wordsQuestion" {{isQuestionType 'wordsQuestion'}}>Words answer question</option>
-                  <option value="multiPointsQuestion" {{isQuestionType 'multiPointsQuestion'}}>Points answer question</option>
-                </select>
+      {{#each questions}}
+        <div class="ui basic segment">
+          {{#unless isEditing}}
+            {{#if help}}
+              <button class="ui right floated icon compact button questionHelp" data-content="{{help}}" data-position="left center" data-variation="very wide">
+                <i class="help icon "></i>
+              </button>
+            {{/if}}
+          {{/unless}}
+          <h2 class="ui header editable" data-tooltip="{{help}}" data-field="chapters.{{../chapterIndex}}.slides.{{../slideIndex}}.questions.{{@index}}.text">
+            {{text}}
+          </h2>
+          {{#if isEditing}}
+          <div class="ui middle aligned stackable grid">
+            <div class="four wide column">
+              <input type="hidden" id="type_{{questionId}}" value="chapters.{{../chapterIndex}}.slides.{{../slideIndex}}.questions.{{@index}}.type">
+              <select class="ui fluid dropdown questionType" id="typeSelect_{{questionId}}">
+                <option value="rangeQuestion" {{isQuestionType 'rangeQuestion'}}>Range question</option>
+                <option value="singleChoiceQuestion" {{isQuestionType 'singleChoiceQuestion'}}>Single answer question</option>
+                <option value="multiChoicesQuestion" {{isQuestionType 'multiChoicesQuestion'}}>Multiple answers question</option>
+                <option value="wordsQuestion" {{isQuestionType 'wordsQuestion'}}>Words answer question</option>
+                <option value="multiPointsQuestion" {{isQuestionType 'multiPointsQuestion'}}>Points answer question</option>
+              </select>
+            </div>
+            <div class="four wide column">
+              <div class="field">
+                <small>Question description</small>
+                <p class="editable questionExtra" data-field="chapters.{{../chapterIndex}}.slides.{{../slideIndex}}.questions.{{@index}}.description">{{description}}</p>
               </div>
-              <div class="four wide column">
-                <div class="field">
-                  <small>Question description</small>
-                  <p class="editable questionExtra" data-field="chapters.{{../chapterIndex}}.slides.{{../slideIndex}}.questions.{{@index}}.description">{{description}}</p>
-                </div>
+            </div>
+            <div class="four wide column">
+              <div class="field">
+                <small>Question help</small>
+                <p class="editable questionExtra" data-field="chapters.{{../chapterIndex}}.slides.{{../slideIndex}}.questions.{{@index}}.help">{{help}}</p>
               </div>
-              <div class="four wide column">
-                <div class="field">
-                  <small>Question help</small>
-                  <p class="editable questionExtra" data-field="chapters.{{../chapterIndex}}.slides.{{../slideIndex}}.questions.{{@index}}.help">{{help}}</p>
-                </div>
+            </div>
+            <div class="four wide column">
+              <div class="ui red fluid icon labeled button deleteQuestionBtn" data-ref="{{@index}}">
+                <i class="delete icon"></i>
+                Delete question
               </div>
-              <div class="four wide column">
-                <div class="ui red fluid icon labeled button deleteQuestionBtn" data-ref="{{@index}}">
-                  <i class="delete icon"></i>
-                  Delete question
+            </div>
+          </div>
+          {{else}} <!-- not editing  -->
+            {{#if description}}
+              <h3 class="ui header">{{description}}</h3>
+            {{/if}}
+          {{/if}}
+
+          {{#if showAnswersStat questionId}}
+            {{> UI.dynamic template=stat data=@index }}
+            <div class="ui center aligned basic segment">
+              <div class="ui animated fade button cancelAnswer" data-ref="{{questionId}}">
+                <div class="visible content">Cancel my responses to this question</div>
+                <div class="hidden content">
+                  I changed my mind
                 </div>
               </div>
             </div>
-            {{else}} <!-- not editing  -->
-              {{#if description}}
-                <h3 class="ui header">{{description}}</h3>
-              {{/if}}
-            {{/if}}
-
-            {{#if showAnswersStat questionId}}
-              {{> UI.dynamic template=stat data=@index }}
-              <div class="ui center aligned basic segment">
-                <div class="ui animated fade button cancelAnswer" data-ref="{{questionId}}">
-                  <div class="visible content">Cancel my responses to this question</div>
-                  <div class="hidden content">
-                    I changed my mind
-                  </div>
-                </div>
+          {{else}} <!-- Show answers inputs -->
+            {{> UI.dynamic template=type data=@index }}
+            {{#if isEditing}}
+              <br>
+              <div class="ui green fluid icon labeled button addAnswerBtn" data-ref="{{@index}}">
+                <i class="add icon"></i>
+                Add an answer
               </div>
-            {{else}} <!-- Show answers inputs -->
-              {{> UI.dynamic template=type data=@index }}
-              {{#if isEditing}}
-                <br>
-                <div class="ui green fluid icon labeled button addAnswerBtn" data-ref="{{@index}}">
-                  <i class="add icon"></i>
-                  Add an answer
-                </div>
-              {{/if}}
             {{/if}}
+          {{/if}}
 
-          </div>
-          <div class="ui divider"></div>
-        {{/each}}
+        </div>
+        <div class="ui divider"></div>
+      {{/each}}
 
-        {{#if isEditing}}
-          <div class="fluid ui basic icon labeled button addQuestionBtn">
-            <i class="add icon"></i>
-            Add a question
-          </div>
-        {{else}}
-          {{#unless hasVotedAll slideIndex chapterIndex}}
-          <div class="fluid huge ui positive icon labeled button submitAnswersBtn">
-            <i class="check icon"></i>
-            Submit answers
-          </div>
-          {{/unless}}
-        {{/if}}
-        <br>
-        <br>
-        <br>
+      {{#if isEditing}}
+        <div class="fluid ui basic icon labeled button addQuestionBtn">
+          <i class="add icon"></i>
+          Add a question
+        </div>
+      {{else}}
+        {{#unless hasVotedAll slideIndex chapterIndex}}
+        <div class="fluid huge ui positive icon labeled button submitAnswersBtn">
+          <i class="check icon"></i>
+          Submit answers
+        </div>
+        {{/unless}}
+      {{/if}}
+      <br>
+      <br>
+      <br>
 
-      </div>
     </div>
-
-    <!-- questionTitleModal -->
-    <div class="ui basic modal questionTitleModal">
-      <i class="close icon"></i>
-      <div class="header">
-        What is the question?
-      </div>
-      <div class="content">
-        <div class="description">
-          <div class="ui fluid input">
-            <input type="text" placeholder="The question (ex: On a scale from 1 to 5, how would you rate the following options?)" id="questionTitle">
-          </div>
-        </div>
-      </div>
-      <div class="actions">
-        <div class="one fluid ui inverted buttons">
-          <div class="ui ok green basic inverted button validateQuestionAdd">
-            <i class="checkmark icon"></i>
-            Let's ask it
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- deleteQuestionModal -->
-    <div class="ui basic modal deleteQuestionModal">
-      <i class="close icon"></i>
-      <div class="ui icon header">
-        <i class="trash icon"></i>
-        Are you sure?
-      </div>
-      <div class="content">
-        <h3 class="ui center aligned inverted header">You won't be able to revert this question deletion!</h3>
-      </div>
-      <div class="actions">
-        <div class="ui red basic cancel inverted icon labeled button">
-          <i class="remove icon"></i>
-          No
-        </div>
-        <div class="ui green ok inverted icon labeled button">
-          <i class="checkmark icon"></i>
-          Yes
-        </div>
-      </div>
-    </div>
-
   </div>
+
+  <!-- questionTitleModal -->
+  <div class="ui basic modal questionTitleModal">
+    <i class="close icon"></i>
+    <div class="header">
+      What is the question?
+    </div>
+    <div class="content">
+      <div class="description">
+        <div class="ui fluid input">
+          <input type="text" placeholder="The question (ex: On a scale from 1 to 5, how would you rate the following options?)" id="questionTitle">
+        </div>
+      </div>
+    </div>
+    <div class="actions">
+      <div class="one fluid ui inverted buttons">
+        <div class="ui ok green basic inverted button validateQuestionAdd">
+          <i class="checkmark icon"></i>
+          Let's ask it
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- deleteQuestionModal -->
+  <div class="ui basic modal deleteQuestionModal">
+    <i class="close icon"></i>
+    <div class="ui icon header">
+      <i class="trash icon"></i>
+      Are you sure?
+    </div>
+    <div class="content">
+      <h3 class="ui center aligned inverted header">You won't be able to revert this question deletion!</h3>
+    </div>
+    <div class="actions">
+      <div class="ui red basic cancel inverted icon labeled button">
+        <i class="remove icon"></i>
+        No
+      </div>
+      <div class="ui green ok inverted icon labeled button">
+        <i class="checkmark icon"></i>
+        Yes
+      </div>
+    </div>
+  </div>
+
 </template>

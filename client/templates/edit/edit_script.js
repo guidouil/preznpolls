@@ -12,6 +12,13 @@ Template.edit.helpers({
     }
     return false;
   },
+  flip () {
+    let prez = Presentations.findOne({ _id: Router.current().params.prez });
+    if (prez) {
+      return prez.flip;
+    }
+    return false;
+  },
 });
 
 Template.edit.events({

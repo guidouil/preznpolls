@@ -1,3 +1,8 @@
 <template name='wordsQuestion'>
-
+  <div class="ui form">
+    <div class="field {{isDisabled}}">
+      <label for="words_{{questionId}}">Please, type words or groups of words separated by commas. Thank you.</label>
+      <textarea id="words_{{questionId}}" rows="4" class="wordsAnswer" data-question="{{questionId}}"></textarea>
+    </div>
+  </div>
 </template>

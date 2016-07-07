@@ -218,4 +218,5 @@ Template.pollSlide.onRendered(function () {
   });
   $('.dropdown').dropdown();
   makeEditable();
+  $('.questionHelp').popup();
 });

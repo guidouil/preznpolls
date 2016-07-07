@@ -77,9 +77,15 @@ Template.sidebar.events({
     }
   },
   'click .sidebarSlide' (event) {
+    let prez = Presentations.findOne({ _id: Router.current().params.prez });
+    let flip = 'ping';
+    if (prez.flip === flip) {
+      flip = 'pong';
+    }
     Presentations.update({ _id: Router.current().params.prez }, { $set: {
       chapterViewIndex: event.currentTarget.dataset.chapter,
       slideViewIndex: event.currentTarget.dataset.index,
+      flip: flip,
     }});
   },
   'click .deleteSlideBtn' (event) {
