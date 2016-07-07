@@ -36,11 +36,10 @@ Template.cloudStat.onRendered(function () {
         });
       }
     });
-    console.log(usersAnswers, 'wordscloud_' + questionId);
     WordCloud(document.getElementById('wordscloud_' + questionId), {
       list: usersAnswers,
       gridSize: 8,
-      weightFactor: 64,
+      weightFactor: 40,
       fontFamily: 'Lato, Helvetica Neue, Arial, Helvetica, sans-serif',
       color: 'random-dark',
       backgroundColor: '#f0f0f0',
@@ -54,7 +53,10 @@ Template.cloudStat.helpers({
     return Template.instance().questionId;
   },
   cloudWidth () {
-    return window.screen.width * 0.7;
+    if (window.screen.width > 1025) {
+      return window.screen.width * 0.6;
+    }
+    return window.screen.width * 0.8;
   },
   cloudHeight () {
     return window.screen.height * 0.6;

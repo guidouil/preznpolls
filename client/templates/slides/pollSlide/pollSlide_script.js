@@ -108,7 +108,7 @@ Template.pollSlide.events({
       // Words question answer
       $('.wordsAnswer').each(function(index, answer) {
         if (answer.value) {
-          let words = answer.value.split(',').map(Function.prototype.call, String.prototype.trim);
+          let words = answer.value.toUpperCase().split(/,|\n/).map(Function.prototype.call, String.prototype.trim);
           answers[answer.dataset.question] = _.uniq(words);
         }
       });
