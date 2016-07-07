@@ -1,17 +1,23 @@
 <template name='sidebar'>
   <div class="ui left sidebar ui segment presentationSidebar">
     {{#with presentation}}
+    <button class="ui negative right floated compact icon button deletePresentationBtn">
+      <i class="trash icon"></i>
+    </button>
       <h1 class="ui header editable" data-field="title">{{title}}</h1>
       <div class="ui divider"></div>
       {{#each chapters}}
+        <button class="ui basic red right floated compact icon button deleteChapterBtn" data-index="{{@index}}">
+          <i class="delete icon"></i>
+        </button>
         <h2 class="ui header editable" data-field="chapters.{{@index}}.title">{{title}}</h2>
         {{#each slides}}
-          <div class="ui {{isActiveSlide ../order @index}} fluid buttons slideSideBtns">
-            <button class="ui labeled icon button sidebarSlide" data-index="{{@index}}"  data-chapter="{{../order}}">
+          <div class="ui {{isActiveSlide ../order @index}} {{slideColor type}} fluid buttons slideSideBtns">
+            <button class="ui ok labeled icon button sidebarSlide" data-index="{{@index}}"  data-chapter="{{../order}}">
               <i class="{{slideIcon type}} icon"></i>
               {{title}}
             </button>
-            <button class="ui compact icon button deleteSlideBtn"  data-index="{{@index}}"  data-chapter="{{../order}}">
+            <button class="ui icon button deleteSlideBtn"  data-index="{{@index}}"  data-chapter="{{../order}}">
               <i class="delete icon"></i>
             </button>
           </div>
@@ -29,46 +35,69 @@
     {{/with}}
   </div>
 
+  <!-- New slide modal to choose type -->
   <div class="ui basic modal newSlideType">
     <i class="close icon"></i>
     <div class="header">
       What type of slide do you want to add?
     </div>
     <div class="actions">
-      <div class="ui positive medium labeled icon button slideTypeBtn"
+      <div class="ui ok green inverted medium labeled icon button slideTypeBtn"
         data-content="Large title & description"
         data-position="top center"
         data-ref="coverSlide">
         <i class="header icon"></i>
         Cover slide
       </div>
-      <div class="ui positive medium labeled icon button slideTypeBtn"
+      <div class="ui ok blue inverted medium labeled icon button slideTypeBtn"
+        data-content="Ask questions & get stats"
+        data-position="top center"
+        data-ref="pollSlide">
+        <i class="pie chart icon"></i>
+        Poll slide
+      </div>
+      <div class="ui ok teal inverted medium labeled icon button slideTypeBtn"
         data-content="Title & multilines text"
         data-position="top center"
         data-ref="textSlide">
         <i class="file text outline icon"></i>
         Text slide
       </div>
-      <div class="ui positive medium labeled icon button slideTypeBtn"
+      <div class="ui ok orange inverted medium labeled icon button slideTypeBtn"
         data-content="Title & large image"
         data-position="top center"
         data-ref="imageSlide">
         <i class="file image outline icon"></i>
         Image slide
       </div>
-      <div class="ui positive medium labeled icon button slideTypeBtn"
+      <div class="ui ok red inverted medium labeled icon button slideTypeBtn"
         data-content="Title & large video"
         data-position="top center"
         data-ref="videoSlide">
         <i class="film icon"></i>
         Video slide
       </div>
-      <div class="ui positive medium labeled icon button slideTypeBtn"
-        data-content="Ask questions & get stats"
-        data-position="top center"
-        data-ref="pollSlide">
-        <i class="pie chart icon"></i>
-        Poll slide
+    </div>
+  </div>
+
+  <!-- Warning modal in case of deletion -->
+  <div class="ui basic modal deleteWarningModal">
+    <i class="close icon"></i>
+    <div class="ui icon header">
+      <i class="trash icon"></i>
+      Are you sure?
+    </div>
+    <div class="content">
+      <h3 class="ui center aligned inverted header">You won't be able to revert this deletion!</h3>
+    </div>
+    <div class="actions">
+      <div class="ui red basic cancel inverted icon labeled button">
+        <i class="remove icon"></i>
+        No
+      </div>
+      <div class="ui green ok inverted icon labeled button">
+        <i class="checkmark icon"></i>
+        Yes
       </div>
     </div>
   </div>

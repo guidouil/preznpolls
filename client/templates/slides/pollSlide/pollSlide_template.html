@@ -32,13 +32,13 @@
             <div class="four wide column">
               <div class="field">
                 <small>Question description</small>
-                <p class="editable questionExtra" data-field="chapters.{{../chapterIndex}}.slides.{{../slideIndex}}.questions.{{@index}}.description">{{description}}</p>
+                <p class="editable" data-field="chapters.{{../chapterIndex}}.slides.{{../slideIndex}}.questions.{{@index}}.description">{{description}}</p>
               </div>
             </div>
             <div class="four wide column">
               <div class="field">
                 <small>Question help</small>
-                <p class="editable questionExtra" data-field="chapters.{{../chapterIndex}}.slides.{{../slideIndex}}.questions.{{@index}}.help">{{help}}</p>
+                <p class="editable" data-field="chapters.{{../chapterIndex}}.slides.{{../slideIndex}}.questions.{{@index}}.help">{{help}}</p>
               </div>
             </div>
             <div class="four wide column">
@@ -80,7 +80,7 @@
       {{/each}}
 
       {{#if isEditing}}
-        <div class="fluid ui basic icon labeled button addQuestionBtn">
+        <div class="fluid ui primary icon labeled button addQuestionBtn">
           <i class="add icon"></i>
           Add a question
         </div>
@@ -92,9 +92,6 @@
         </div>
         {{/unless}}
       {{/if}}
-      <br>
-      <br>
-      <br>
 
     </div>
   </div>
@@ -114,7 +111,7 @@
     </div>
     <div class="actions">
       <div class="one fluid ui inverted buttons">
-        <div class="ui ok green basic inverted button validateQuestionAdd">
+        <div class="ui ok green basic inverted icon labeled button validateQuestionAdd">
           <i class="checkmark icon"></i>
           Let's ask it
         </div>

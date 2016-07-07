@@ -160,7 +160,6 @@ Template.pollSlide.events({
         }
       },
     }).modal('show');
-
   },
   'click .deleteAnswerBtn' (event) {
     let questionIndex = event.currentTarget.dataset.index;

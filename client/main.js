@@ -12,6 +12,10 @@ Template.registerHelper('isEditing', function () {
   return Router.current().route.getName() === 'edit';
 });
 
+Template.registerHelper('isEditingOr', function (value) {
+  return value || Router.current().route.getName() === 'edit';
+});
+
 Template.registerHelper('currentIndexes', function (chapterOrSlide) {
   let prez = Presentations.findOne({ _id: Router.current().params.prez });
   if (prez) {

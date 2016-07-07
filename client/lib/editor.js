@@ -4,12 +4,17 @@ makeEditable = function () {
     $('.editable').on('blur', function (event) {
       let value = event.currentTarget.innerText;
       let field = event.currentTarget.dataset.field;
+      let prez = Presentations.findOne({ _id: Router.current().params.prez });
       check(value, String);
       check(field, String);
-      let update = {};
-      update[field] = value;
-      Presentations.update({ _id: Router.current().params.prez }, { $set: update });
+      if (prez && prez[field] !== value) {
+        let update = {};
+        update[field] = value;
+        Presentations.update({ _id: Router.current().params.prez }, { $set: update });
+        event.currentTarget.innerText = value;
+        return true;
+      }
+      return false;
     });
   }
-  return false;
 };

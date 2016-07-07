@@ -24,6 +24,21 @@ Template.sidebar.helpers({
       return 'pie chart';
     }
   },
+  slideColor (slideType) {
+    switch (slideType) {
+    default:
+    case 'coverSlide':
+      return 'green';
+    case 'textSlide':
+      return 'teal';
+    case 'imageSlide':
+      return 'orange';
+    case 'videoSlide':
+      return 'red';
+    case 'pollSlide':
+      return 'blue';
+    }
+  },
 });
 
 Template.sidebar.events({
@@ -41,6 +56,8 @@ Template.sidebar.events({
             title: prez.title,
             order: currentChapter.slides.length,
             type: evt[0].dataset.ref,
+            image: '/default-image.png',
+            video: 'https://www.youtube.com/embed/O6Xo21L0ybE',
           });
           Presentations.update({ _id: prez._id }, { $set: {
             chapters: chapters,
@@ -95,13 +112,46 @@ Template.sidebar.events({
       let currentSlideIndex = event.currentTarget.dataset.index;
       let currentChapterIndex = event.currentTarget.dataset.chapter;
       let chapters = prez.chapters;
-      chapters[currentChapterIndex].slides.splice(currentSlideIndex, 1);
-      Presentations.update({ _id: Router.current().params.prez }, { $set: {
-        chapterViewIndex: currentChapterIndex,
-        slideViewIndex: 0,
-        chapters: chapters,
-      }});
+      $('.deleteWarningModal').modal({
+        onApprove: function() {
+          chapters[currentChapterIndex].slides.splice(currentSlideIndex, 1);
+          Presentations.update({ _id: Router.current().params.prez }, { $set: {
+            chapterViewIndex: currentChapterIndex,
+            slideViewIndex: 0,
+            chapters: chapters,
+          }});
+        },
+      }).modal('show');
     }
+  },
+  'click .deleteChapterBtn' (event) {
+    let prez = Presentations.findOne({ _id: Router.current().params.prez });
+    if (prez) {
+      let currentChapterIndex = event.currentTarget.dataset.index;
+      let chapters = prez.chapters;
+      $('.deleteWarningModal').modal({
+        onApprove: function() {
+          chapters.splice(currentChapterIndex, 1);
+          _.each(chapters, function( chapter, index) {
+            chapter.order = index;
+          });
+          Presentations.update({ _id: Router.current().params.prez }, { $set: {
+            chapterViewIndex: 0,
+            slideViewIndex: 0,
+            chapters: chapters,
+          }});
+        },
+      }).modal('show');
+    }
+  },
+  'click .deletePresentationBtn' () {
+    $('.deleteWarningModal').modal({
+      onApprove: function() {
+        Presentations.remove({ _id: Router.current().params.prez });
+        $('.presentationSidebar').sidebar('hide');
+        Router.go('home');
+      },
+    }).modal('show');
   },
 });
 

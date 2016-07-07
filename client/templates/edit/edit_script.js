@@ -4,7 +4,7 @@ Template.edit.helpers({
   },
   slide () {
     let prez = Presentations.findOne({ _id: Router.current().params.prez });
-    if (prez && prez.chapterViewIndex >= 0 && prez.slideViewIndex >= 0) {
+    if (prez && prez.chapterViewIndex >= 0 && prez.slideViewIndex >= 0 && prez.chapters && prez.chapters[prez.chapterViewIndex].slides) {
       let slide = prez.chapters[prez.chapterViewIndex].slides[prez.slideViewIndex];
       slide.chapterIndex = prez.chapterViewIndex;
       slide.slideIndex = prez.slideViewIndex;

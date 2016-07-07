@@ -3,7 +3,16 @@
   <div class="ui container">
     <div class="ui basic center aligned segment">
       <h1 class="ui header editable" data-field="chapters.{{chapterIndex}}.slides.{{slideIndex}}.title">{{title}}</h1>
-      <img class="ui massive centered image" src="/default-image.png">
+      <img class="ui massive centered image" src="{{image}}">
+      {{#if isEditing}}
+      <div class="field">
+        <small>Image url</small>
+        <p class="editable" data-field="chapters.{{chapterIndex}}.slides.{{slideIndex}}.image">{{image}}</p>
+      </div>
+      {{/if}}
+      {{#if isEditingOr description}}
+        <h3 class="ui header editable" data-field="chapters.{{chapterIndex}}.slides.{{slideIndex}}.description">{{description}}</h3>
+      {{/if}}
     </div>
   </div>
 
