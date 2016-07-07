@@ -1,19 +1,44 @@
 <template name='imageSlide'>
 
   <div class="ui container">
-    <div class="ui basic center aligned segment">
+    <div class="ui {{color}} center aligned segment">
       <h1 class="ui header editable" data-field="chapters.{{chapterIndex}}.slides.{{slideIndex}}.title">{{title}}</h1>
       <img class="ui massive centered image" src="{{image}}">
-      {{#if isEditing}}
-      <div class="field">
-        <small>Image url</small>
-        <p class="editable" data-field="chapters.{{chapterIndex}}.slides.{{slideIndex}}.image">{{image}}</p>
-      </div>
-      {{/if}}
-      {{#if isEditingOr description}}
-        <h3 class="ui header editable" data-field="chapters.{{chapterIndex}}.slides.{{slideIndex}}.description">{{description}}</h3>
-      {{/if}}
     </div>
+    {{#if isEditing}}
+      <div class="ui basic center aligned segment">
+        <div class="field">
+          <small>Image url</small>
+          <p class="editable" data-field="chapters.{{chapterIndex}}.slides.{{slideIndex}}.image">{{image}}</p>
+        </div>
+      </div>
+    {{/if}}
+    {{#if isEditingOr description}}
+      <div class="ui {{color}} center aligned segment">
+        <h3 class="ui header editable" data-field="chapters.{{chapterIndex}}.slides.{{slideIndex}}.description">{{description}}</h3>
+      </div>
+    {{/if}}
+    {{#if isEditing}}
+      <div class="ui basic center aligned segment">
+        <div class="ui two column grid">
+          <div class="column">
+            <div class="field">
+              <small>Background image url</small>
+              <p class="editable" data-field="chapters.{{chapterIndex}}.slides.{{slideIndex}}.backgroundImage">{{backgroundImage}}</p>
+            </div>
+          </div>
+          <div class="column">
+            <input type="hidden" class="slideColorInput" id="slideColorInput" value="chapters.{{chapterIndex}}.slides.{{slideIndex}}.color">
+            <select class="ui fluid labeled icon dropdown slideColor" id="slideColor">
+              <option value="">Color</option>
+              {{#each colors}}
+              <option {{isSelectedColor ../color this}} value="{{this}}"><div class="ui {{this}} empty circular label"></div>{{capitalize this}}</option>
+              {{/each}}
+            </select>
+          </div>
+        </div>
+      </div>
+    {{/if}}
   </div>
 
 </template>

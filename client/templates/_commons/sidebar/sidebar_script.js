@@ -5,7 +5,7 @@ Template.sidebar.helpers({
   isActiveSlide (chapterIndex, slideIndex) {
     let prez = Presentations.findOne({ _id: Router.current().params.prez });
     if (prez && prez.chapterViewIndex === chapterIndex && prez.slideViewIndex === slideIndex) {
-      return 'primary';
+      return 'inverted';
     }
     return '';
   },
@@ -56,6 +56,7 @@ Template.sidebar.events({
             title: prez.title,
             order: currentChapter.slides.length,
             type: evt[0].dataset.ref,
+            color: 'basic',
             image: '/default-image.png',
             video: 'https://www.youtube.com/embed/O6Xo21L0ybE',
           });
@@ -84,6 +85,7 @@ Template.sidebar.events({
           title: prez.title,
           order: 0,
           type: 'coverSlide',
+          color: 'basic',
         }],
       });
       Presentations.update({ _id: Router.current().params.prez }, { $set: {

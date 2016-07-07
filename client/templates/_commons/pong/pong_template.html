@@ -1,4 +1,17 @@
 <template name='pong'>
+  {{#if backgroundImage}}
+  <style media="screen">
+    .transitions-content {
+      background: url({{backgroundImage}}) no-repeat center center fixed;
+      -webkit-background-size: cover;
+      -moz-background-size: cover;
+      -o-background-size: cover;
+      background-size: cover;
+      filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='{{backgroundImage}}', sizingMethod='scale');
+      -ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='{{backgroundImage}}', sizingMethod='scale')";
+    }
+  </style>
+  {{/if}}
   <div class="transitions-content">
     {{> UI.dynamic template=this.type data=this}}
     <br>

@@ -29,14 +29,14 @@ Template.registerHelper('currentIndexes', function (chapterOrSlide) {
 
 
 Template.registerHelper('isSelectedColor', function (color, value) {
-  if (color === value) {
+  if (color && value && (color === value || color.search(value) !== -1)) {
     return 'selected';
   }
   return '';
 });
 
 Template.registerHelper('colors', function() {
-  return ['red', 'orange', 'yellow', 'olive', 'green', 'teal', 'blue', 'purple', 'violet', 'pink', 'brown', 'grey', 'black'];
+  return ['black', 'red', 'orange', 'yellow', 'olive', 'green', 'teal', 'blue', 'purple', 'violet', 'pink', 'brown', 'grey'];
 });
 
 Template.registerHelper('plural', function (number) {

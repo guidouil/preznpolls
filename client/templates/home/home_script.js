@@ -18,6 +18,7 @@ Template.home.events({
               order: 0,
               type: 'coverSlide',
               title: prezTitle,
+              color: 'basic',
             }],
           }],
         });
