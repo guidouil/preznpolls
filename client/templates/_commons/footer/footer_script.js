@@ -9,6 +9,24 @@ Template.footer.helpers({
     }
     return false;
   },
+  activeStat () {
+    if (Session.equals('showMeTheStat', true)) {
+      return 'orange';
+    }
+    return '';
+  },
+  viewers () {
+    let viewers = Viewers.findOne({ _id: Router.current().params.prez });
+    if (viewers && viewers.viewers ) {
+      return viewers.viewers.length;
+    }
+    return 0;
+  },
+  voters () {
+    let query = {};
+    query[Router.current().params.prez] = {$exists: 1};
+    return Votes.find(query).count();
+  },
 });
 
 Template.footer.events({

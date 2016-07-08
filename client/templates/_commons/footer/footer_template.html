@@ -1,5 +1,5 @@
 <template name='footer'>
-  <div class="ui bottom fixed inverted blue menu">
+  <div class="ui bottom fixed inverted borderless blue menu">
     <div class="left menu">
       {{#if isEditing}}
       <a class="item" href="{{pathFor 'play' prez=prez}}">
@@ -10,9 +10,14 @@
         <i class="large edit icon"></i>
       </a>
       {{/if}}
+      <div class="item">
+        <i class="large user icon"></i>
+        <strong>{{viewers}}</strong>
+      </div>
       {{#if isPollSlide}}
       <a class="item viewStat" >
-        <i class="large pie chart icon"></i>
+        <i class="large {{activeStat}} pie chart icon"></i>
+        <strong>{{voters}}</strong>
       </a>
       {{/if}}
     </div>

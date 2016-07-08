@@ -1,37 +1,46 @@
 <template name='home'>
-  <div class="ui basic center aligned segment">
-    <h1 class="ui header">Welcome to Prez&Polls!</h1>
-    <i class="huge  "></i>
-    <button class="ui blue labeled icon button createPrez">
-      <i class="plus icon"></i>
-      New presentation
-    </button>
-    <div class="ui bulleted list">
+  {{> header}}
+
+  <div class="ui container homeContainer">
+
+    <h1 class="ui header">Public presentations</h1>
+    <div class="ui four stackable cards">
       {{#each presentations}}
-      <a class="item" href="{{pathFor 'play' prez=_id}}">
-        {{title}}
-      </a>
+      <div class="raised card">
+        <div class="content">
+          <div class="header">{{toUpperCase title}}</div>
+          <div class="meta">Created {{fromNow createdAt}}</div>
+          <div class="description">
+            {{chaptersCount}} chapter{{plural chaptersCount}} & {{slidesCount}} slide{{plural slidesCount}}
+          </div>
+        </div>
+        <div class="ui bottom attached buttons">
+          <a class="ui secondary labeled icon button" href="{{pathFor 'edit' prez=_id}}"><i class="edit icon"></i>Edit</a>
+          <a class="ui primary labeled icon button" href="{{pathFor 'play' prez=_id}}"><i class="play icon"></i>View</a>
+        </div>
+
+      </div>
       {{/each}}
     </div>
-  </div>
 
-  <div class="ui basic modal prezTitleModal">
-    <i class="close icon"></i>
-    <div class="header">
-      What's the title of your presentation?
-    </div>
-    <div class="content">
-      <div class="description">
-        <div class="ui fluid input">
-          <input type="text" placeholder="Presentation title" id="prezTitle">
+    <div class="ui basic modal prezTitleModal">
+      <i class="close icon"></i>
+      <div class="header">
+        What's the title of your presentation?
+      </div>
+      <div class="content">
+        <div class="description">
+          <div class="ui fluid input">
+            <input type="text" placeholder="Presentation title" id="prezTitle">
+          </div>
         </div>
       </div>
-    </div>
-    <div class="actions">
-      <div class="one fluid ui inverted buttons">
-        <div class="ui ok green basic inverted button createPrezBtn">
-          <i class="checkmark icon"></i>
-          Let's create it
+      <div class="actions">
+        <div class="one fluid ui inverted buttons">
+          <div class="ui ok green basic inverted button createPrezBtn">
+            <i class="checkmark icon"></i>
+            Let's create it
+          </div>
         </div>
       </div>
     </div>

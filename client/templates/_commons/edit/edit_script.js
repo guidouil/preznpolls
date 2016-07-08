@@ -1,5 +1,6 @@
 Template.edit.onCreated(function () {
   this.subscribe('Presentation', Router.current().params.prez);
+  this.subscribe('Viewers', Router.current().params.prez);
   this.subscribe('Votes', Router.current().params.prez);
 });
 

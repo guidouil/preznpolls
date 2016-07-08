@@ -155,6 +155,22 @@ Template.sidebar.events({
       },
     }).modal('show');
   },
+  'click .resetViews' () {
+    $('.deleteWarningModal').modal({
+      onApprove: function() {
+        Views.remove({ _id: Router.current().params.prez });
+        $('.presentationSidebar').sidebar('hide');
+      },
+    }).modal('show');
+  },
+  'click .resetVotes' () {
+    $('.deleteWarningModal').modal({
+      onApprove: function() {
+        Meteor.call('resetVotes', Router.current().params.prez);
+        $('.presentationSidebar').sidebar('hide');
+      },
+    }).modal('show');
+  },
 });
 
 Template.sidebar.onRendered(function () {

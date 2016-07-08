@@ -21,7 +21,6 @@ semantic:ui-css
 iron:router
 aldeed:simple-schema
 aldeed:collection2
-aldeed:autoform
 jamielob:transitions
 session
 check

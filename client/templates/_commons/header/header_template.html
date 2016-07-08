@@ -1,3 +1,17 @@
 <template name='header'>
-
+  <div class="ui top fixed inverted borderless blue menu">
+    <div class="left menu">
+      <a class="item" href="{{pathFor 'home'}}">
+        <i class="large home icon"></i>
+      </a>
+    </div>
+    <a class="center header item" href="{{pathFor 'home'}}">
+      <h1 class="ui inverted header">Prez&Polls</h1>
+    </a>
+    <div class="right menu">
+      <a class="item createPrez" >
+        <i class="large plus icon"></i>
+      </a>
+    </div>
+  </div>
 </template>

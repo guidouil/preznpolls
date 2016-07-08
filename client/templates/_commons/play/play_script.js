@@ -1,6 +1,8 @@
 Template.play.onCreated(function () {
   this.subscribe('Presentation', Router.current().params.prez);
+  this.subscribe('Viewers', Router.current().params.prez);
   this.subscribe('Votes', Router.current().params.prez);
+  Viewers.update({ _id: Router.current().params.prez }, { $addToSet: { viewers: Meteor.userId() }});
 });
 
 Template.play.helpers({
@@ -23,8 +25,6 @@ Template.play.helpers({
   },
 });
 
-Template.play.events({
-});
-
-Template.play.onRendered(function () {
+Template.play.onDestroyed(function () {
+  Viewers.update({ _id: Router.current().params.prez }, { $pull: { viewers: Meteor.userId() }});
 });

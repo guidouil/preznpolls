@@ -1,6 +1,13 @@
+let moment = require('moment');
+
 Template.registerHelper('toLowerCase', function (string) {
   check(string, String);
   return string.toLowerCase();
+});
+
+Template.registerHelper('toUpperCase', function (string) {
+  check(string, String);
+  return string.toUpperCase();
 });
 
 Template.registerHelper('capitalize', function (string) {
@@ -27,7 +34,6 @@ Template.registerHelper('currentIndexes', function (chapterOrSlide) {
   return 0;
 });
 
-
 Template.registerHelper('isSelectedColor', function (color, value) {
   if (color && value && (color === value || color.search(value) !== -1)) {
     return 'selected';
@@ -44,4 +50,9 @@ Template.registerHelper('plural', function (number) {
     return 's';
   }
   return '';
+});
+
+Template.registerHelper('fromNow', function (date) {
+  check(date, Date);
+  return moment(date).fromNow();
 });
