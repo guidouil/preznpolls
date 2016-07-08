@@ -2,6 +2,13 @@ Template.footer.helpers({
   prez () {
     return Router.current().params.prez;
   },
+  isPollSlide () {
+    let prez = Presentations.findOne({ _id: Router.current().params.prez });
+    if (prez && prez.chapterViewIndex >= 0 && prez.slideViewIndex >= 0) {
+      return prez.chapters[prez.chapterViewIndex].slides[prez.slideViewIndex].type === 'pollSlide';
+    }
+    return false;
+  },
 });
 
 Template.footer.events({

@@ -10,6 +10,9 @@ Template.pollSlide.helpers({
     if (Session.equals('showMeTheStat', true)) {
       return true;
     }
+    if (Session.equals('showMeTheStat', false)) {
+      return false;
+    }
     let prez = Router.current().params.prez;
     let vote = Votes.findOne({ _id: Meteor.userId() });
     if (vote && vote[prez] && vote[prez][questionId]) {
