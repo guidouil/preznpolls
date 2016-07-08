@@ -30,5 +30,5 @@ Template.edit.events({
 });
 
 Template.edit.onRendered(function () {
-
+  $('.showPrezSidebar').transition('tada');
 });

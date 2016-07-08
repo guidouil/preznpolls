@@ -3,7 +3,7 @@
   <div class="ui container">
     <div class="ui basic segment">
 
-      <h1 class="ui center aligned header editable" data-field="chapters.{{chapterIndex}}.slides.{{slideIndex}}.title">{{title}}</h1>
+      <h1 class="ui center {{color}} aligned header editable" data-field="chapters.{{chapterIndex}}.slides.{{slideIndex}}.title">{{title}}</h1>
 
       {{#each questions}}
         <div class="ui {{../color}} segment">
@@ -26,7 +26,7 @@
                 <option value="singleChoiceQuestion" {{isQuestionType 'singleChoiceQuestion'}}>Single answer question</option>
                 <option value="multiChoicesQuestion" {{isQuestionType 'multiChoicesQuestion'}}>Multiple answers question</option>
                 <option value="wordsQuestion" {{isQuestionType 'wordsQuestion'}}>Words answer question</option>
-                <option value="multiPointsQuestion" {{isQuestionType 'multiPointsQuestion'}}>Points answer question</option>
+                <option value="multiPointsQuestion" {{isQuestionType 'multiPointsQuestion'}} disabled>Points answer question</option>
               </select>
             </div>
             <div class="four wide column">
@@ -58,14 +58,14 @@
             {{> UI.dynamic template=stat data=@index }}
             <div class="ui center aligned basic segment">
               <div class="ui animated fade button cancelAnswer" data-ref="{{questionId}}">
-                <div class="visible content">Cancel my responses to this question</div>
+                <div class="visible content">Cancel my answer to this question</div>
                 <div class="hidden content">
                   I changed my mind
                 </div>
               </div>
             </div>
           {{else}} <!-- Show answers inputs -->
-            {{> UI.dynamic template=type data=@index }}
+            {{> UI.dynamic template=type data=@index }} <!-- load the stat template type with current question index -->
             {{#if isEditing}}
               <br>
               <div class="ui green fluid icon labeled button addAnswerBtn" data-ref="{{@index}}">
