@@ -29,6 +29,7 @@ Template.home.events({
 });
 
 Template.home.onRendered(function () {
+  this.subscribe('Presentations');
   $('#prezTitle').keypress(function (e) {
     if (e.which === 13) {
       $('.createPrezBtn').click();

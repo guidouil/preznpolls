@@ -1,3 +1,7 @@
+Meteor.publish('Presentations', function () {
+  return Presentations.find({ isPublic: true });
+});
+
 Meteor.publish('Presentation', function (prezId) {
   return Presentations.find({ _id: prezId });
 });

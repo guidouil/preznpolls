@@ -1,3 +1,8 @@
+Template.edit.onCreated(function () {
+  this.subscribe('Presentation', Router.current().params.prez);
+  this.subscribe('Votes', Router.current().params.prez);
+});
+
 Template.edit.helpers({
   presentation () {
     return Presentations.findOne({ _id: Router.current().params.prez });

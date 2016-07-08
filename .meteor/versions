@@ -9,7 +9,6 @@ aldeed:simple-schema@1.5.3
 aldeed:template-extension@3.4.3
 allow-deny@1.0.5
 artwells:accounts-guest@0.1.13
-autopublish@1.0.7
 autoupdate@1.2.10
 babel-compiler@6.8.3
 babel-runtime@0.1.9_1
@@ -47,7 +46,6 @@ html-tools@1.0.10
 htmljs@1.0.10
 http@1.1.7
 id-map@1.0.8
-insecure@1.0.7
 iron:controller@1.0.12
 iron:core@1.0.11
 iron:dynamic-template@1.0.12
@@ -74,7 +72,7 @@ mobile-experience@1.0.4
 mobile-status-bar@1.0.12
 modules@0.6.4
 modules-runtime@0.6.4_1
-momentjs:moment@2.14.1
+momentjs:moment@2.10.6
 mongo@1.1.9_1
 mongo-id@1.0.5
 npm-bcrypt@0.8.7
