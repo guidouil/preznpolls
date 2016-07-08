@@ -1,6 +1,14 @@
-.imageSlideContainer {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate3d(-50%,-50%,0);
+@media (min-width:320px) {
+  .imageSlideContainer {
+    position: absolute;
+    top: 20%;
+  }
+}
+@media (min-width:641px) {
+  .imageSlideContainer {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate3d(-50%,-50%,0);
+  }
 }

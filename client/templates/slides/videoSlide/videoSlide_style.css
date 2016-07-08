@@ -1,6 +1,14 @@
-.videoSlideContainer {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate3d(-50%,-50%,0);
+@media (min-width:320px) {
+  .videoSlideContainer {
+    position: absolute;
+    top: 20%;
+  }
+}
+@media (min-width:641px) {
+  .videoSlideContainer {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate3d(-50%,-50%,0);
+  }
 }
