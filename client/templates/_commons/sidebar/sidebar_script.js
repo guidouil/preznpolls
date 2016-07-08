@@ -158,7 +158,7 @@ Template.sidebar.events({
   'click .resetViews' () {
     $('.deleteWarningModal').modal({
       onApprove: function() {
-        Views.remove({ _id: Router.current().params.prez });
+        Viewers.update({ _id: Router.current().params.prez }, { $set: { viewers: [] }});
         $('.presentationSidebar').sidebar('hide');
       },
     }).modal('show');
