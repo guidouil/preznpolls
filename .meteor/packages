@@ -16,18 +16,22 @@ standard-minifier-css   # CSS minifier run for production mode
 standard-minifier-js    # JS minifier run for production mode
 es5-shim                # ECMAScript 5 compatibility for older browsers.
 ecmascript              # Enable ECMAScript2015+ syntax in app code
+accounts-password
+service-configuration
+accounts-ui
+session
+check
+random
 
 semantic:ui-css
 iron:router
 aldeed:simple-schema
 aldeed:collection2
-jamielob:transitions
-session
-check
-clubfest:raphael
-mizzao:user-status
+useraccounts:semantic-ui
+useraccounts:iron-routing
 artwells:accounts-guest
-accounts-password
+mizzao:user-status
+jamielob:transitions
+clubfest:raphael
 chfritz:easycron
-random
 overture8:wordcloud2

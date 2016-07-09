@@ -20,6 +20,14 @@ Template.header.helpers({
     }
     return 0;
   },
+  userName() {
+    if (Meteor.user()) {
+      let email = contactEmail(Meteor.user());
+      let piece = email.split('@');
+      return piece[0];
+    }
+    return '';
+  },
 });
 
 Template.header.events({
@@ -41,14 +49,29 @@ Template.header.events({
               }],
             }],
           });
-          Viewers.insert({ _id: prezId, viewers: []});
+          Viewers.insert({
+            _id: prezId,
+            viewers: [],
+            left: [],
+            right: [],
+          });
+          $('#prezTitle').val('');
+          $('.prezTitleModal').modal('hide');
+          Router.go('play', {prez: prezId});
         }
+        return true;
       },
     }).modal('show');
+  },
+  'click .signOutBtn' () {
+    Meteor.logout(function () {
+      Router.go('home');
+    });
   },
 });
 
 Template.header.onRendered(function () {
+  $('.dropdown').dropdown();
   $('.createPrez').transition('tada');
   Meteor.setInterval(function () {
     let yaya = Math.random();
@@ -61,7 +84,7 @@ Template.header.onRendered(function () {
     } else {
       $('.createPrez').transition('pulse').transition('pulse');
     }
-  }, 20000);
+  }, 10000);
 
   $('#prezTitle').keypress(function (e) {
     if (e.which === 13) {

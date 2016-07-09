@@ -33,6 +33,27 @@
         Add chapter
       </button>
       <div class="ui divider"></div>
+      <form class="ui form">
+        <div class="field">
+          <div class="ui slider checkbox">
+            <input type="checkbox" name="isPublic" id="isPublic" {{isChecked isPublic}}>
+            <label for="isPublic">Public presentation</label>
+          </div>
+        </div>
+        <div class="field">
+          <div class="ui slider checkbox">
+            <input type="checkbox" name="isListed" id="isListed" {{isChecked isListed}}>
+            <label for="isListed">Listed presentation</label>
+          </div>
+        </div>
+        <div class="field">
+          <div class="ui slider checkbox">
+            <input type="checkbox" name="isLiveOnly" id="isLiveOnly" {{isChecked isLiveOnly}}>
+            <label for="isLiveOnly">Live only presentation</label>
+          </div>
+        </div>
+      </form>
+      <div class="ui divider"></div>
       <div class="ui fluid buttons">
         <div class="ui red basic button resetViews">Reset views</div>
         <div class="ui red button resetVotes">Reset votes</div>

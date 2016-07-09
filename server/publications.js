@@ -1,5 +1,12 @@
 Meteor.publish('Presentations', function () {
-  return Presentations.find({ isPublic: true });
+  return Presentations.find({ isPublic: true, isListed: true });
+});
+
+Meteor.publish('MyPresentations', function () {
+  if (this.userId) {
+    return Presentations.find({ owners: this.userId });
+  }
+  return false;
 });
 
 Meteor.publish('Presentation', function (prezId) {

@@ -39,6 +39,9 @@ Template.sidebar.helpers({
       return 'blue';
     }
   },
+  isChecked (value) {
+    return (value === true ? 'checked' : '');
+  },
 });
 
 Template.sidebar.events({
@@ -170,6 +173,21 @@ Template.sidebar.events({
         $('.presentationSidebar').sidebar('hide');
       },
     }).modal('show');
+  },
+  'change #isPublic' (evt) {
+    Presentations.update({ _id: Router.current().params.prez }, { $set: {
+      isPublic: evt.currentTarget.checked,
+    }});
+  },
+  'change #isListed' (evt) {
+    Presentations.update({ _id: Router.current().params.prez }, { $set: {
+      isListed: evt.currentTarget.checked,
+    }});
+  },
+  'change #isLiveOnly' (evt) {
+    Presentations.update({ _id: Router.current().params.prez }, { $set: {
+      isLiveOnly: evt.currentTarget.checked,
+    }});
   },
 });
 

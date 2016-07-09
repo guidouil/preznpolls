@@ -15,13 +15,26 @@
       </h1>
     </a>
     <div class="right menu">
-      <a class="item">
-        {{#if isHome}}
-        Welcome&nbsp;<u>Guest</u>
-        {{else}}
-        <b>{{viewers}}</b>&nbsp;<i class="big user icon"></i>
-        {{/if}}
-      </a>
+      {{#if isGuest}}
+        <a class="item" href="/sign-in">
+          {{#if isHome}}
+          Welcome Guest
+          {{else}}
+          <b>{{viewers}}</b>&nbsp;<i class="big user icon"></i>
+          {{/if}}
+        </a>
+      {{else}}
+        <div class="ui dropdown link item">
+          {{#if isHome}}
+          <span class="text">Welcome {{capitalize userName}}</span>
+          {{else}}
+          <span class="text"><b>{{viewers}}</b>&nbsp;<i class="big user icon"></i></span>
+          {{/if}}
+          <div class="menu">
+            <a class="item signOutBtn">Sign out</a>
+          </div>
+        </div>
+      {{/if}}
     </div>
   </div>
 
@@ -32,8 +45,12 @@
     </div>
     <div class="content">
       <div class="description">
-        <div class="ui fluid input">
-          <input type="text" placeholder="Presentation title" id="prezTitle">
+        <div class="ui form">
+          <div class="field">
+            <div class="ui fluid input">
+              <input type="text" placeholder="Presentation title" id="prezTitle">
+            </div>
+          </div>
         </div>
       </div>
     </div>

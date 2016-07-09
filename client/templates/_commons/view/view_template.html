@@ -1,0 +1,16 @@
+<template name='view'>
+  <div class="transitions-container"  style="height:100%;">
+    {{> UI.dynamic template=flip data=slide}}
+  </div>
+  <div class="ui large compact icon buttons pagination-view-buttons">
+    <div class="ui secondary button previousSlide" data-transition-out="scaleOut" data-transition-in="slideFadeDownIn"><i class="angle double left icon"></i></div>
+    <div class="ui disabled button">
+      {{#if chapterPosition}}
+        C.{{chapterPosition}} -
+      {{/if}}
+      {{slidePagination}}
+    </div>
+    <div class="ui secondary button nextSlide" data-transition-out="scaleOut" data-transition-in="slideFadeDownIn"><i class="angle double right icon"></i></div>
+  </div>
+  <a class="ui large compact primary labeled icon button back-to-live" href="{{pathFor 'play' prez=prezId}}"><i class="play icon"></i>Back to live</a>
+</template>

@@ -11,14 +11,22 @@ Template.footer.helpers({
   },
   activeStat () {
     if (Session.equals('showMeTheStat', true)) {
-      return 'orange';
+      return 'black';
     }
     return '';
   },
   voters () {
-    let query = {};
-    query[Router.current().params.prez] = {$exists: 1};
-    return Votes.find(query).count();
+    let voters = 0;
+    let prez = Presentations.findOne({ _id: Router.current().params.prez });
+    if (prez && prez.chapters[prez.chapterViewIndex].slides[prez.slideViewIndex].questions) {
+      let questions = prez.chapters[prez.chapterViewIndex].slides[prez.slideViewIndex].questions;
+      _.each(questions, function (question) {
+        let query = {};
+        query[Router.current().params.prez + '.' + question.questionId] = {$exists: 1};
+        voters += Votes.find(query).count();
+      });
+    }
+    return voters;
   },
 });
 

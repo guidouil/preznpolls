@@ -5,6 +5,9 @@ Template.edit.onCreated(function () {
 });
 
 Template.edit.helpers({
+  prezId () {
+    return Router.current().params.prez;
+  },
   presentation () {
     return Presentations.findOne({ _id: Router.current().params.prez });
   },
@@ -36,5 +39,5 @@ Template.edit.events({
 });
 
 Template.edit.onRendered(function () {
-  $('.showPrezSidebar').transition('tada');
+  $('.showPrezSidebar').transition('pulse').transition('pulse');
 });

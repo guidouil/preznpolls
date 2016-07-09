@@ -2,24 +2,88 @@
 
   <div class="ui container homeContainer">
 
-    <h1 class="ui header">Public presentations</h1>
-    <div class="ui four stackable cards">
-      {{#each presentations}}
-      <div class="raised card">
-        <div class="content">
-          <div class="header">{{toUpperCase title}}</div>
-          <div class="meta">Created {{fromNow createdAt}}</div>
-          <div class="description">
-            {{chaptersCount}} chapter{{plural chaptersCount}} & {{slidesCount}} slide{{plural slidesCount}}
-          </div>
+    <div class="ui basic segment">
+      <div class="ui column stackable grid">
+        <div class="six wide column">
+          <h1 class="ui header">Welcome to Prez&Polls</h1>
+          <h2 class="ui header">Engage your audience in real time</h2>
+          <p class="ui header">
+            It's quite easy to make a presentation and show it to an audience. But if you want inputs from them, you'll have to setup complicated tools and devices. Well, not anymore.
+          </p>
+          <p class="ui header">
+            With Prez&Polls you just share the address of your live presentation and you are in control of the sliding. Every personn on your presentation with any devices watch the pages flowing as you push the button.
+          </p>
+          <p class="ui header">
+            With the polls slides you can ask questions to your audience and get live graphs from the answers. You stay in control as you see the numbers of viewers and answers updated in real time.
+          </p>
+          {{#if isGuest}}
+            <div class="ui basic center aligned segment">
+              <div class="ui buttons">
+                <a href="/sign-in" class="ui primary button">Sign in</a>
+                <div class="or"></div>
+                <a href="/sign-up" class="ui secondary button">Sign up</a>
+              </div>
+            </div>
+          {{/if}}
+          <p class="ui header">
+            Prez&Polls is still in early alpha... (July 2016)
+          </p>
         </div>
-        <div class="ui bottom attached buttons">
-          <a class="ui secondary labeled icon button" href="{{pathFor 'edit' prez=_id}}"><i class="edit icon"></i>Edit</a>
-          <a class="ui primary labeled icon button" href="{{pathFor 'play' prez=_id}}"><i class="play icon"></i>View</a>
-        </div>
+        <div class="ten wide column">
 
+          {{#if myPresentations}}
+          <h2 class="ui header">Your presentations</h2>
+          <div class="ui three stackable cards">
+            {{#each myPresentations}}
+            <div class="raised card">
+              <div class="content">
+                <div class="header">{{toUpperCase title}}</div>
+                <div class="meta">Created {{fromNow createdAt}}</div>
+                <div class="description">
+                  {{chaptersCount}} chapter{{plural chaptersCount}} & {{slidesCount}} slide{{plural slidesCount}}
+                </div>
+              </div>
+              <div class="extra content">
+                <i class="check icon"></i>
+                {{viewersCount}} Viewers
+              </div>
+              <div class="ui bottom attached buttons">
+                <a class="ui primary icon button" href="{{pathFor 'play' prez=_id}}"><i class="play icon"></i>Live</a>
+                <a class="ui icon button" href="{{pathFor 'edit' prez=_id}}"><i class="edit icon"></i>Edit</a>
+              </div>
+            </div>
+            {{/each}}
+          </div>
+          <div class="ui divider"></div>
+          {{/if}}
+
+          <h2 class="ui header">Public presentations</h2>
+          <div class="ui three stackable cards">
+            {{#each presentations}}
+            <div class="raised card">
+              <div class="content">
+                <div class="header">{{toUpperCase title}}</div>
+                <div class="meta">Created {{fromNow createdAt}}</div>
+                <div class="description">
+                  {{chaptersCount}} chapter{{plural chaptersCount}} & {{slidesCount}} slide{{plural slidesCount}}
+                </div>
+              </div>
+              <div class="extra content">
+                <i class="check icon"></i>
+                {{viewersCount}} Viewers
+              </div>
+              <div class="ui bottom attached buttons">
+                <a class="ui primary icon button" href="{{pathFor 'play' prez=_id}}"><i class="play icon"></i>Live</a>
+                {{#unless isLiveOnly}}
+                <a class="ui secondary icon button" href="{{pathFor 'view' prez=_id chapter=0 slide=0}}"><i class="eye icon"></i>View</a>
+                {{/unless}}
+              </div>
+            </div>
+            {{/each}}
+          </div>
+
+        </div>
       </div>
-      {{/each}}
     </div>
 
   </div>

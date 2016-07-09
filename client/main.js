@@ -59,3 +59,20 @@ Template.registerHelper('fromNow', function (date) {
   check(date, Date);
   return moment(date).fromNow();
 });
+
+Template.registerHelper('isPrezOwner', function (prezId) {
+  if (Meteor.userId()) {
+    if (! prezId) {
+      prezId = Router.current().params.prez;
+    }
+    if (prezId) {
+      return isPrezOwner(prezId, Meteor.userId());
+    }
+  }
+  return false;
+});
+
+Template.registerHelper('isGuest', function () {
+  let user = Meteor.user();
+  return user && user.profile && user.profile.guest;
+});

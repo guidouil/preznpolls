@@ -11,7 +11,9 @@
 </head>
 
 <template name="main">
-  {{> sidebar}}
+  {{#if isPrezOwner}}
+    {{> sidebar}}
+  {{/if}}
   <div class="pusher">
     {{> header}}
     <div class="main-container">

@@ -1,6 +1,12 @@
 Template.home.helpers({
   presentations () {
-    return Presentations.find({}, {sort: {name: 1}}).fetch();
+    return Presentations.find({ isPublic: true, isListed: true }, {sort: {createdAt: -1}}).fetch();
+  },
+  myPresentations () {
+    if (Meteor.userId()) {
+      return Presentations.find({ owners: Meteor.userId() }, {sort: {createdAt: -1}}).fetch();
+    }
+    return false;
   },
   chaptersCount () {
     let chaptersCount = 0;
@@ -19,6 +25,13 @@ Template.home.helpers({
       });
     }
     return slidesCount;
+  },
+  viewersCount () {
+    let viewersCount = 0;
+    if (this && this.viewers) {
+      viewersCount = this.viewers.length;
+    }
+    return viewersCount;
   },
 });
 
