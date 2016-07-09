@@ -80,9 +80,12 @@ Template.header.onRendered(function () {
     } else if (yaya >= 0.5) {
       $('.createPrez').transition('jiggle');
     } else if (yaya >= 0.25) {
-      $('.createPrez').transition('flash');
+      $('.createPrez').transition('pulse');
     } else {
-      $('.createPrez').transition('pulse').transition('pulse');
+      $('.createPrezIcon').addClass('loading');
+      setTimeout(function () {
+        $('.createPrezIcon').removeClass('loading');
+      }, 500);
     }
   }, 10000);
 

@@ -4,7 +4,7 @@
 
     <div class="ui basic segment">
       <div class="ui column stackable grid">
-        <div class="six wide column">
+        <div class="five wide column">
           <h1 class="ui header">Welcome to Prez&Polls</h1>
           <h2 class="ui header">Engage your audience in real time</h2>
           <p class="ui header">
@@ -26,13 +26,14 @@
             </div>
           {{/if}}
           <p class="ui header">
-            Prez&Polls is still in early alpha... (July 2016)
+            Prez&Polls is still in early alpha.
           </p>
         </div>
-        <div class="ten wide column">
 
-          {{#if myPresentations}}
+        <div class="eleven wide column">
+
           <h2 class="ui header">Your presentations</h2>
+          {{#if myPresentations}}
           <div class="ui three stackable cards">
             {{#each myPresentations}}
             <div class="raised card">
@@ -48,14 +49,17 @@
                 {{viewersCount}} Viewers
               </div>
               <div class="ui bottom attached buttons">
-                <a class="ui primary icon button" href="{{pathFor 'play' prez=_id}}"><i class="play icon"></i>Live</a>
-                <a class="ui icon button" href="{{pathFor 'edit' prez=_id}}"><i class="edit icon"></i>Edit</a>
+                <a class="ui primary labeled icon button" href="{{pathFor 'play' prez=_id}}"><i class="play icon"></i>Live</a>
+                <a class="ui icon labeled button" href="{{pathFor 'edit' prez=_id}}"><i class="edit icon"></i>Edit</a>
               </div>
             </div>
             {{/each}}
           </div>
-          <div class="ui divider"></div>
+          {{else}}
+          <button class="ui large fluid positive icon labeled button createPrezBigBtn"><i class="plus icon"></i>Create a presentation</button>
           {{/if}}
+
+          <div class="ui divider"></div>
 
           <h2 class="ui header">Public presentations</h2>
           <div class="ui three stackable cards">
@@ -73,9 +77,9 @@
                 {{viewersCount}} Viewers
               </div>
               <div class="ui bottom attached buttons">
-                <a class="ui primary icon button" href="{{pathFor 'play' prez=_id}}"><i class="play icon"></i>Live</a>
+                <a class="ui primary compact labeled icon button" href="{{pathFor 'play' prez=_id}}"><i class="play icon"></i>Live</a>
                 {{#unless isLiveOnly}}
-                <a class="ui secondary icon button" href="{{pathFor 'view' prez=_id chapter=0 slide=0}}"><i class="eye icon"></i>View</a>
+                <a class="ui secondary compact labeled icon button" href="{{pathFor 'view' prez=_id chapter=0 slide=0}}"><i class="eye icon"></i>View</a>
                 {{/unless}}
               </div>
             </div>

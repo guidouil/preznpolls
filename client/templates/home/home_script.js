@@ -36,9 +36,12 @@ Template.home.helpers({
 });
 
 Template.home.events({
-
+  'click .createPrezBigBtn' () {
+    $('.createPrez').click();
+  },
 });
 
 Template.home.onRendered(function () {
   this.subscribe('Presentations');
+  $('.createPrezBigBtn').transition('tada');
 });
