@@ -12,7 +12,10 @@
 
 <template name="main">
   {{> sidebar}}
-  <div class="pusher main-container">
-    {{> yield}}
+  <div class="pusher">
+    {{> header}}
+    <div class="main-container">
+      {{> yield}}
+    </div>
   </div>
 </template>

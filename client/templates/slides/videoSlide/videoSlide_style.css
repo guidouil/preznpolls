@@ -1,14 +1,13 @@
 @media (min-width:320px) {
   .videoSlideContainer {
-    position: absolute;
-    top: 20%;
+    padding-top: 2rem;
   }
 }
 @media (min-width:641px) {
   .videoSlideContainer {
     position: absolute;
-    top: 50%;
+    top: 30%;
     left: 50%;
-    transform: translate3d(-50%,-50%,0);
+    transform: translate3d(-50%,-30%,0);
   }
 }

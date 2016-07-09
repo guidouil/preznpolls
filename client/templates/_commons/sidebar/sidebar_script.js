@@ -57,7 +57,7 @@ Template.sidebar.events({
             order: currentChapter.slides.length,
             type: evt[0].dataset.ref,
             color: 'basic',
-            image: '/default-image.png',
+            image: '/default-image.jpeg',
             video: 'https://www.youtube.com/embed/O6Xo21L0ybE',
           });
           Presentations.update({ _id: prez._id }, { $set: {

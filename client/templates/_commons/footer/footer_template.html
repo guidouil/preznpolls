@@ -10,20 +10,12 @@
         <i class="large edit icon"></i>
       </a>
       {{/if}}
-      <div class="item">
-        <i class="large user icon"></i>
-        <strong>{{viewers}}</strong>
-      </div>
       {{#if isPollSlide}}
       <a class="item viewStat" >
-        <i class="large {{activeStat}} pie chart icon"></i>
-        <strong>{{voters}}</strong>
+        <b>{{voters}}</b>&nbsp;<i class="large {{activeStat}} pie chart icon"></i>
       </a>
       {{/if}}
     </div>
-    <a class="center header item" href="{{pathFor 'home'}}">
-      Prez&Polls
-    </a>
     <div class="right menu">
       <a class="item previousSlide" data-transition-out="scaleOut" data-transition-in="slideFadeDownIn">
         <i class="large angle double left icon"></i>

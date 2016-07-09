@@ -5,8 +5,10 @@ Template.coverSlide.events({
   'change .slideColor' (event, tmpl) {
     let field = tmpl.find('#slideColorInput').value;
     let color = tmpl.find('#slideColor :selected').value;
-    if (color === 'black') {
+    if (color === 'white') {
       color = 'basic';
+    } else if (color === 'black') {
+      color = 'inverted';
     } else if (color) {
       color = 'inverted ' + color;
     }

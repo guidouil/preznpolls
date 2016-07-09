@@ -15,13 +15,6 @@ Template.footer.helpers({
     }
     return '';
   },
-  viewers () {
-    let viewers = Viewers.findOne({ _id: Router.current().params.prez });
-    if (viewers && viewers.viewers ) {
-      return viewers.viewers.length;
-    }
-    return 0;
-  },
   voters () {
     let query = {};
     query[Router.current().params.prez] = {$exists: 1};

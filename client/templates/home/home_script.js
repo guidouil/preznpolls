@@ -23,37 +23,9 @@ Template.home.helpers({
 });
 
 Template.home.events({
-  'click .createPrez' () {
-    $('.prezTitleModal').modal({
-      onApprove: function() {
-        let prezTitle = $('#prezTitle').val();
-        if (prezTitle) {
-          let prezId = Presentations.insert({
-            title: prezTitle,
-            chapters: [{
-              order: 0,
-              title: 'Chapter 0',
-              slides: [{
-                order: 0,
-                type: 'coverSlide',
-                title: prezTitle,
-                color: 'basic',
-              }],
-            }],
-          });
-          Viewers.insert({ _id: prezId, viewers: []});
-        }
-      },
-    }).modal('show');
-  },
+
 });
 
 Template.home.onRendered(function () {
   this.subscribe('Presentations');
-  $('#prezTitle').keypress(function (e) {
-    if (e.which === 13) {
-      $('.createPrezBtn').click();
-      return false;
-    }
-  });
 });

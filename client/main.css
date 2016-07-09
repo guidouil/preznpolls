@@ -5,3 +5,8 @@ html.ios, html.ios body, .pusher {
 .transitions-content {
   overflow-y: auto !important;
 }
+
+.main-container {
+  padding-top: 4.1rem;
+  height: 100%;
+}

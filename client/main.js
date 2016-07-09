@@ -38,11 +38,14 @@ Template.registerHelper('isSelectedColor', function (color, value) {
   if (color && value && (color === value || color.search(value) !== -1)) {
     return 'selected';
   }
+  if ((color === 'basic' && value === 'white') || (color === 'inverted' && value === 'black')) {
+    return 'selected';
+  }
   return '';
 });
 
 Template.registerHelper('colors', function() {
-  return ['black', 'red', 'orange', 'yellow', 'olive', 'green', 'teal', 'blue', 'purple', 'violet', 'pink', 'brown', 'grey'];
+  return ['white', 'red', 'orange', 'yellow', 'olive', 'green', 'teal', 'blue', 'purple', 'violet', 'pink', 'brown', 'grey', 'black'];
 });
 
 Template.registerHelper('plural', function (number) {

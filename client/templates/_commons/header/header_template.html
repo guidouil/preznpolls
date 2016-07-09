@@ -1,17 +1,49 @@
 <template name='header'>
   <div class="ui top fixed inverted borderless blue menu">
     <div class="left menu">
-      <a class="item" href="{{pathFor 'home'}}">
-        <i class="large home icon"></i>
+      <a class="item createPrez" >
+        <i class="big plus icon"></i>
       </a>
     </div>
     <a class="center header item" href="{{pathFor 'home'}}">
-      <h1 class="ui inverted header">Prez&Polls</h1>
+      <h1 class="ui inverted header">
+        {{#if prezTitle}}
+          {{prezTitle}}
+        {{else}}
+          Prez&Polls
+        {{/if}}
+      </h1>
     </a>
     <div class="right menu">
-      <a class="item createPrez" >
-        <i class="large plus icon"></i>
+      <a class="item">
+        {{#if isHome}}
+        Welcome&nbsp;<u>Guest</u>
+        {{else}}
+        <b>{{viewers}}</b>&nbsp;<i class="big user icon"></i>
+        {{/if}}
       </a>
+    </div>
+  </div>
+
+  <div class="ui basic modal prezTitleModal">
+    <i class="close icon"></i>
+    <div class="header">
+      What's the title of your presentation?
+    </div>
+    <div class="content">
+      <div class="description">
+        <div class="ui fluid input">
+          <input type="text" placeholder="Presentation title" id="prezTitle">
+        </div>
+      </div>
+    </div>
+    <div class="actions">
+      <div class="one fluid ui inverted buttons">
+        <div class="ui ok green basic inverted button createPrezBtn">
+          <i class="checkmark icon"></i>
+          Let's create it
+        </div>
+      </div>
     </div>
   </div>
 </template>
