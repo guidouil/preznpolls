@@ -22,6 +22,10 @@ Template.pollSlide.helpers({
   },
   hasVotedAll () {
     let prez = Presentations.findOne({ _id: Router.current().params.prez });
+    if (prez && Router.current().params.chapter >= 0 && Router.current().params.slide >= 0) {
+      prez.chapterViewIndex = Router.current().params.chapter;
+      prez.slideViewIndex = Router.current().params.slide;
+    }
     let questions = prez.chapters[prez.chapterViewIndex].slides[prez.slideViewIndex].questions;
     let votes = Votes.findOne({ _id: Meteor.userId() });
     if (questions && votes && votes[prez._id]) {
@@ -124,6 +128,10 @@ Template.pollSlide.events({
         }
       });
 
+      if (Router.current().params.chapter >= 0 && Router.current().params.slide >= 0) {
+        prez.chapterViewIndex = Router.current().params.chapter;
+        prez.slideViewIndex = Router.current().params.slide;
+      }
       let questions = prez.chapters[prez.chapterViewIndex].slides[prez.slideViewIndex].questions;
       if (questions) {
         _.each(questions, function(question) {

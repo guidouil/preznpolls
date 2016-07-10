@@ -1,6 +1,10 @@
 Template.gaugeStat.onCreated(function () {
   let questionIndex = this.data;
   let prez = Presentations.findOne({ _id: Router.current().params.prez });
+  if (prez && Router.current().params.chapter >= 0 && Router.current().params.slide >= 0) {
+    prez.chapterViewIndex = Router.current().params.chapter;
+    prez.slideViewIndex = Router.current().params.slide;
+  }
   let answers = prez.chapters[prez.chapterViewIndex].slides[prez.slideViewIndex].questions[questionIndex].answers;
   let questionId = prez.chapters[prez.chapterViewIndex].slides[prez.slideViewIndex].questions[questionIndex].questionId;
   this.answers = answers;

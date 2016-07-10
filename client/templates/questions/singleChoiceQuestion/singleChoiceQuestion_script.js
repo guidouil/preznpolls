@@ -2,6 +2,10 @@ Template.singleChoiceQuestion.helpers({
   questionId () {
     let questionIndex = Template.instance().data;
     let prez = Presentations.findOne({ _id: Router.current().params.prez });
+    if (prez && Router.current().params.chapter >= 0 && Router.current().params.slide >= 0) {
+      prez.chapterViewIndex = Router.current().params.chapter;
+      prez.slideViewIndex = Router.current().params.slide;
+    }
     if (questionIndex >= 0 && prez && prez.chapters[prez.chapterViewIndex].slides[prez.slideViewIndex].questions) {
       return prez.chapters[prez.chapterViewIndex].slides[prez.slideViewIndex].questions[questionIndex].questionId;
     }
@@ -10,6 +14,10 @@ Template.singleChoiceQuestion.helpers({
   answers () {
     let questionIndex = Template.instance().data;
     let prez = Presentations.findOne({ _id: Router.current().params.prez });
+    if (prez && Router.current().params.chapter >= 0 && Router.current().params.slide >= 0) {
+      prez.chapterViewIndex = Router.current().params.chapter;
+      prez.slideViewIndex = Router.current().params.slide;
+    }
     if (questionIndex >= 0 && prez && prez.chapters[prez.chapterViewIndex].slides[prez.slideViewIndex].questions) {
       return prez.chapters[prez.chapterViewIndex].slides[prez.slideViewIndex].questions[questionIndex].answers;
     }
@@ -18,6 +26,10 @@ Template.singleChoiceQuestion.helpers({
   indexes () {
     let questionIndex = Template.instance().data;
     let prez = Presentations.findOne({ _id: Router.current().params.prez });
+    if (prez && Router.current().params.chapter >= 0 && Router.current().params.slide >= 0) {
+      prez.chapterViewIndex = Router.current().params.chapter;
+      prez.slideViewIndex = Router.current().params.slide;
+    }
     if (questionIndex >= 0 && prez && prez.chapters[prez.chapterViewIndex].slides[prez.slideViewIndex].questions) {
       return {
         chapterIndex: prez.chapterViewIndex,

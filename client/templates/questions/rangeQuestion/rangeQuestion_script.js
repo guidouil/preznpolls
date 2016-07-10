@@ -2,6 +2,10 @@ Template.rangeQuestion.onRendered(function () {
   let questionIndex = this.data;
   Tracker.autorun(function () {
     let prez = Presentations.findOne({ _id: Router.current().params.prez });
+    if (prez && Router.current().params.chapter >= 0 && Router.current().params.slide >= 0) {
+      prez.chapterViewIndex = Router.current().params.chapter;
+      prez.slideViewIndex = Router.current().params.slide;
+    }
     if (questionIndex >= 0 && prez && prez.chapters[prez.chapterViewIndex].slides[prez.slideViewIndex].questions && prez.chapters[prez.chapterViewIndex].slides[prez.slideViewIndex].questions[questionIndex]) {
       let answers = prez.chapters[prez.chapterViewIndex].slides[prez.slideViewIndex].questions[questionIndex].answers;
       if (answers && answers.length) {
@@ -29,6 +33,10 @@ Template.rangeQuestion.helpers({
   questionId () {
     let questionIndex = Template.instance().data;
     let prez = Presentations.findOne({ _id: Router.current().params.prez });
+    if (prez && Router.current().params.chapter >= 0 && Router.current().params.slide >= 0) {
+      prez.chapterViewIndex = Router.current().params.chapter;
+      prez.slideViewIndex = Router.current().params.slide;
+    }
     if (questionIndex >= 0 && prez && prez.chapters[prez.chapterViewIndex].slides[prez.slideViewIndex].questions && prez.chapters[prez.chapterViewIndex].slides[prez.slideViewIndex].questions[questionIndex]) {
       return prez.chapters[prez.chapterViewIndex].slides[prez.slideViewIndex].questions[questionIndex].questionId;
     }
@@ -37,6 +45,10 @@ Template.rangeQuestion.helpers({
   answers () {
     let questionIndex = Template.instance().data;
     let prez = Presentations.findOne({ _id: Router.current().params.prez });
+    if (prez && Router.current().params.chapter >= 0 && Router.current().params.slide >= 0) {
+      prez.chapterViewIndex = Router.current().params.chapter;
+      prez.slideViewIndex = Router.current().params.slide;
+    }
     if (questionIndex >= 0 && prez && prez.chapters[prez.chapterViewIndex].slides[prez.slideViewIndex].questions && prez.chapters[prez.chapterViewIndex].slides[prez.slideViewIndex].questions[questionIndex]) {
       return prez.chapters[prez.chapterViewIndex].slides[prez.slideViewIndex].questions[questionIndex].answers;
     }
@@ -45,6 +57,10 @@ Template.rangeQuestion.helpers({
   indexes () {
     let questionIndex = Template.instance().data;
     let prez = Presentations.findOne({ _id: Router.current().params.prez });
+    if (prez && Router.current().params.chapter >= 0 && Router.current().params.slide >= 0) {
+      prez.chapterViewIndex = Router.current().params.chapter;
+      prez.slideViewIndex = Router.current().params.slide;
+    }
     if (questionIndex >= 0 && prez && prez.chapters[prez.chapterViewIndex].slides[prez.slideViewIndex].questions) {
       return {
         chapterIndex: prez.chapterViewIndex,
