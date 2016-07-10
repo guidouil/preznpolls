@@ -57,7 +57,7 @@ Template.pollSlide.events({
   'click .addQuestionBtn' () {
     let prez = Presentations.findOne({ _id: Router.current().params.prez });
     if (prez) {
-      let questionTitle = 'On a scale from 1 to 5, how would you rate the following options?';
+      let questionTitle = 'What is the question?';
       let questions = prez.chapters[prez.chapterViewIndex].slides[prez.slideViewIndex].questions
       let questionsLength = (questions ? questions.length : 0);
       let newQuestion = {};
@@ -71,7 +71,7 @@ Template.pollSlide.events({
         help: '',
         answers: [{
           answerId: Random.id(),
-          text: 'Awesomeness',
+          text: 'Answer',
           minValue: 0,
           maxValue: 5,
           order: 0,
@@ -80,6 +80,7 @@ Template.pollSlide.events({
         }],
       };
       Presentations.update({ _id: Router.current().params.prez }, { $push: newQuestion });
+      makeEditable();
     }
   },
   'click .addAnswerBtn' (event) {
@@ -99,6 +100,7 @@ Template.pollSlide.events({
         isRightAnswer: false,
       };
       Presentations.update({ _id: Router.current().params.prez }, { $push: newAnswer });
+      makeEditable();
     }
   },
   'click .submitAnswersBtn' () {

@@ -1,9 +1,21 @@
 <template name='header'>
   <div class="ui top fixed inverted borderless blue menu">
     <div class="left menu">
-      <a class="item createPrez" >
-        <i class="big plus icon createPrezIcon"></i>
-      </a>
+      {{#if isPrezOwner}}
+        {{#if isEditing}}
+        <a class="item" href="{{pathFor 'play' prez=prez}}">
+          <i class="large save icon"></i>
+        </a>
+        {{else}}
+        <a class="item" href="{{pathFor 'edit' prez=prez}}">
+          <i class="large edit icon"></i>
+        </a>
+        {{/if}}
+      {{else}}
+        <a class="item createPrez" >
+          <i class="big plus icon createPrezIcon"></i>
+        </a>
+      {{/if}}
     </div>
     <a class="center header item" href="{{pathFor 'home'}}">
       <h1 class="ui inverted header">

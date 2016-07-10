@@ -28,6 +28,9 @@ Template.header.helpers({
     }
     return '';
   },
+  prez () {
+    return Router.current().params.prez;
+  },
 });
 
 Template.header.events({

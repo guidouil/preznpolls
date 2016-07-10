@@ -5,6 +5,6 @@
   z-index: 999;
 }
 .editContainer .editable {
-  border: 2px dashed grey;
+  border-bottom: 2px solid grey;
   min-height: 1em !important;
 }
