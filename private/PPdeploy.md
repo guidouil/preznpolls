@@ -19,6 +19,6 @@ npm install
 cd
 export MONGO_URL='mongodb://127.0.0.1:27017/preznpolls'
 export PORT=3000
-export ROOT_URL='http://preznpolls.com:3000'
+export ROOT_URL='http://preznpolls.com'
 forever start --append --uid "preznpolls" preznpolls/main.js
 date

@@ -9,8 +9,18 @@ Meteor.publish('MyPresentations', function () {
   return false;
 });
 
+Meteor.publish('SharedPresentations', function () {
+  if (this.userId) {
+    return Presentations.find({ users: this.userId });
+  }
+  return false;
+});
+
 Meteor.publish('Presentation', function (prezId) {
-  return Presentations.find({ _id: prezId });
+  if (this.userId) {
+    return Presentations.find({ _id: prezId, $or: [{ isPublic: true }, { owners: this.userId }, { users: this.userId }] });
+  }
+  return Presentations.find({ _id: prezId, isPublic: true });
 });
 
 Meteor.publish('Viewers', function (prezId) {
