@@ -127,6 +127,7 @@ Template.sidebar.events({
       slideViewIndex: event.currentTarget.dataset.index,
       flip: flip,
     }});
+    $('.presentationSidebar').sidebar('hide');
   },
   'click .deleteSlideBtn' (event) {
     event.preventDefault();
