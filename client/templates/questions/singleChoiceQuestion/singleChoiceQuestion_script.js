@@ -11,6 +11,14 @@ Template.singleChoiceQuestion.helpers({
     }
     return false;
   },
+  questionText () {
+    let questionIndex = Template.instance().data;
+    let prez = Presentations.findOne({ _id: Router.current().params.prez });
+    if (questionIndex >= 0 && prez && prez.chapters[prez.chapterViewIndex].slides[prez.slideViewIndex].questions) {
+      return prez.chapters[prez.chapterViewIndex].slides[prez.slideViewIndex].questions[questionIndex].text;
+    }
+    return false;
+  },
   answers () {
     let questionIndex = Template.instance().data;
     let prez = Presentations.findOne({ _id: Router.current().params.prez });

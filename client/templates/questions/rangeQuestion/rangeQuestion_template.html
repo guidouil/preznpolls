@@ -1,25 +1,27 @@
 <template name='rangeQuestion'>
   {{#each betterAnswer answers indexes.questionIndex indexes.slideIndex indexes.chapterIndex}}
-    <h3 class="ui header editable" data-field="chapters.{{chapterIndex}}.slides.{{slideIndex}}.questions.{{questionIndex}}.answers.{{@index}}.text">
+    <h3 class="ui header editable" data-title="One of the answer to scale for the question: {{questionText}}" data-content="This will also be used as the label in the resulting gauge graph showing the average value." data-variation="very wide" data-field="chapters.{{chapterIndex}}.slides.{{slideIndex}}.questions.{{questionIndex}}.answers.{{@index}}.text">
       {{text}}
       {{#unless isEditing}}
-      <small id="display_{{answerId}}"></small>
+        <small id="display_{{answerId}}"></small>
       {{/unless}}
     </h3>
-    <div class="ui {{color}} range" id="range_{{answerId}}"></div>
+    {{#unless isEditing}}
+      <div class="ui {{color}} range" id="range_{{answerId}}"></div>
+    {{/unless}}
     <input type="hidden" id="{{answerId}}" data-ref="{{text}}" data-question="{{questionId}}" class="answerInput">
     {{#if isEditing}}
     <div class="ui four column middle aligned stackable grid">
       <div class="column">
         <div class="field">
           <small>Minimum value</small>
-          <p class="editable" data-field="chapters.{{chapterIndex}}.slides.{{slideIndex}}.questions.{{questionIndex}}.answers.{{@index}}.minValue">{{minValue}}</p>
+          <p class="editable" data-content="Minimum value of the range. Usualy 0 or 1." data-field="chapters.{{chapterIndex}}.slides.{{slideIndex}}.questions.{{questionIndex}}.answers.{{@index}}.minValue">{{minValue}}</p>
         </div>
       </div>
       <div class="column">
         <div class="field">
           <small>Maximum value</small>
-          <p class="editable" data-field="chapters.{{chapterIndex}}.slides.{{slideIndex}}.questions.{{questionIndex}}.answers.{{@index}}.maxValue">{{maxValue}}</p>
+          <p class="editable" data-content="Maximum value of the range. Usualy 5, 10 or 100." data-field="chapters.{{chapterIndex}}.slides.{{slideIndex}}.questions.{{questionIndex}}.answers.{{@index}}.maxValue">{{maxValue}}</p>
         </div>
       </div>
       <div class="column">

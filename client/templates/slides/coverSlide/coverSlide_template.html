@@ -3,12 +3,12 @@
   <div class="ui container coverSlideConatainer">
     <div class="coverSlide">
       <div class="ui {{color}} center aligned segment">
-        <h1 class="ui header editable" data-field="chapters.{{chapterIndex}}.slides.{{slideIndex}}.title">{{title}}</h1>
+        <h1 class="ui header editable" data-field="chapters.{{chapterIndex}}.slides.{{slideIndex}}.title" data-title="Cover slide title"  data-position="top center">{{title}}</h1>
         {{#if isEditingOr description}}
-          <h2 class="ui header editable" data-field="chapters.{{chapterIndex}}.slides.{{slideIndex}}.description">{{description}}</h2>
+          <h2 class="ui header editable" data-field="chapters.{{chapterIndex}}.slides.{{slideIndex}}.description" data-title="Cover slide sub title"  data-position="top center">{{description}}</h2>
         {{/if}}
         {{#if isEditingOr help}}
-          <h3 class="ui header editable" data-field="chapters.{{chapterIndex}}.slides.{{slideIndex}}.help">{{help}}</h3>
+          <h3 class="ui header editable" data-field="chapters.{{chapterIndex}}.slides.{{slideIndex}}.help" data-content="Cover slide additional text"  data-position="top center">{{help}}</h3>
         {{/if}}
       </div>
       {{#if isEditing}}
@@ -17,7 +17,7 @@
             <div class="column">
               <div class="field">
                 <small>Background image url</small>
-                <p class="editable" data-field="chapters.{{chapterIndex}}.slides.{{slideIndex}}.backgroundImage">{{backgroundImage}}</p>
+                <p class="editable" data-content="Cover slide background image url"  data-position="bottom center"> data-field="chapters.{{chapterIndex}}.slides.{{slideIndex}}.backgroundImage">{{backgroundImage}}</p>
               </div>
             </div>
             <div class="column">

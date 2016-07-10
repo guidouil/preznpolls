@@ -3,7 +3,7 @@
   <div class="ui container">
     <div class="ui basic segment">
 
-      <h1 class="ui center {{color}} aligned header editable" data-field="chapters.{{chapterIndex}}.slides.{{slideIndex}}.title">{{title}}</h1>
+      <h1 class="ui center {{color}} aligned header editable" data-field="chapters.{{chapterIndex}}.slides.{{slideIndex}}.title" data-content="Poll slide title"  data-position="top center">{{title}}</h1>
 
       {{#each questions}}
         <div class="ui {{../color}} segment">
@@ -14,37 +14,54 @@
               </button>
             {{/if}}
           {{/unless}}
-          <h2 class="ui header editable" data-tooltip="{{help}}" data-field="chapters.{{../chapterIndex}}.slides.{{../slideIndex}}.questions.{{@index}}.text">
+          <h2 class="ui header editable" data-title="The question you want to ask" data-content="Be smart about the way you ask this question if you want to get the right answers. Use bellow description and help fields to enhance your question." data-variation="very wide" data-field="chapters.{{../chapterIndex}}.slides.{{../slideIndex}}.questions.{{@index}}.text">
             {{text}}
           </h2>
           {{#if isEditing}}
           <div class="ui middle aligned stackable grid">
             <div class="four wide column">
-              <input type="hidden" id="type_{{questionId}}" value="chapters.{{../chapterIndex}}.slides.{{../slideIndex}}.questions.{{@index}}.type">
-              <select class="ui fluid dropdown questionType" id="typeSelect_{{questionId}}">
-                <option value="rangeQuestion" {{isQuestionType 'rangeQuestion'}}>Range question</option>
-                <option value="singleChoiceQuestion" {{isQuestionType 'singleChoiceQuestion'}}>Single answer question</option>
-                <option value="multiChoicesQuestion" {{isQuestionType 'multiChoicesQuestion'}}>Multiple answers question</option>
-                <option value="wordsQuestion" {{isQuestionType 'wordsQuestion'}}>Words answer question</option>
-                <option value="multiPointsQuestion" {{isQuestionType 'multiPointsQuestion'}} disabled>Points answer question</option>
-              </select>
+              <div class="ui basic segment questionTypePopup" data-title="Type of the question" data-content="This will change the interface to answer to this question. Each question type will generate it's corresponding graph to show the answers." data-variation="very wide" data-position="right center">
+                <input type="hidden" id="type_{{questionId}}" value="chapters.{{../chapterIndex}}.slides.{{../slideIndex}}.questions.{{@index}}.type">
+                <select class="ui fluid labeled icon dropdown questionType" id="typeSelect_{{questionId}}">
+                  <option value="rangeQuestion" {{isQuestionType 'rangeQuestion'}}>
+                    <i class="dashboard icon"></i>
+                    Range
+                  </option>
+                  <option value="singleChoiceQuestion" {{isQuestionType 'singleChoiceQuestion'}}>
+                    <i class="selected radio icon"></i>
+                    Single answer
+                  </option>
+                  <option value="multiChoicesQuestion" {{isQuestionType 'multiChoicesQuestion'}}>
+                    <i class="checkmark box icon"></i>
+                    Multiple answers
+                  </option>
+                  <option value="wordsQuestion" {{isQuestionType 'wordsQuestion'}}>
+                    <i class="cloud icon"></i>
+                    Words answer
+                  </option>
+                  <option value="multiPointsQuestion" {{isQuestionType 'multiPointsQuestion'}} disabled>
+                    Points answer
+                  </option>
+                </select>
+
+              </div>
             </div>
             <div class="four wide column">
               <div class="field">
                 <small>Question description</small>
-                <p class="editable" data-field="chapters.{{../chapterIndex}}.slides.{{../slideIndex}}.questions.{{@index}}.description">{{description}}</p>
+                <p class="editable" data-content="Can be a long text. Will be shown between the question and it's answers" data-position="bottom left" data-field="chapters.{{../chapterIndex}}.slides.{{../slideIndex}}.questions.{{@index}}.description">{{description}}</p>
               </div>
             </div>
             <div class="four wide column">
               <div class="field">
                 <small>Question help</small>
-                <p class="editable" data-field="chapters.{{../chapterIndex}}.slides.{{../slideIndex}}.questions.{{@index}}.help">{{help}}</p>
+                <p class="editable" data-content="Add's a question mark button on the side of the question with this text in a popup (such as this one)" data-position="bottom left" data-field="chapters.{{../chapterIndex}}.slides.{{../slideIndex}}.questions.{{@index}}.help">{{help}}</p>
               </div>
             </div>
             <div class="four wide column">
               <div class="ui red fluid icon labeled button deleteQuestionBtn" data-ref="{{@index}}">
                 <i class="delete icon"></i>
-                Delete question
+                Delete this question
               </div>
             </div>
           </div>
@@ -70,7 +87,7 @@
               <br>
               <div class="ui green fluid icon labeled button addAnswerBtn" data-ref="{{@index}}">
                 <i class="add icon"></i>
-                Add an answer
+                Add another answer
               </div>
             {{/if}}
           {{/if}}
@@ -82,9 +99,9 @@
       {{#if isEditing}}
         <div class="fluid ui primary icon labeled button addQuestionBtn">
           <i class="add icon"></i>
-          Add a question
+          Add another question
         </div>
-        <div class="ui divider"></div>
+        <br>
         <div class="ui two column grid">
           <div class="column">
             <div class="field">
@@ -111,29 +128,6 @@
         {{/unless}}
       {{/if}}
 
-    </div>
-  </div>
-
-  <!-- questionTitleModal -->
-  <div class="ui basic modal questionTitleModal">
-    <i class="close icon"></i>
-    <div class="header">
-      What is the question?
-    </div>
-    <div class="content">
-      <div class="description">
-        <div class="ui fluid input">
-          <input type="text" placeholder="The question (ex: On a scale from 1 to 5, how would you rate the following options?)" id="questionTitle">
-        </div>
-      </div>
-    </div>
-    <div class="actions">
-      <div class="one fluid ui inverted buttons">
-        <div class="ui ok green basic inverted icon labeled button validateQuestionAdd">
-          <i class="checkmark icon"></i>
-          Let's ask it
-        </div>
-      </div>
     </div>
   </div>
 

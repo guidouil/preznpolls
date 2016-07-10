@@ -4,20 +4,20 @@
       <div class="column">
         <div class="field">
           <small>Minimum answers to validate</small>
-          <p class="editable" data-field="chapters.{{indexes.chapterIndex}}.slides.{{indexes.slideIndex}}.questions.{{indexes.questionIndex}}.minAnswers">{{question.minAnswers}}</p>
+          <p class="editable" data-content="Minimum number of answer a user must check to validate this question." data-variation="wide" data-field="chapters.{{indexes.chapterIndex}}.slides.{{indexes.slideIndex}}.questions.{{indexes.questionIndex}}.minAnswers">{{question.minAnswers}}</p>
         </div>
       </div>
       <div class="column">
         <div class="field">
           <small>Maximum answers to validate</small>
-          <p class="editable" data-field="chapters.{{indexes.chapterIndex}}.slides.{{indexes.slideIndex}}.questions.{{indexes.questionIndex}}.maxAnswers">{{question.maxAnswers}}</p>
+          <p class="editable" data-content="Maximum number of answer a user can check to validate this question." data-variation="wide" data-field="chapters.{{indexes.chapterIndex}}.slides.{{indexes.slideIndex}}.questions.{{indexes.questionIndex}}.maxAnswers">{{question.maxAnswers}}</p>
         </div>
       </div>
     </div>
     {{#each answers}}
       <div class="ui four column middle aligned stackable grid">
         <div class="column">
-          <h3 class="ui header editable" data-field="chapters.{{indexes.chapterIndex}}.slides.{{indexes.slideIndex}}.questions.{{indexes.questionIndex}}.answers.{{@index}}.text">
+          <h3 class="ui header editable" data-title="One of the answer to the question: {{question.text}}" data-content="This will also be used as the label in the resulting graphs." data-variation="very wide" data-field="chapters.{{indexes.chapterIndex}}.slides.{{indexes.slideIndex}}.questions.{{indexes.questionIndex}}.answers.{{@index}}.text">
             {{text}}
           </h3>
         </div>
@@ -39,7 +39,7 @@
         <div class="column">
           <div class="ui orange fluid icon labeled button deleteAnswerBtn" data-ref="{{@index}}" data-index="{{indexes.questionIndex}}">
             <i class="delete icon"></i>
-            Delete answer
+            Delete this answer
           </div>
         </div>
       </div>

@@ -62,6 +62,24 @@ Template.sidebar.events({
             color: 'basic',
             image: '/default-image.jpeg',
             video: 'https://www.youtube.com/embed/O6Xo21L0ybE',
+            questions: [{
+              questionId: Random.id(),
+              text: 'What is the question?',
+              type: 'singleChoiceQuestion',
+              stat: 'pieStat',
+              order: 0,
+              description: '',
+              help: '',
+              answers: [{
+                answerId: Random.id(),
+                text: 'Answer 1',
+                minValue: 0,
+                maxValue: 5,
+                order: 0,
+                value: 1,
+                isRightAnswer: false,
+              }],
+            }],
           });
           Presentations.update({ _id: prez._id }, { $set: {
             chapters: chapters,

@@ -2,6 +2,8 @@ makeEditable = function () {
   if (Router.current().route.getName() === 'edit') {
     $('.editable').attr('contenteditable', false);
     $('.editable').attr('contenteditable', true);
+    $('.editable').popup();
+    $('.questionTypePopup').popup();
     $('.editable').on('blur', function (event) {
       event.stopPropagation();
       let value = event.currentTarget.innerText;
@@ -18,7 +20,7 @@ makeEditable = function () {
           return false;
         }, 200);
       }
-      return false;
     });
   }
+  return false;
 };

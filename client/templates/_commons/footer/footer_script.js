@@ -11,7 +11,7 @@ Template.footer.helpers({
   },
   activeStat () {
     if (Session.equals('showMeTheStat', true)) {
-      return 'black';
+      return 'green';
     }
     return '';
   },

@@ -2,7 +2,7 @@
 
   <div class="ui container videoSlideContainer">
     <div class="ui {{color}} center aligned segment">
-      <h1 class="ui header editable" data-field="chapters.{{chapterIndex}}.slides.{{slideIndex}}.title">{{title}}</h1>
+      <h1 class="ui header editable" data-field="chapters.{{chapterIndex}}.slides.{{slideIndex}}.title" data-title="Video slide title"  data-position="top center">{{title}}</h1>
       <div class="ui embed" data-url="{{video}}?autoplay=1" data-autoplay="true"></div>
     </div>
     {{#if isEditing}}
@@ -15,7 +15,7 @@
     {{/if}}
     {{#if isEditingOr description}}
       <div class="ui {{color}} center aligned segment">
-        <h3 class="ui header editable" data-field="chapters.{{chapterIndex}}.slides.{{slideIndex}}.description">{{description}}</h3>
+        <h3 class="ui header editable" data-field="chapters.{{chapterIndex}}.slides.{{slideIndex}}.description" data-content="Video slide additional text">{{description}}</h3>
       </div>
     {{/if}}
     {{#if isEditing}}

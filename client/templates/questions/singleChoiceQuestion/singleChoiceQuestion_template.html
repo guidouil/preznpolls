@@ -4,7 +4,7 @@
     {{#each answers}}
       <div class="ui four column middle aligned stackable grid">
         <div class="column">
-          <h3 class="ui header editable" data-field="chapters.{{indexes.chapterIndex}}.slides.{{indexes.slideIndex}}.questions.{{indexes.questionIndex}}.answers.{{@index}}.text">
+          <h3 class="ui header editable" data-title="One of the answer to the question: {{questionText}}" data-content="This will also be used as the label in the resulting graphs." data-variation="very wide" data-field="chapters.{{indexes.chapterIndex}}.slides.{{indexes.slideIndex}}.questions.{{indexes.questionIndex}}.answers.{{@index}}.text">
             {{text}}
           </h3>
         </div>
@@ -26,7 +26,7 @@
         <div class="column">
           <div class="ui orange fluid icon labeled button deleteAnswerBtn" data-ref="{{@index}}" data-index="{{indexes.questionIndex}}">
             <i class="delete icon"></i>
-            Delete answer
+            Delete this answer
           </div>
         </div>
       </div>
