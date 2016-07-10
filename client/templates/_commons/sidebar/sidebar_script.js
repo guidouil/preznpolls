@@ -212,4 +212,5 @@ Template.sidebar.events({
 
 Template.sidebar.onRendered(function () {
   makeEditable();
+  $('.button').popup();
 });

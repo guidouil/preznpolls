@@ -76,3 +76,11 @@ Template.registerHelper('isGuest', function () {
   let user = Meteor.user();
   return user && user.profile && user.profile.guest;
 });
+
+Template.registerHelper('noInverted', function (color) {
+  check(color, String);
+  if (color.search('inverted') === 0) {
+    return color.replace('inverted', '');
+  }
+  return color;
+});

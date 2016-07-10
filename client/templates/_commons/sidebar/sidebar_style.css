@@ -4,3 +4,7 @@
 .slideSideBtns {
   padding-bottom: 2px;
 }
+.presentationSidebar .editable {
+  border-bottom: 2px solid grey;
+  min-height: 1em !important;
+}

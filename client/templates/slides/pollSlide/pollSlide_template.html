@@ -3,7 +3,7 @@
   <div class="ui container">
     <div class="ui basic segment">
 
-      <h1 class="ui center {{color}} aligned header editable" data-field="chapters.{{chapterIndex}}.slides.{{slideIndex}}.title" data-content="Poll slide title"  data-position="top center">{{title}}</h1>
+      <h1 class="ui center {{noInverted color}} aligned header editable" data-field="chapters.{{chapterIndex}}.slides.{{slideIndex}}.title" data-content="Poll slide title"  data-position="top center">{{title}}</h1>
 
       {{#each questions}}
         <div class="ui {{../color}} segment">
@@ -23,10 +23,6 @@
               <div class="ui basic segment questionTypePopup" data-title="Type of the question" data-content="This will change the interface to answer to this question. Each question type will generate it's corresponding graph to show the answers." data-variation="very wide" data-position="right center">
                 <input type="hidden" id="type_{{questionId}}" value="chapters.{{../chapterIndex}}.slides.{{../slideIndex}}.questions.{{@index}}.type">
                 <select class="ui fluid labeled icon dropdown questionType" id="typeSelect_{{questionId}}">
-                  <option value="rangeQuestion" {{isQuestionType 'rangeQuestion'}}>
-                    <i class="dashboard icon"></i>
-                    Range
-                  </option>
                   <option value="singleChoiceQuestion" {{isQuestionType 'singleChoiceQuestion'}}>
                     <i class="selected radio icon"></i>
                     Single answer
@@ -35,12 +31,17 @@
                     <i class="checkmark box icon"></i>
                     Multiple answers
                   </option>
+                  <option value="rangeQuestion" {{isQuestionType 'rangeQuestion'}}>
+                    <i class="dashboard icon"></i>
+                    Range answer
+                  </option>
+                  <option value="multiPointsQuestion" {{isQuestionType 'multiPointsQuestion'}}>
+                    <i class="star half empty icon"></i>
+                    Rating answer
+                  </option>
                   <option value="wordsQuestion" {{isQuestionType 'wordsQuestion'}}>
                     <i class="cloud icon"></i>
                     Words answer
-                  </option>
-                  <option value="multiPointsQuestion" {{isQuestionType 'multiPointsQuestion'}} disabled>
-                    Points answer
                   </option>
                 </select>
 

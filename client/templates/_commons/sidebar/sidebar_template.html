@@ -1,36 +1,36 @@
 <template name='sidebar'>
   <div class="ui left wide sidebar ui segment presentationSidebar">
     {{#with presentation}}
-    <button class="ui negative right floated compact icon button deletePresentationBtn">
+    <button class="ui negative right floated compact icon button deletePresentationBtn" data-title="Delete this presentation" data-position="right center">
       <i class="trash icon"></i>
     </button>
-      <h1 class="ui header editable" data-field="title">{{title}}</h1>
+      <h1 class="ui header editable" data-field="title" data-title="Slide title" data-position="right center">{{title}}</h1>
       <div class="ui divider"></div>
       {{#each chapters}}
-        <button class="ui basic red right floated compact icon button deleteChapterBtn" data-index="{{@index}}">
+        <button class="ui basic red right floated compact icon button deleteChapterBtn" data-index="{{@index}}" data-title="Delete this chapter" data-position="right center">
           <i class="delete icon"></i>
         </button>
-        <h2 class="ui header editable" data-field="chapters.{{@index}}.title">{{title}}</h2>
+        <h2 class="ui header editable" data-field="chapters.{{@index}}.title" data-title="Chapter title" data-position="right center">{{title}}</h2>
         {{#each slides}}
           <div class="ui {{isActiveSlide ../order @index}} {{slideColor type}} fluid buttons slideSideBtns">
             <button class="ui ok labeled icon button sidebarSlide" data-index="{{@index}}"  data-chapter="{{../order}}">
               <i class="{{slideIcon type}} icon"></i>
               {{title}}
             </button>
-            <button class="ui icon button deleteSlideBtn"  data-index="{{@index}}"  data-chapter="{{../order}}">
+            <button class="ui icon button deleteSlideBtn"  data-index="{{@index}}"  data-chapter="{{../order}}" data-title="Delete this slide" data-position="right center">
               <i class="delete icon"></i>
             </button>
           </div>
         {{/each}} <!-- slides end -->
         <button class="ui grey fluid labeled icon button addSlide" data-chapter="{{@index}}">
           <i class="plus icon"></i>
-          Add slide
+          Add a slide
         </button>
         <div class="ui divider"></div>
       {{/each}} <!-- chapters end -->
       <button class="ui basic fluid labeled icon button addChapter">
         <i class="plus icon"></i>
-        Add chapter
+        Add a chapter
       </button>
       <div class="ui divider"></div>
       <form class="ui form">

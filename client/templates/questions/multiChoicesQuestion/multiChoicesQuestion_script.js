@@ -76,7 +76,7 @@ Template.multiChoicesQuestion.events({
     query[field] = isRightAnswer;
     Presentations.update({ _id: Router.current().params.prez }, { $set: query });
   },
-  'change .answerInput' (event) {
+  'change .answerInput' (event) { // for voting
     let answerId = this.answerId;
     let checked = event.currentTarget.checked;
     if (checked) {

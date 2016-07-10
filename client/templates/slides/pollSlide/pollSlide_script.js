@@ -124,6 +124,21 @@ Template.pollSlide.events({
           });
         }
       });
+      // Multi Points (rating) question
+      $('.rating').each(function(index, answer) {
+        let rating = $(answer).rating('get rating');
+        if (rating > 0) {
+          if (! answers[answer.dataset.question]) {
+            answers[answer.dataset.question] = [];
+          }
+          answers[answer.dataset.question].push({
+            id: answer.id,
+            value: rating,
+            text: answer.dataset.ref,
+            time: new Date(),
+          });
+        }
+      });
       // Words question answer
       $('.wordsAnswer').each(function(index, answer) {
         if (answer.value) {
@@ -222,6 +237,7 @@ Template.pollSlide.events({
       maxAnswers = 3;
       break;
     case 'rangeQuestion':
+    case 'multiPointsQuestion':
       stat = 'gaugeStat';
       break;
     case 'wordsQuestion':
