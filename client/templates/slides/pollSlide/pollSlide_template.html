@@ -3,7 +3,7 @@
   <div class="ui container">
     <div class="ui basic segment">
 
-      <h1 class="ui center {{noInverted color}} aligned header editable" data-field="chapters.{{chapterIndex}}.slides.{{slideIndex}}.title" data-content="Poll slide title"  data-position="top center">{{title}}</h1>
+      <h1 class="ui center {{noInverted color}} aligned header editable" data-field="chapters.{{chapterIndex}}.slides.{{slideIndex}}.title" data-title="Poll slide title"  data-position="top center">{{title}}</h1>
 
       {{#each questions}}
         <div class="ui {{../color}} segment">
@@ -107,7 +107,7 @@
           <div class="column">
             <div class="field">
               <small>Background image url</small>
-              <p class="editable" data-field="chapters.{{chapterIndex}}.slides.{{slideIndex}}.backgroundImage">{{backgroundImage}}</p>
+              <p class="editable" data-field="chapters.{{chapterIndex}}.slides.{{slideIndex}}.backgroundImage" data-content="Poll slide background image url" data-position="bottom center">{{backgroundImage}}</p>
             </div>
           </div>
           <div class="column">

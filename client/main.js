@@ -19,6 +19,10 @@ Template.registerHelper('isEditing', function () {
   return Router.current().route.getName() === 'edit';
 });
 
+Template.registerHelper('isPlaying', function () {
+  return Router.current().route.getName() === 'play';
+});
+
 Template.registerHelper('isEditingOr', function (value) {
   return value || Router.current().route.getName() === 'edit';
 });

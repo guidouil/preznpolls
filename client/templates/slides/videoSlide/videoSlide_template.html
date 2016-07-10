@@ -2,20 +2,20 @@
 
   <div class="ui container videoSlideContainer">
     <div class="ui {{color}} center aligned segment">
-      <h1 class="ui header editable" data-field="chapters.{{chapterIndex}}.slides.{{slideIndex}}.title" data-title="Video slide title"  data-position="top center">{{title}}</h1>
+      <h1 class="ui header editable" data-field="chapters.{{chapterIndex}}.slides.{{slideIndex}}.title" data-title="Video slide title" data-position="top center">{{title}}</h1>
       <div class="ui embed" data-url="{{video}}?autoplay=1" data-autoplay="true"></div>
     </div>
     {{#if isEditing}}
       <div class="ui basic center aligned segment">
         <div class="field">
           <small>Embed video url</small>
-          <p class="editable" data-field="chapters.{{chapterIndex}}.slides.{{slideIndex}}.video">{{video}}</p>
+          <p class="editable" data-field="chapters.{{chapterIndex}}.slides.{{slideIndex}}.video" data-title="Embed video url" data-content="Be sure to past a youtube embed URL like this : https://www.youtube.com/embed/YOUR_VIDEO_ID" data-position="top center" data-variation="wide">{{video}}</p>
         </div>
       </div>
     {{/if}}
     {{#if isEditingOr description}}
       <div class="ui {{color}} center aligned segment">
-        <h3 class="ui header editable" data-field="chapters.{{chapterIndex}}.slides.{{slideIndex}}.description" data-content="Video slide additional text">{{description}}</h3>
+        <h3 class="ui header editable" data-field="chapters.{{chapterIndex}}.slides.{{slideIndex}}.description" data-content="Video slide additional text" data-position="top center">{{description}}</h3>
       </div>
     {{/if}}
     {{#if isEditing}}
@@ -24,7 +24,7 @@
           <div class="column">
             <div class="field">
               <small>Background image url</small>
-              <p class="editable" data-field="chapters.{{chapterIndex}}.slides.{{slideIndex}}.backgroundImage">{{backgroundImage}}</p>
+              <p class="editable" data-field="chapters.{{chapterIndex}}.slides.{{slideIndex}}.backgroundImage" data-content="Video slide background image url" data-position="bottom center">{{backgroundImage}}</p>
             </div>
           </div>
           <div class="column">

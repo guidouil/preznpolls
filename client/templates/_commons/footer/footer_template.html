@@ -18,9 +18,15 @@
     </div>
     <div class="right menu">
       <a class="item previousSlide" data-transition-out="scaleOut" data-transition-in="slideFadeDownIn">
+        {{#if viewersWant.left}}
+          <b>{{viewersWant.left}}</b>&nbsp;
+        {{/if}}
         <i class="large angle double left icon"></i>
       </a>
       <a class="item nextSlide" data-transition-out="scaleOut" data-transition-in="slideFadeDownIn">
+        {{#if viewersWant.right}}
+        <b>{{viewersWant.right}}</b>&nbsp;
+        {{/if}}
         <i class="large angle double right icon"></i>
       </a>
     </div>

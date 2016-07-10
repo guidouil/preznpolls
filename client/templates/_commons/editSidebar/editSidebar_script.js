@@ -1,4 +1,9 @@
-Template.sidebar.helpers({
+Template.editSidebar.onRendered(function () {
+  makeEditable();
+  $('.button').popup();
+});
+
+Template.editSidebar.helpers({
   presentation () {
     return Presentations.findOne({ _id: Router.current().params.prez });
   },
@@ -44,7 +49,7 @@ Template.sidebar.helpers({
   },
 });
 
-Template.sidebar.events({
+Template.editSidebar.events({
   'click .addSlide' (event) {
     event.preventDefault();
     let currentChapterIndex = event.currentTarget.dataset.chapter;
@@ -208,9 +213,4 @@ Template.sidebar.events({
       isLiveOnly: evt.currentTarget.checked,
     }});
   },
-});
-
-Template.sidebar.onRendered(function () {
-  makeEditable();
-  $('.button').popup();
 });

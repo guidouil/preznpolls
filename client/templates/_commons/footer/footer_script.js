@@ -28,12 +28,26 @@ Template.footer.helpers({
     }
     return voters;
   },
+  viewersWant () {
+    let viewersWant = {};
+    if (Router.current().params.prez) {
+      let viewers = Viewers.findOne({ _id: Router.current().params.prez });
+      if (viewers && viewers.left ) {
+        viewersWant.left = viewers.left.length;
+      }
+      if (viewers && viewers.right ) {
+        viewersWant.right = viewers.right.length;
+      }
+    }
+    return viewersWant;
+  },
 });
 
 Template.footer.events({
   'click .previousSlide' () {
     let prez = Presentations.findOne({ _id: Router.current().params.prez });
     if (prez && prez.chapterViewIndex >= 0 && prez.slideViewIndex >= 0) {
+      Viewers.update({ _id: Router.current().params.prez }, { $unset: { left: '', right: '' }});
       let flip = 'ping';
       if (prez.flip === flip) {
         flip = 'pong';
@@ -67,6 +81,7 @@ Template.footer.events({
   'click .nextSlide' () {
     let prez = Presentations.findOne({ _id: Router.current().params.prez });
     if (prez && prez.chapterViewIndex >= 0 && prez.slideViewIndex >= 0) {
+      Viewers.update({ _id: Router.current().params.prez }, { $unset: { right: '', left: '' }});
       let flip = 'ping';
       if (prez.flip === flip) {
         flip = 'pong';

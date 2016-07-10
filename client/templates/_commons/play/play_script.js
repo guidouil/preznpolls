@@ -74,3 +74,13 @@ Template.play.events({
 Template.play.onDestroyed(function () {
   Viewers.update({ _id: Router.current().params.prez }, { $pull: { viewers: Meteor.userId() }});
 });
+
+Template.ping.onRendered(function () {
+  $('.viewLeft').removeClass('loading');
+  $('.viewRight').removeClass('loading');
+});
+
+Template.pong.onRendered(function () {
+  $('.viewLeft').removeClass('loading');
+  $('.viewRight').removeClass('loading');
+});
