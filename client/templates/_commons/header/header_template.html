@@ -67,13 +67,15 @@
     <div class="content">
       <div class="description">
         <form class="ui form" id="prezTitleForm">
+          <label for="prezTitle">Presentation title</label>
           <div class="field">
             <div class="ui fluid input">
               <input type="text" placeholder="Presentation title" id="prezTitle">
             </div>
           </div>
+          <label for="prezId">Presentation short name (must be unique and URL valid)</label>
           <div class="field" id="prezIdField">
-            <div class="ui fluid labeled icon input" id="prezIdInput">
+            <div class="ui fluid labeled icon input" id="prezIdInput" data-title="We're trying to create it with your title" data-content="If it stays red, it means it's not unique. Try to change it a little, like adding a number at the end." data-variation="very wide" data-position="bottom center">
               <div class="ui label">
                 prez.win/
               </div>

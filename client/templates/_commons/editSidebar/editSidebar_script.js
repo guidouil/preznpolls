@@ -202,7 +202,7 @@ Template.editSidebar.events({
     }
   },
   'click .prezSettings' () {
-    $('.link').popup('hide all');
+    $('.prezSettings').popup('hide');
     $('.presentationSidebar').sidebar('hide');
     Router.go('settings', {prez: Router.current().params.prez});
   },

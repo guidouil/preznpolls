@@ -1,22 +1,23 @@
 <template name='play'>
-  <div class="transitions-container"  style="height:100%;">
-    {{> UI.dynamic template=flip data=slide}}
-  </div>
-  {{#unless isPrezOwner}}
-  <div class="ui large compact icon buttons pagination-buttons">
-    <div class="ui button viewLeft"><i class="angle double left icon"></i></div>
-    <div class="ui disabled button">
-      {{#if chapterPosition}}
-        C.{{chapterPosition}} -
-      {{/if}}
-      {{slidePagination}}
+  {{#if slide}}
+    <div class="transitions-container"  style="height:100%;">
+      {{> UI.dynamic template=flip data=slide}}
     </div>
-    <div class="ui button viewRight"><i class="angle double right icon"></i></div>
-  </div>
-  {{else}}
+    {{#unless isPrezOwner}}
+    <div class="ui large compact icon buttons pagination-buttons">
+      <div class="ui button viewLeft"><i class="angle double left icon"></i></div>
+      <div class="ui disabled button">
+        {{#if chapterPosition}}
+        C.{{chapterPosition}} -
+        {{/if}}
+        {{slidePagination}}
+      </div>
+      <div class="ui button viewRight"><i class="angle double right icon"></i></div>
+    </div>
+    {{else}}
     <div class="ui large compact disabled button pagination-buttons">
       {{#if chapterPosition}}
-        C.{{chapterPosition}} -
+      C.{{chapterPosition}} -
       {{/if}}
       {{slidePagination}}
     </div>
@@ -26,6 +27,8 @@
       bottom: 4.5rem;
     }
     </style>
-  {{/unless}}
-
+    {{/unless}}
+  {{else}}
+    {{> notFound}}
+  {{/if}}
 </template>

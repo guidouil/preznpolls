@@ -84,7 +84,7 @@ Template.settings.events({
       return false;
     }
     let prezId = event.currentTarget.value;
-    prezId = removeDiacritics(prezId).toLowerCase().replace(/ /g, '-');
+    prezId = encodeURIComponent(removeDiacritics(prezId).toLowerCase().replace(/ /g, '-'));
     if (prezId && prezId !== Router.current().params.prez) {
       $('#settingsPrezId').val(prezId);
       $('#settingsPrezIdInput').addClass('loading');
@@ -112,4 +112,5 @@ Template.settings.events({
 });
 
 Template.settings.onRendered(function () {
+  $('.input, .checkbox').popup();
 });

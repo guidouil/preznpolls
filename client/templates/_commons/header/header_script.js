@@ -39,6 +39,9 @@ Template.header.helpers({
 Template.header.events({
   'click .createPrez' () {
     $('.prezTitleModal').modal({
+      onVisible: function () {
+        $('#prezIdInput').popup();
+      },
       onApprove: function() {
         let prezId = $('#prezId').val();
         let prezTitle = $('#prezTitle').val();
@@ -119,7 +122,7 @@ Template.header.onRendered(function () {
       return false;
     }
     let prezTitle = event.currentTarget.value;
-    let prezId = removeDiacritics(prezTitle).toLowerCase().replace(/ /g, '-');
+    let prezId = encodeURIComponent(removeDiacritics(prezTitle).toLowerCase().replace(/ /g, '-'));
     $('#prezId').val(prezId);
     $('#prezIdInput').addClass('loading');
     Meteor.call('checkPrezId', prezId, function (error, result) {
@@ -149,7 +152,7 @@ Template.header.onRendered(function () {
       return false;
     }
     let prezId = event.currentTarget.value;
-    prezId = removeDiacritics(prezId).toLowerCase().replace(/ /g, '-');
+    prezId = encodeURIComponent(removeDiacritics(prezId).toLowerCase().replace(/ /g, '-'));
     if (prezId) {
       $('#prezId').val(prezId);
       $('#prezIdInput').addClass('loading');
