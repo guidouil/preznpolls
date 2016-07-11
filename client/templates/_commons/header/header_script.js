@@ -31,6 +31,9 @@ Template.header.helpers({
   prez () {
     return Router.current().params.prez;
   },
+  prezUrl () {
+    return Meteor.absoluteUrl('p/' + Router.current().params.prez);
+  },
 });
 
 Template.header.events({
@@ -70,6 +73,13 @@ Template.header.events({
     Meteor.logout(function () {
       Router.go('home');
     });
+  },
+  'click .showUrl' () {
+    $('.prezUrlModal').modal({
+      dimmerSettings: {
+        opacity: 1,
+      },
+    }).modal('show');
   },
 });
 

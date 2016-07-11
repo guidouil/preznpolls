@@ -20,7 +20,7 @@
           {{#if isEditing}}
           <div class="ui middle aligned stackable grid">
             <div class="four wide column">
-              <div class="ui basic segment questionTypePopup" data-title="Type of the question" data-content="This will change the interface to answer to this question. Each question type will generate it's corresponding graph to show the answers." data-variation="very wide" data-position="right center">
+              <div class="ui basic segment questionTypePopup" data-title="Type of questions" data-content="This will change the interface to answer to this question. Each question type will generate it's corresponding graph to show the answers." data-variation="very wide" data-position="right center">
                 <input type="hidden" id="type_{{questionId}}" value="chapters.{{../chapterIndex}}.slides.{{../slideIndex}}.questions.{{@index}}.type">
                 <select class="ui fluid labeled icon dropdown questionType" id="typeSelect_{{questionId}}">
                   <option value="singleChoiceQuestion" {{isQuestionType 'singleChoiceQuestion'}}>

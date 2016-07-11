@@ -1,14 +1,14 @@
 <template name='header'>
-  <div class="ui top fixed inverted borderless blue menu">
+  <div class="ui top fixed inverted borderless blue icon menu">
     <div class="left menu">
       {{#if isPrezOwner}}
         {{#if isEditing}}
         <a class="item" href="{{pathFor 'play' prez=prez}}">
-          <i class="large save icon"></i>
+          <i class="big save icon"></i>
         </a>
         {{else}}
         <a class="item" href="{{pathFor 'edit' prez=prez}}">
-          <i class="large edit icon"></i>
+          <i class="big edit icon"></i>
         </a>
         {{/if}}
       {{else}}
@@ -16,15 +16,20 @@
           <i class="big plus icon createPrezIcon"></i>
         </a>
       {{/if}}
+      {{#if isPlaying}}
+        <a class="item">
+          <i class="big world icon showUrl"></i>
+        </a>
+      {{/if}}
     </div>
     <a class="center header item" href="{{pathFor 'home'}}">
-      <h1 class="ui inverted header">
-        {{#if prezTitle}}
-          {{prezTitle}}
-        {{else}}
+      {{#if isHome}}
+        <h1 class="ui inverted header">
           Prez&Polls
-        {{/if}}
-      </h1>
+        </h1>
+      {{else}}
+        <i class="big pied piper icon"></i>
+      {{/if}}
     </a>
     <div class="right menu">
       {{#if isGuest}}
@@ -46,6 +51,11 @@
             <a class="item signOutBtn">Sign out</a>
           </div>
         </div>
+      {{/if}}
+      {{#if isPlaying}}
+        <a class="item">
+          <i class="big comments outline icon"></i>
+        </a>
       {{/if}}
     </div>
   </div>
@@ -73,6 +83,13 @@
           Let's create it
         </div>
       </div>
+    </div>
+  </div>
+
+  <!-- Prez URL Modal -->
+  <div class="ui basic modal prezUrlModal">
+    <div class="ui huge center aligned header" style="font-size: 3em;">
+      {{prezUrl}}
     </div>
   </div>
 </template>

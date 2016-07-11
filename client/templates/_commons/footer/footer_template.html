@@ -1,18 +1,18 @@
 <template name='footer'>
-  <div class="ui bottom fixed inverted borderless menu">
+  <div class="ui bottom fixed inverted borderless icon menu">
     <div class="left menu">
       {{#if isEditing}}
       <a class="item" href="{{pathFor 'play' prez=prez}}">
-        <i class="large save icon"></i>
+        <i class="big save icon"></i>
       </a>
       {{else}}
       <a class="item" href="{{pathFor 'edit' prez=prez}}">
-        <i class="large edit icon"></i>
+        <i class="big edit icon"></i>
       </a>
       {{/if}}
       {{#if isPollSlide}}
       <a class="item viewStat" >
-        <b>{{voters}}</b>&nbsp;<i class="large {{activeStat}} pie chart icon"></i>
+        <b>{{voters}}</b>&nbsp;<i class="big {{activeStat}} pie chart icon"></i>
       </a>
       {{/if}}
     </div>
@@ -21,13 +21,13 @@
         {{#if viewersWant.left}}
           <b>{{viewersWant.left}}</b>&nbsp;
         {{/if}}
-        <i class="large angle double left icon"></i>
+        <i class="big angle double left icon"></i>
       </a>
       <a class="item nextSlide" data-transition-out="scaleOut" data-transition-in="slideFadeDownIn">
         {{#if viewersWant.right}}
         <b>{{viewersWant.right}}</b>&nbsp;
         {{/if}}
-        <i class="large angle double right icon"></i>
+        <i class="big angle double right icon"></i>
       </a>
     </div>
   </div>

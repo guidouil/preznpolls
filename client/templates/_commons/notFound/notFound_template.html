@@ -1,0 +1,18 @@
+<template name='notFound'>
+  <div class="ui container">
+    <div class="ui basic center aligned segment">
+      <h2 class="ui icon header">
+        <i class="loading pied piper alternate icon"></i>
+        <div class="content">
+          It looks like you have a wrong link
+          <div class="sub header">Please follow the path to home</div>
+        </div>
+      </h2>
+      <br>
+      <a href="{{pathFor 'home'}}" class="ui massive icon labeled primary button">
+        <i class="home icon"></i>
+        HOME
+      </a>
+    </div>
+  </div>
+</template>

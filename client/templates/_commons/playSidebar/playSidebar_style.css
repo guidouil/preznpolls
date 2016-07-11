@@ -1,0 +1,18 @@
+.chatContent {
+  height: 100%;
+}
+.closeChat {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+.replyForm {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  overflow: hidden;
+}
+.replyBox {
+  min-height: 6em !important;
+  height: 6em !important;
+}

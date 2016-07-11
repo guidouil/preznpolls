@@ -38,9 +38,6 @@ Template.play.helpers({
     }
     return '';
   },
-  prezUrl () {
-    return Meteor.absoluteUrl('p/' + Router.current().params.prez);
-  },
 });
 
 Template.play.events({
@@ -61,13 +58,6 @@ Template.play.events({
       Viewers.update({ _id: Router.current().params.prez }, { $addToSet: { right: Meteor.userId() }});
       $('.viewRight').addClass('loading');
     }
-  },
-  'click .showUrl' () {
-    $('.prezUrlModal').modal({
-      dimmerSettings: {
-        opacity: 1,
-      },
-    }).modal('show');
   },
 });
 

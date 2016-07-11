@@ -5,9 +5,5 @@
       {{> UI.dynamic template=flip data=slide}}
     </div>
     {{> footer}}
-  {{else}}
-    <div class="ui basic center aligned segment">
-      <a class="ui large button" href="{{pathFor 'play' prez=prezId}}">You must be one of the presentation owners to edit it.</a>
-    </div>
   {{/if}}
 </template>

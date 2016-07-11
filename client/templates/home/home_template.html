@@ -34,7 +34,7 @@
 
           <h2 class="ui header">Your presentations</h2>
           {{#if myPresentations}}
-          <div class="ui four doubling cards">
+          <div class="ui four stackable cards">
             {{#each myPresentations}}
             <a class="ui link raised card" href="{{pathFor 'play' prez=_id}}">
               <div class="content">
@@ -48,9 +48,9 @@
                 <i class="check icon"></i>
                 {{viewersCount}} Viewer{{plural viewersCount}}
               </div>
-              <div class="ui large bottom attached buttons">
-                <a class="ui primary icon button" href="{{pathFor 'play' prez=_id}}"><i class="play icon"></i></a>
-                <a class="ui icon button" href="{{pathFor 'edit' prez=_id}}"><i class="edit icon"></i></a>
+              <div class="ui bottom attached buttons">
+                <a class="ui primary compact icon button" href="{{pathFor 'play' prez=_id}}"><i class="large play icon"></i></a>
+                <a class="ui compact icon button" href="{{pathFor 'edit' prez=_id}}"><i class="large edit icon"></i></a>
               </div>
             </a>
             {{/each}}
@@ -62,7 +62,7 @@
           <div class="ui divider"></div>
 
           <h2 class="ui header">Public presentations</h2>
-          <div class="ui four doubling cards">
+          <div class="ui four stackable cards">
             {{#each presentations}}
             <a class="ui link raised card" href="{{pathFor 'play' prez=_id}}">
               <div class="content">
@@ -76,12 +76,15 @@
                 <i class="check icon"></i>
                 {{viewersCount}} Viewer{{plural viewersCount}}
               </div>
-              <div class="ui large bottom attached buttons">
-                <a class="ui primary compact icon button" href="{{pathFor 'play' prez=_id}}"><i class="play icon"></i></a>
-                {{#unless isLiveOnly}}
-                <a class="ui secondary compact icon button" href="{{pathFor 'view' prez=_id chapter=0 slide=0}}"><i class="eye icon"></i></a>
-                {{/unless}}
-              </div>
+              {{#if isLiveOnly}}
+                <a class="ui primary bottom attached compact icon button" href="{{pathFor 'play' prez=_id}}"><i class="large play icon"></i></a>
+              {{else}}
+                <div class="ui bottom attached buttons">
+                  <a class="ui primary compact icon button" href="{{pathFor 'play' prez=_id}}"><i class="large play icon"></i></a>
+                  <a class="ui compact icon button" href="{{pathFor 'view' prez=_id chapter=0 slide=0}}"><i class="large eye icon"></i></a>
+                </div>
+
+              {{/if}}
             </a>
             {{/each}}
           </div>

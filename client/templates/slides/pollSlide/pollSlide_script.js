@@ -79,6 +79,24 @@ Template.pollSlide.events({
           order: 0,
           value: 1,
           isRightAnswer: false,
+        },
+        {
+          answerId: Random.id(),
+          text: 'Answer 2',
+          minValue: 0,
+          maxValue: 5,
+          order: 1,
+          value: 1,
+          isRightAnswer: false,
+        },
+        {
+          answerId: Random.id(),
+          text: 'Answer 3',
+          minValue: 0,
+          maxValue: 5,
+          order: 2,
+          value: 1,
+          isRightAnswer: false,
         }],
       };
       Presentations.update({ _id: Router.current().params.prez }, { $push: newQuestion });

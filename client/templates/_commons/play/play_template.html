@@ -1,6 +1,5 @@
 <template name='play'>
   <div class="transitions-container"  style="height:100%;">
-    <i class="large world blue link icon showUrl"></i>
     {{> UI.dynamic template=flip data=slide}}
   </div>
   <div class="ui large compact icon buttons pagination-buttons">
@@ -22,10 +21,4 @@
     </style>
   {{/if}}
 
-  <!-- Prez URL Modal -->
-  <div class="ui basic modal prezUrlModal">
-    <div class="ui huge center aligned header" style="font-size: 3em;">
-      {{prezUrl}}
-    </div>
-  </div>
 </template>
