@@ -88,3 +88,7 @@ Template.registerHelper('noInverted', function (color) {
   }
   return color;
 });
+
+Template.registerHelper('plusOne', function (value) {
+  return Number(value) + 1;
+});

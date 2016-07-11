@@ -1,6 +1,6 @@
 Template.editSidebar.onRendered(function () {
   makeEditable();
-  $('.button').popup();
+  $('.button, .link').popup();
 });
 
 Template.editSidebar.helpers({
@@ -44,8 +44,12 @@ Template.editSidebar.helpers({
       return 'blue';
     }
   },
-  isChecked (value) {
-    return (value === true ? 'checked' : '');
+  isOnlyOneChapter () {
+    let prez = Presentations.findOne({ _id: Router.current().params.prez });
+    if (prez && prez.chapters) {
+      return prez.chapters.length === 1;
+    }
+    return false;
   },
 });
 
@@ -107,8 +111,9 @@ Template.editSidebar.events({
           Presentations.update({ _id: prez._id }, { $set: {
             chapters: chapters,
             slideViewIndex: prez.slideViewIndex + 1,
-          }});
-          $('.newSlideType').modal('hide');
+          }}, function () {
+            $('.newSlideType').modal('hide');
+          });
         }
       },
     })
@@ -124,19 +129,21 @@ Template.editSidebar.events({
       let chapters = prez.chapters;
       chapters.push({
         order: prez.chapters.length,
-        title: 'Chapter ' + prez.chapters.length,
+        title: 'Chapter ' + prez.chapters.length + 1,
         slides: [{
-          title: prez.title,
+          title: prez.title + ', chapter ' + Number(prez.chapters.length + 1),
           order: 0,
           type: 'coverSlide',
           color: 'basic',
         }],
       });
       Presentations.update({ _id: Router.current().params.prez }, { $set: {
-        chapterViewIndex: prez.chapters.length,
+        chapterViewIndex: prez.chapters.length - 1,
         slideViewIndex: 0,
         chapters: chapters,
-      }});
+      }}, function () {
+        $('.presentationSidebar').sidebar('hide');
+      });
     }
   },
   'click .sidebarSlide' (event) {
@@ -149,8 +156,9 @@ Template.editSidebar.events({
       chapterViewIndex: event.currentTarget.dataset.chapter,
       slideViewIndex: event.currentTarget.dataset.index,
       flip: flip,
-    }});
-    $('.presentationSidebar').sidebar('hide');
+    }}, function () {
+      $('.presentationSidebar').sidebar('hide');
+    });
   },
   'click .deleteSlideBtn' (event) {
     event.preventDefault();
@@ -176,59 +184,26 @@ Template.editSidebar.events({
     if (prez) {
       let currentChapterIndex = event.currentTarget.dataset.index;
       let chapters = prez.chapters;
-      $('.deleteWarningModal').modal({
-        onApprove: function() {
-          chapters.splice(currentChapterIndex, 1);
-          _.each(chapters, function( chapter, index) {
-            chapter.order = index;
-          });
-          Presentations.update({ _id: Router.current().params.prez }, { $set: {
-            chapterViewIndex: 0,
-            slideViewIndex: 0,
-            chapters: chapters,
-          }});
-        },
-      }).modal('show');
+      if (chapters && chapters.length > 1) {
+        $('.deleteWarningModal').modal({
+          onApprove: function() {
+            chapters.splice(currentChapterIndex, 1);
+            _.each(chapters, function( chapter, index) {
+              chapter.order = index;
+            });
+            Presentations.update({ _id: Router.current().params.prez }, { $set: {
+              chapterViewIndex: 0,
+              slideViewIndex: 0,
+              chapters: chapters,
+            }});
+          },
+        }).modal('show');
+      }
     }
   },
-  'click .deletePresentationBtn' () {
-    $('.deleteWarningModal').modal({
-      onApprove: function() {
-        Presentations.remove({ _id: Router.current().params.prez });
-        $('.presentationSidebar').sidebar('hide');
-        Router.go('home');
-      },
-    }).modal('show');
-  },
-  'click .resetViews' () {
-    $('.deleteWarningModal').modal({
-      onApprove: function() {
-        Viewers.update({ _id: Router.current().params.prez }, { $set: { viewers: [] }});
-        $('.presentationSidebar').sidebar('hide');
-      },
-    }).modal('show');
-  },
-  'click .resetVotes' () {
-    $('.deleteWarningModal').modal({
-      onApprove: function() {
-        Meteor.call('resetVotes', Router.current().params.prez);
-        $('.presentationSidebar').sidebar('hide');
-      },
-    }).modal('show');
-  },
-  'change #isPublic' (evt) {
-    Presentations.update({ _id: Router.current().params.prez }, { $set: {
-      isPublic: evt.currentTarget.checked,
-    }});
-  },
-  'change #isListed' (evt) {
-    Presentations.update({ _id: Router.current().params.prez }, { $set: {
-      isListed: evt.currentTarget.checked,
-    }});
-  },
-  'change #isLiveOnly' (evt) {
-    Presentations.update({ _id: Router.current().params.prez }, { $set: {
-      isLiveOnly: evt.currentTarget.checked,
-    }});
+  'click .prezSettings' () {
+    $('.link').popup('hide all');
+    $('.presentationSidebar').sidebar('hide');
+    Router.go('settings', {prez: Router.current().params.prez});
   },
 });

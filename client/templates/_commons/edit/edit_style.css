@@ -1,9 +1,3 @@
-.showPrezSidebar {
-  position: absolute;
-  top: 5px;
-  left: 4px;
-  z-index: 999;
-}
 .editContainer .editable {
   border-bottom: 2px solid grey;
   min-height: 1em !important;

@@ -7,6 +7,9 @@ Template.pollSlide.helpers({
   },
 
   showAnswersStat (questionId) {
+    if (Router.current().route.getName() === 'edit') {
+      return false;
+    }
     if (Session.equals('showMeTheStat', true)) {
       return true;
     }
@@ -119,8 +122,9 @@ Template.pollSlide.events({
         value: 1,
         isRightAnswer: false,
       };
-      Presentations.update({ _id: Router.current().params.prez }, { $push: newAnswer });
-      makeEditable();
+      Presentations.update({ _id: Router.current().params.prez }, { $push: newAnswer }, function () {
+        makeEditable();
+      });
     }
   },
   'click .submitAnswersBtn' () {

@@ -1,0 +1,77 @@
+<template name='settings'>
+  {{#if isPrezOwner}}
+  <div class="ui container">
+    <div class="ui basic segment">
+      {{#with presentation}}
+        <h1 class="ui center alligned header">Presentation settings</h1>
+        <form class="ui form">
+          <h3 class="ui dividing header">URL address</h3>
+          <div class="field" id="settingsPrezIdField">
+            <label for="settingsPrezId">Presentation short name  for url (must be unique)</label>
+            <div class="ui fluid labeled icon input" id="settingsPrezIdInput">
+              <div class="ui label">
+                prez.win/
+              </div>
+              <input type="text" placeholder="Presentation short name (must be unique)" id="settingsPrezId" value="{{_id}}">
+              <i class="green check icon" id="settingsPrezIdIcon"></i>
+            </div>
+          </div>
+          <button class="ui positive fluid icon labeled button disabled setPrezId"><i class="check icon"></i>Apply URL change</button>
+          <h3 class="ui dividing header">Access controls</h3>
+          <div class="field">
+            <div class="ui slider checkbox">
+              <input type="checkbox" name="isPublic" id="isPublic" {{isChecked isPublic}}>
+              <label for="isPublic">Public presentation</label>
+            </div>
+          </div>
+          <div class="field">
+            <div class="ui slider checkbox">
+              <input type="checkbox" name="isListed" id="isListed" {{isChecked isListed}}>
+              <label for="isListed">Listed presentation</label>
+            </div>
+          </div>
+          <div class="field">
+            <div class="ui slider checkbox">
+              <input type="checkbox" name="isLiveOnly" id="isLiveOnly" {{isChecked isLiveOnly}}>
+              <label for="isLiveOnly">Live only presentation</label>
+            </div>
+          </div>
+
+          <h3 class="ui dividing header">Data management</h3>
+          <div class="field">
+            <div class="ui fluid large buttons">
+              <div class="ui red basic button resetViews">Reset presentations views</div>
+              <div class="ui red button resetVotes">Reset presentation answers</div>
+            </div>
+          </div>
+          <div class="field">
+            <button class="ui fluid negative large icon labeled button deletePresentationBtn"><i class="trash icon"></i>DELETE PRESENTATION</button>
+          </div>
+        </form>
+      {{/with}}
+    </div>
+  </div>
+
+  <!-- Warning modal in case of deletion -->
+  <div class="ui basic modal changePrezIdWarning">
+    <i class="close icon"></i>
+    <h2 class="ui icon center aligned header">
+      <i class="red warning sign icon"></i>
+      THIS IS A BIG CHANGE, ARE YOU SURE?
+    </h2>
+    <div class="content">
+      <h3 class="ui center aligned inverted header">The previous URL to your presntation will not work anymore. This will also reset all the answers and views of this presentation. Finally the presentation creation date will be set to now.</h3>
+    </div>
+    <div class="actions">
+      <div class="ui red basic cancel inverted icon labeled button">
+        <i class="remove icon"></i>
+        No, keep the previous URL
+      </div>
+      <div class="ui green basic ok inverted icon labeled button">
+        <i class="checkmark icon"></i>
+        Yes, change my URL
+      </div>
+    </div>
+  </div>
+  {{/if}}
+</template>

@@ -4,7 +4,7 @@ Template.footer.helpers({
   },
   isPollSlide () {
     let prez = Presentations.findOne({ _id: Router.current().params.prez });
-    if (prez && prez.chapterViewIndex >= 0 && prez.slideViewIndex >= 0) {
+    if (prez && prez.chapterViewIndex >= 0 && prez.slideViewIndex >= 0 && prez.chapters && prez.chapters[prez.chapterViewIndex]) {
       return prez.chapters[prez.chapterViewIndex].slides[prez.slideViewIndex].type === 'pollSlide';
     }
     return false;

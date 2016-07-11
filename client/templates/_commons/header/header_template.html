@@ -3,6 +3,9 @@
     <div class="left menu">
       {{#if isPrezOwner}}
         {{#if isEditing}}
+        <a class="item showPrezSidebar">
+          <i class="big content icon"></i>
+        </a>
         <a class="item" href="{{pathFor 'play' prez=prez}}">
           <i class="big save icon"></i>
         </a>
@@ -23,62 +26,67 @@
       {{/if}}
     </div>
     <a class="center header item" href="{{pathFor 'home'}}">
-      {{#if isHome}}
-        <h1 class="ui inverted header">
-          Prez&Polls
-        </h1>
-      {{else}}
-        <i class="big pied piper icon"></i>
-      {{/if}}
+      <i class="big pied piper icon"></i>
     </a>
     <div class="right menu">
       {{#if isGuest}}
         <a class="item" href="/sign-in">
-          {{#if isHome}}
-          Welcome Guest
-          {{else}}
-          <b>{{viewers}}</b>&nbsp;<i class="big user icon"></i>
-          {{/if}}
+          {{#unless isHome}}
+            <b>{{viewers}}</b>&nbsp;
+          {{/unless}}
+          <i class="big user icon"></i>
         </a>
       {{else}}
         <div class="ui dropdown link item">
-          {{#if isHome}}
-          <span class="text">Welcome {{capitalize userName}}</span>
-          {{else}}
-          <span class="text"><b>{{viewers}}</b>&nbsp;<i class="big user icon"></i></span>
-          {{/if}}
+          <span class="text">
+            {{#unless isHome}}
+              <b>{{viewers}}</b>&nbsp;
+            {{/unless}}
+            <i class="big user icon"></i>
+          </span>
           <div class="menu">
+            <a class="item disabled">Profile</a>
             <a class="item signOutBtn">Sign out</a>
           </div>
         </div>
       {{/if}}
       {{#if isPlaying}}
-        <a class="item">
+        <a class="item disabled">
           <i class="big comments outline icon"></i>
         </a>
       {{/if}}
     </div>
   </div>
 
+  <!-- Presentation title and id modal  -->
   <div class="ui basic modal prezTitleModal">
     <i class="close icon"></i>
     <div class="header">
-      What's the title of your presentation?
+      What's the title (and the short name) of your presentation?
     </div>
     <div class="content">
       <div class="description">
-        <div class="ui form">
+        <form class="ui form" id="prezTitleForm">
           <div class="field">
             <div class="ui fluid input">
               <input type="text" placeholder="Presentation title" id="prezTitle">
             </div>
           </div>
-        </div>
+          <div class="field" id="prezIdField">
+            <div class="ui fluid labeled icon input" id="prezIdInput">
+              <div class="ui label">
+                prez.win/
+              </div>
+              <input type="text" placeholder="Presentation short name (must be unique)" id="prezId">
+              <i class="green check icon" id="prezIdIcon"></i>
+            </div>
+          </div>
+        </form>
       </div>
     </div>
     <div class="actions">
       <div class="one fluid ui inverted buttons">
-        <div class="ui ok green basic inverted button createPrezBtn">
+        <div class="ui ok green basic inverted button disabled createPrezBtn">
           <i class="checkmark icon"></i>
           Let's create it
         </div>

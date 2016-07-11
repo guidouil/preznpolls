@@ -1,63 +1,35 @@
 <template name='editSidebar'>
   <div class="ui left wide sidebar ui segment presentationSidebar">
     {{#with presentation}}
-    <button class="ui negative right floated compact icon button deletePresentationBtn" data-title="Delete this presentation" data-position="right center">
-      <i class="trash icon"></i>
-    </button>
-      <h1 class="ui header editable" data-field="title" data-title="Slide title" data-position="right center">{{title}}</h1>
+    <i class="big grey setting link icon prezSettings" data-title="Presentation settings" data-position="right center"></i>
+      <h1 class="ui header editable" data-field="title" data-title="Presentation title" data-position="right center">{{title}}</h1>
       <div class="ui divider"></div>
       {{#each chapters}}
-        <button class="ui basic red right floated compact icon button deleteChapterBtn" data-index="{{@index}}" data-title="Delete this chapter" data-position="right center">
-          <i class="delete icon"></i>
-        </button>
-        <h2 class="ui header editable" data-field="chapters.{{@index}}.title" data-title="Chapter title" data-position="right center">{{title}}</h2>
+        {{#unless isOnlyOneChapter}}
+          <i class="large red delete link icon deleteChapterBtn" data-title="Delete chapter {{plusOne @index}}" data-position="right center" data-index="{{@index}}" ></i>
+        {{/unless}}
+        <h2 class="ui header editable" data-field="chapters.{{@index}}.title" data-title="Chapter {{plusOne @index}} title" data-position="right center">{{title}}</h2>
         {{#each slides}}
-          <div class="ui {{isActiveSlide ../order @index}} {{slideColor type}} fluid buttons slideSideBtns">
+          <div class="ui {{isActiveSlide ../order @index}} {{slideColor type}} fluid large compact buttons slideSideBtns">
             <button class="ui ok labeled icon button sidebarSlide" data-index="{{@index}}"  data-chapter="{{../order}}">
               <i class="{{slideIcon type}} icon"></i>
               {{title}}
             </button>
-            <button class="ui icon button deleteSlideBtn"  data-index="{{@index}}"  data-chapter="{{../order}}" data-title="Delete this slide" data-position="right center">
+            <button class="ui compact icon button deleteSlideBtn"  data-index="{{@index}}"  data-chapter="{{../order}}" data-title="Delete this slide" data-position="right center">
               <i class="delete icon"></i>
             </button>
           </div>
         {{/each}} <!-- slides end -->
-        <button class="ui grey fluid labeled icon button addSlide" data-chapter="{{@index}}">
+        <button class="ui grey fluid large compact labeled icon button addSlide" data-chapter="{{@index}}">
           <i class="plus icon"></i>
           Add a slide
         </button>
         <div class="ui divider"></div>
       {{/each}} <!-- chapters end -->
-      <button class="ui basic fluid labeled icon button addChapter">
+      <button class="ui basic fluid large compact labeled icon button addChapter">
         <i class="plus icon"></i>
         Add a chapter
       </button>
-      <div class="ui divider"></div>
-      <form class="ui form">
-        <div class="field">
-          <div class="ui slider checkbox">
-            <input type="checkbox" name="isPublic" id="isPublic" {{isChecked isPublic}}>
-            <label for="isPublic">Public presentation</label>
-          </div>
-        </div>
-        <div class="field">
-          <div class="ui slider checkbox">
-            <input type="checkbox" name="isListed" id="isListed" {{isChecked isListed}}>
-            <label for="isListed">Listed presentation</label>
-          </div>
-        </div>
-        <div class="field">
-          <div class="ui slider checkbox">
-            <input type="checkbox" name="isLiveOnly" id="isLiveOnly" {{isChecked isLiveOnly}}>
-            <label for="isLiveOnly">Live only presentation</label>
-          </div>
-        </div>
-      </form>
-      <div class="ui divider"></div>
-      <div class="ui fluid buttons">
-        <div class="ui red basic button resetViews">Reset views</div>
-        <div class="ui red button resetVotes">Reset votes</div>
-      </div>
     {{/with}}
   </div>
 

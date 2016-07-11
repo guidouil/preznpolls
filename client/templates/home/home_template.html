@@ -11,10 +11,10 @@
             It's quite easy to make a presentation and show it to an audience. But if you want inputs from them, you'll have to setup complicated tools and devices. Well, not anymore.
           </p>
           <p class="ui header">
-            With Prez&Polls you just share the address of your live presentation and you are in control of the sliding. Every personn on your presentation with any devices watch the pages flowing as you push the button.
+            With Prez&Polls you just share the address of your live presentation and you are in control of the sliding. Every viewer of your presentation watch the pages flowing as you push the button. It works on any devices.
           </p>
           <p class="ui header">
-            With the polls slides you can ask questions to your audience and get live graphs from the answers. You stay in control as you see the numbers of viewers and answers updated in real time.
+            And with the polls slides you can ask questions to your audience and get live graphs from the answers. You stay in control as you see the numbers of viewers and answers updated in real time.
           </p>
           {{#if isGuest}}
             <div class="ui basic center aligned segment">
@@ -50,7 +50,7 @@
               </div>
               <div class="ui bottom attached buttons">
                 <a class="ui primary compact icon button" href="{{pathFor 'play' prez=_id}}"><i class="large play icon"></i></a>
-                <a class="ui compact icon button" href="{{pathFor 'edit' prez=_id}}"><i class="large edit icon"></i></a>
+                <a class="ui secondary compact icon button" href="{{pathFor 'edit' prez=_id}}"><i class="large edit icon"></i></a>
               </div>
             </a>
             {{/each}}
@@ -81,7 +81,7 @@
               {{else}}
                 <div class="ui bottom attached buttons">
                   <a class="ui primary compact icon button" href="{{pathFor 'play' prez=_id}}"><i class="large play icon"></i></a>
-                  <a class="ui compact icon button" href="{{pathFor 'view' prez=_id chapter=0 slide=0}}"><i class="large eye icon"></i></a>
+                  <a class="ui secondary compact icon button" href="{{pathFor 'view' prez=_id chapter=0 slide=0}}"><i class="large eye icon"></i></a>
                 </div>
 
               {{/if}}

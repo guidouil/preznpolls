@@ -2,6 +2,7 @@
   <div class="transitions-container"  style="height:100%;">
     {{> UI.dynamic template=flip data=slide}}
   </div>
+  {{#unless isPrezOwner}}
   <div class="ui large compact icon buttons pagination-buttons">
     <div class="ui button viewLeft"><i class="angle double left icon"></i></div>
     <div class="ui disabled button">
@@ -12,13 +13,19 @@
     </div>
     <div class="ui button viewRight"><i class="angle double right icon"></i></div>
   </div>
-  {{#if isPrezOwner}}
+  {{else}}
+    <div class="ui large compact disabled button pagination-buttons">
+      {{#if chapterPosition}}
+        C.{{chapterPosition}} -
+      {{/if}}
+      {{slidePagination}}
+    </div>
     {{> footer}}
     <style media="screen">
     .pagination-buttons {
       bottom: 4.5rem;
     }
     </style>
-  {{/if}}
+  {{/unless}}
 
 </template>

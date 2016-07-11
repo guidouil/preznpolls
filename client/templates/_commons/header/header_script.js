@@ -32,7 +32,7 @@ Template.header.helpers({
     return Router.current().params.prez;
   },
   prezUrl () {
-    return Meteor.absoluteUrl('p/' + Router.current().params.prez);
+    return 'prez.win/' + Router.current().params.prez;
   },
 });
 
@@ -40,17 +40,19 @@ Template.header.events({
   'click .createPrez' () {
     $('.prezTitleModal').modal({
       onApprove: function() {
+        let prezId = $('#prezId').val();
         let prezTitle = $('#prezTitle').val();
-        if (prezTitle) {
-          let prezId = Presentations.insert({
+        if (prezId && prezTitle) {
+          Presentations.insert({
+            _id: prezId,
             title: prezTitle,
             chapters: [{
               order: 0,
-              title: 'Chapter 0',
+              title: 'Chapter 1',
               slides: [{
                 order: 0,
                 type: 'coverSlide',
-                title: prezTitle,
+                title: prezTitle + ', chapter 1',
                 color: 'basic',
               }],
             }],
@@ -81,11 +83,17 @@ Template.header.events({
       },
     }).modal('show');
   },
+  'click .showPrezSidebar' () {
+    $('.presentationSidebar')
+    .sidebar('setting', 'transition', 'scale down')
+    .sidebar('show');
+  },
 });
 
 Template.header.onRendered(function () {
   $('.dropdown').dropdown();
   $('.createPrez').transition('tada');
+  // cool animations for the + top left icon
   Meteor.setInterval(function () {
     let yaya = Math.random();
     if (yaya >= 0.75) {
@@ -102,10 +110,70 @@ Template.header.onRendered(function () {
     }
   }, 10000);
 
-  $('#prezTitle').keypress(function (e) {
-    if (e.which === 13) {
+  $('#prezTitle').keyup(function (event) {
+    if (event.which === 13) {
+      if ($('.createPrezBtn').hasClass('disabled')) {
+        return false;
+      }
       $('.createPrezBtn').click();
       return false;
     }
+    let prezTitle = event.currentTarget.value;
+    let prezId = removeDiacritics(prezTitle).toLowerCase().replace(/ /g, '-');
+    $('#prezId').val(prezId);
+    $('#prezIdInput').addClass('loading');
+    Meteor.call('checkPrezId', prezId, function (error, result) {
+      if (error) {
+        error.log(error);
+      }
+      if (result === true) {
+        $('#prezIdInput > i').addClass('green check').removeClass('red close');
+        $('#prezIdField').removeClass('error');
+        $('.createPrezBtn').removeClass('disabled');
+        $('#prezIdInput').removeClass('loading');
+      } else {
+        $('#prezIdInput > i').removeClass('green check').addClass('red close');
+        $('#prezIdField').addClass('error');
+        $('.createPrezBtn').addClass('disabled');
+        $('#prezIdInput').removeClass('loading');
+      }
+    });
+    return false;
+  });
+  $('#prezId').keyup(function (event) {
+    if (event.which === 13) {
+      if ($('.createPrezBtn').hasClass('disabled')) {
+        return false;
+      }
+      $('.createPrezBtn').click();
+      return false;
+    }
+    let prezId = event.currentTarget.value;
+    prezId = removeDiacritics(prezId).toLowerCase().replace(/ /g, '-');
+    if (prezId) {
+      $('#prezId').val(prezId);
+      $('#prezIdInput').addClass('loading');
+      Meteor.call('checkPrezId', prezId, function (error, result) {
+        if (error) {
+          error.log(error);
+        }
+        if (result === true) {
+          $('#prezIdInput > i').addClass('green check').removeClass('red close');
+          $('#prezIdField').removeClass('error');
+          $('.createPrezBtn').removeClass('disabled');
+          $('#prezIdInput').removeClass('loading');
+        } else {
+          $('#prezIdInput > i').removeClass('green check').addClass('red close');
+          $('#prezIdField').addClass('error');
+          $('.createPrezBtn').addClass('disabled');
+          $('#prezIdInput').removeClass('loading');
+        }
+      });
+    }
+    $('#prezIdInput > i').removeClass('green check').addClass('red close');
+    $('#prezIdField').addClass('error');
+    $('.createPrezBtn').addClass('disabled');
+    $('#prezIdInput').removeClass('loading');
+    return false;
   });
 });

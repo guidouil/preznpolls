@@ -14,11 +14,9 @@ makeEditable = function () {
       if (prez && prez[field] !== value) {
         let update = {};
         update[field] = value;
-        Presentations.update({ _id: Router.current().params.prez }, { $set: update });
-        setTimeout(function () {
+        Presentations.update({ _id: Router.current().params.prez }, { $set: update }, function () {
           event.currentTarget.innerText = value;
-          return false;
-        }, 200);
+        });
       }
     });
   }
