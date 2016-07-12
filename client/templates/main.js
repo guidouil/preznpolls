@@ -100,3 +100,9 @@ Template.registerHelper('noBasic', function (color) {
 Template.registerHelper('plusOne', function (value) {
   return Number(value) + 1;
 });
+
+Template.registerHelper('truncate', function (string, length) {
+  check(string, String);
+  check(length, Number);
+  return string.slice(0, length + 1);
+});

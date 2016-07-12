@@ -27,6 +27,10 @@ Meteor.publish('Viewers', function (prezId) {
   return Viewers.find({ _id: prezId });
 });
 
+Meteor.publish('Discussion', function (prezId) {
+  return Discussions.find({ _id: prezId });
+});
+
 Meteor.publish('Votes', function (prezId) {
   let query = {};
   query[prezId] = { $exists: 1 };

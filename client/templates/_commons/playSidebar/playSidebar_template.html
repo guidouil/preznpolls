@@ -2,37 +2,38 @@
   <div class="ui right wide sidebar ui segment playSidebar">
     <i class="big close link icon closeChat"></i>
 
-    <div class="ui comments chatContent">
+    <div class="ui minimal comments chatContent">
       <h3 class="ui dividing header">Public discussion</h3>
-      {{#if hasMessages}}
-        {{#each messages}}
+      {{#each messages}}
         <div class="comment">
           <div class="content">
-            <a class="author">{{author}}</a>
+            <a class="author">Viewer {{truncate who 4}}</a>
             <div class="metadata">
               <span class="date">{{fromNow when}}</span>
+              {{#if isPrezOwner}}
+                <i class="red link delete icon deleteMessage"></i>
+              {{/if}}
             </div>
             <div class="text">
-              {{text}}
+              {{what}}
             </div>
           </div>
         </div>
-        {{/each}}
-        <div class="replyForm">
-          <form class="ui reply form ">
-            <div class="field">
-              <textarea cols="3" class="replyBox"></textarea>
-            </div>
-            <div class="ui fluid blue labeled submit icon button postMessage">
-              <i class="sendicon"></i> Post public message
-            </div>
-          </form>
+      {{/each}}
+    </div>
+
+    <div class="ui massive fluid bottom fixed inverted blue borderless menu">
+      <div class="item header">
+        {{clock}}
+      </div>
+      <div class="right menu">
+        <div class="item">
+          <div class="ui big icon input">
+            <input type="text" placeholder="Say something :)" id="messageInput">
+            <i class="blue link send icon postMessage"></i>
+          </div>
         </div>
-      {{else}}
-        <p>
-          No opened discussion for the moment.
-        </p>
-      {{/if}}
+      </div>
     </div>
 
   </div>

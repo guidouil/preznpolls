@@ -34,6 +34,13 @@ Template.header.helpers({
   prezUrl () {
     return 'prez.win/' + Router.current().params.prez;
   },
+  messagesCount () {
+    let discussion = Discussions.findOne({ _id: Router.current().params.prez });
+    if (discussion && discussion.discussion) {
+      return discussion.discussion.length;
+    }
+    return false;
+  },
 });
 
 Template.header.events({
@@ -91,12 +98,21 @@ Template.header.events({
     .sidebar('setting', 'transition', 'scale down')
     .sidebar('show');
   },
+  'click .showPlaySidebar' () {
+    $('.playSidebar').sidebar({
+      transition: 'overlay',
+      dimPage: false,
+    }).sidebar('show');
+  },
 });
 
 Template.header.onRendered(function () {
   $('.dropdown').dropdown();
-  $('.createPrez').transition('tada');
   // cool animations for the + top left icon
+  $('.createPrezIcon').addClass('loading');
+  setTimeout(function () {
+    $('.createPrezIcon').removeClass('loading');
+  }, 500);
   Meteor.setInterval(function () {
     let yaya = Math.random();
     if (yaya >= 0.75) {

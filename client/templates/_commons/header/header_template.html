@@ -21,7 +21,7 @@
       {{/if}}
       {{#if isPlaying}}
         <a class="item">
-          <i class="big world icon showUrl"></i>
+          <i class="large world icon showUrl"></i>
         </a>
       {{/if}}
     </div>
@@ -29,6 +29,14 @@
       <i class="big pied piper icon"></i>
     </a>
     <div class="right menu">
+      {{#if isPlaying}}
+        <a class="item showPlaySidebar">
+          {{#if messagesCount}}
+            <b>{{messagesCount}}</b>&nbsp;
+          {{/if}}
+          <i class="large comments outline icon"></i>
+        </a>
+      {{/if}}
       {{#if isGuest}}
         <a class="item" href="/sign-in">
           {{#unless isHome}}
@@ -49,11 +57,6 @@
             <a class="item signOutBtn">Sign out</a>
           </div>
         </div>
-      {{/if}}
-      {{#if isPlaying}}
-        <a class="item disabled">
-          <i class="big comments outline icon"></i>
-        </a>
       {{/if}}
     </div>
   </div>
