@@ -34,25 +34,9 @@
 
           <h2 class="ui header">Your presentations</h2>
           {{#if myPresentations}}
-          <div class="ui four stackable cards">
+          <div class="ui stackable four column grid">
             {{#each myPresentations}}
-            <a class="ui link raised card" href="{{pathFor 'play' prez=_id}}">
-              <div class="content">
-                <div class="header">{{toUpperCase title}}</div>
-                <div class="meta">{{fromNow createdAt}}</div>
-                <div class="description">
-                  {{chaptersCount}} chapter{{plural chaptersCount}} & {{slidesCount}} slide{{plural slidesCount}}
-                </div>
-              </div>
-              <div class="extra content">
-                <i class="check icon"></i>
-                {{viewersCount}} Viewer{{plural viewersCount}}
-              </div>
-              <div class="ui bottom attached buttons">
-                <a class="ui primary compact icon button" href="{{pathFor 'play' prez=_id}}"><i class="large play icon"></i></a>
-                <a class="ui secondary compact icon button" href="{{pathFor 'edit' prez=_id}}"><i class="large edit icon"></i></a>
-              </div>
-            </a>
+              <div class="column">{{> miniPrez}}</div>
             {{/each}}
           </div>
           {{else}}
@@ -62,32 +46,12 @@
           <div class="ui divider"></div>
 
           <h2 class="ui header">Public presentations</h2>
-          <div class="ui four stackable cards">
+          <div class="ui stackable four column grid">
             {{#each presentations}}
-            <a class="ui link raised card" href="{{pathFor 'play' prez=_id}}">
-              <div class="content">
-                <div class="header">{{toUpperCase title}}</div>
-                <div class="meta">{{fromNow createdAt}}</div>
-                <div class="description">
-                  {{chaptersCount}} chapter{{plural chaptersCount}} & {{slidesCount}} slide{{plural slidesCount}}
-                </div>
-              </div>
-              <div class="extra content">
-                <i class="check icon"></i>
-                {{viewersCount}} Viewer{{plural viewersCount}}
-              </div>
-              {{#if isLiveOnly}}
-                <a class="ui primary bottom attached compact icon button" href="{{pathFor 'play' prez=_id}}"><i class="large play icon"></i></a>
-              {{else}}
-                <div class="ui bottom attached buttons">
-                  <a class="ui primary compact icon button" href="{{pathFor 'play' prez=_id}}"><i class="large play icon"></i></a>
-                  <a class="ui secondary compact icon button" href="{{pathFor 'view' prez=_id chapter=0 slide=0}}"><i class="large eye icon"></i></a>
-                </div>
-
-              {{/if}}
-            </a>
+              <div class="column">{{> miniPrez}}</div>
             {{/each}}
           </div>
+
 
         </div>
       </div>

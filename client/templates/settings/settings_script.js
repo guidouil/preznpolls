@@ -70,6 +70,7 @@ Template.settings.events({
         }
       },
       onDeny: function () {
+        $('.setPrezId').addClass('disabled');
         $('#settingsPrezId').val(Router.current().params.prez);
       },
     }).modal('show');
@@ -113,4 +114,7 @@ Template.settings.events({
 
 Template.settings.onRendered(function () {
   $('.input, .checkbox').popup();
+  setTimeout(function () {
+    $('.input, .checkbox').popup();
+  }, 1000);
 });

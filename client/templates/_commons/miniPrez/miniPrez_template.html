@@ -1,0 +1,26 @@
+<template name='miniPrez'>
+  <div class="ui {{noBasic chapters.[0].slides.[0].color}} stacked center aligned segment miniPrez">
+    <h4 class="ui header">{{toUpperCase title}}</h4>
+    <div class="ui list miniPrezList">
+      <div class="item">
+        <i class="folder outline icon"></i>
+        <div class="content">
+          {{chaptersCount}} chapter{{plural chaptersCount}}
+        </div>
+      </div>
+      <div class="item">
+        <i class="file outline icon"></i>
+        <div class="content">
+          {{slidesCount}} slide{{plural slidesCount}}
+        </div>
+      </div>
+      <div class="item">
+        <i class="user{{plural viewersCount}} icon"></i>
+        <div class="content">
+          {{viewersCount}} viewer{{plural viewersCount}}
+        </div>
+      </div>
+    </div>
+    <p><small>{{fromNow createdAt}}</small></p>
+  </div>
+</template>

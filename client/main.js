@@ -89,6 +89,14 @@ Template.registerHelper('noInverted', function (color) {
   return color;
 });
 
+Template.registerHelper('noBasic', function (color) {
+  check(color, String);
+  if (color.search('basic') !== -1) {
+    return color.replace('basic', '');
+  }
+  return color;
+});
+
 Template.registerHelper('plusOne', function (value) {
   return Number(value) + 1;
 });
