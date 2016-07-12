@@ -1,5 +1,7 @@
 Template.settings.onCreated(function () {
   this.subscribe('Presentation', Router.current().params.prez);
+  this.subscribe('Viewers', Router.current().params.prez);
+  this.subscribe('Votes', Router.current().params.prez);
 });
 
 Template.settings.helpers({
@@ -64,6 +66,12 @@ Template.settings.events({
           prez._id = $('#settingsPrezId').val();
           Presentations.insert(prez, function () {
             Presentations.remove({ _id: previousId});
+            Viewers.insert({
+              _id: prez._id,
+              viewers: [],
+              left: [],
+              right: [],
+            });
             $('.changePrezIdWarning').modal('hide');
             Router.go('edit', {prez: prez._id});
           });
