@@ -31,9 +31,11 @@ Template.edit.helpers({
 });
 
 Template.edit.events({
-  
+
 });
 
 Template.edit.onRendered(function () {
-
+  $('.presentationSidebar')
+  .sidebar('setting', 'transition', 'scale down')
+  .sidebar('show');
 });

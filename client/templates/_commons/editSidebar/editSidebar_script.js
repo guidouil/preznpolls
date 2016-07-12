@@ -129,7 +129,7 @@ Template.editSidebar.events({
       let chapters = prez.chapters;
       chapters.push({
         order: prez.chapters.length,
-        title: 'Chapter ' + prez.chapters.length + 1,
+        title: 'Chapter ' + Number(prez.chapters.length + 1),
         slides: [{
           title: prez.title + ', chapter ' + Number(prez.chapters.length + 1),
           order: 0,

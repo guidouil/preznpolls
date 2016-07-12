@@ -1,7 +1,23 @@
+let getOwnersAndUsers = function (template) {
+  Meteor.call('getPrezOwnersAndUsers', Router.current().params.prez, function (err, result) {
+    if (result.owners) {
+      template.owners.set(result.owners);
+    }
+    if (result.users) {
+      template.users.set(result.users);
+    }
+  });
+};
+
+
 Template.settings.onCreated(function () {
-  this.subscribe('Presentation', Router.current().params.prez);
-  this.subscribe('Viewers', Router.current().params.prez);
-  this.subscribe('Votes', Router.current().params.prez);
+  let template = this;
+  template.subscribe('Presentation', Router.current().params.prez);
+  template.subscribe('Viewers', Router.current().params.prez);
+  template.subscribe('Votes', Router.current().params.prez);
+  template.owners = new ReactiveVar(false);
+  template.users = new ReactiveVar(false);
+  getOwnersAndUsers(template);
 });
 
 Template.settings.helpers({
@@ -10,6 +26,12 @@ Template.settings.helpers({
   },
   isChecked (value) {
     return (value === true ? 'checked' : '');
+  },
+  owners () {
+    return Template.instance().owners.get();
+  },
+  users () {
+    return Template.instance().users.get();
   },
 });
 
@@ -40,6 +62,11 @@ Template.settings.events({
     }).modal('show');
   },
   'change #isPublic' (event) {
+    if (event.currentTarget.checked) {
+      $('#isListedSlider').removeClass('disabled');
+    } else {
+      $('#isListedSlider').addClass('disabled');
+    }
     Presentations.update({ _id: Router.current().params.prez }, { $set: {
       isPublic: event.currentTarget.checked,
     }});
@@ -116,6 +143,56 @@ Template.settings.events({
     } else {
       $('.setPrezId').addClass('disabled');
     }
+    return false;
+  },
+  'click .addOwnerBtn' (event) {
+    event.preventDefault();
+    let email = $('#ownerEmail').val();
+    let template = Template.instance();
+    if (email && validateEmail(email)) {
+      Meteor.call('giveOrwnership', email, Router.current().params.prez, function(error, result) {
+        if (result === false) {
+          alert('Cant find a user with this address: ' + email);
+        } else if (result === true) {
+          $('#ownerEmail').val('');
+          getOwnersAndUsers(template);
+        }
+      });
+    }
+  },
+  'click .addUserBtn' (event) {
+    event.preventDefault();
+    let email = $('#userEmail').val();
+    let template = Template.instance();
+    if (email && validateEmail(email)) {
+      Meteor.call('addUser', email, Router.current().params.prez, function(error, result) {
+        if (result === false) {
+          alert('Cant find a user with this address: ' + email);
+        } else if (result === true) {
+          $('#userEmail').val('');
+          getOwnersAndUsers(template);
+        }
+      });
+    }
+  },
+  'click .deleteOwnerBtn' (event) {
+    event.preventDefault();
+    let ownerId = event.currentTarget.id;
+    let template = Template.instance();
+    if (ownerId === Meteor.userId()) {
+      alert('You can\'t remove yourself');
+      return false;
+    }
+    Meteor.call('removeOwnership', ownerId, Router.current().params.prez);
+    getOwnersAndUsers(template);
+    return false;
+  },
+  'click .deleteUserBtn' (event) {
+    event.preventDefault();
+    let userId = event.currentTarget.id;
+    let template = Template.instance();
+    Meteor.call('removeUser', userId, Router.current().params.prez);
+    getOwnersAndUsers(template);
     return false;
   },
 });

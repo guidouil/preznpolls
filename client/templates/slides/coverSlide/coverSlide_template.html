@@ -3,7 +3,7 @@
   <div class="ui container coverSlideConatainer">
     <div class="coverSlide">
       <div class="ui {{color}} center aligned segment">
-        <h1 class="ui header editable" data-field="chapters.{{chapterIndex}}.slides.{{slideIndex}}.title" data-title="Cover slide title"  data-position="top center">{{title}}</h1>
+        <h1 class="ui header editable" data-field="chapters.{{chapterIndex}}.slides.{{slideIndex}}.title" data-title="Cover slide title"  data-position="top center" autofocus>{{title}}</h1>
         {{#if isEditingOr description}}
           <h2 class="ui header editable" data-field="chapters.{{chapterIndex}}.slides.{{slideIndex}}.description" data-title="Cover slide sub title"  data-position="top center">{{description}}</h2>
         {{/if}}

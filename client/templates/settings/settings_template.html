@@ -4,7 +4,7 @@
     <div class="ui basic segment">
       {{#with presentation}}
         <h1 class="ui center alligned header">Presentation settings</h1>
-        <form class="ui form">
+        <div class="ui form">
           <h3 class="ui dividing header">URL address</h3>
           <div class="field" id="settingsPrezIdField">
             <label for="settingsPrezId">Presentation short name for the URL address (must be unique)</label>
@@ -17,23 +17,90 @@
             </div>
           </div>
           <button class="ui positive fluid icon labeled button disabled setPrezId"><i class="check icon"></i>Apply URL change</button>
+
           <h3 class="ui dividing header">Access controls</h3>
-          <div class="field">
-            <div class="ui slider checkbox" data-title="If your presentation is public" data-content="Every body can access it with the valid URL address" data-variation="very wide" data-position="right center">
-              <input type="checkbox" name="isPublic" id="isPublic" {{isChecked isPublic}}>
-              <label for="isPublic">Public presentation</label>
+          <div class="ui three column grid">
+            <div class="column">
+              <div class="ui basic segment">
+                <div class="field">
+                  <div class="ui slider checkbox" data-title="If your presentation is public" data-content="Every body can access it with the valid URL address" data-variation="very wide" data-position="right center">
+                    <input type="checkbox" name="isPublic" id="isPublic" {{isChecked isPublic}}>
+                    <label for="isPublic">Public presentation</label>
+                  </div>
+                </div>
+                <div class="field">
+                  <div class="ui slider checkbox" id="isListedSlider" data-title="If your presentation is public and listed" data-content="People can find it on Prez&Polls first page and search engine" data-variation="very wide" data-position="right center">
+                    <input type="checkbox" name="isListed" id="isListed" {{isChecked isListed}}>
+                    <label for="isListed">Listed presentation</label>
+                  </div>
+                </div>
+                <div class="field">
+                  <div class="ui slider checkbox" data-title="If your presentation is live only" data-content="People can't slide thru your presentation, only you can change the slide they are viewing (viewers can vote for next and previous page)." data-variation="very wide" data-position="right center">
+                    <input type="checkbox" name="isLiveOnly" id="isLiveOnly" {{isChecked isLiveOnly}} >
+                    <label for="isLiveOnly">Live only presentation</label>
+                  </div>
+                </div>
+              </div>
             </div>
-          </div>
-          <div class="field">
-            <div class="ui slider checkbox" data-title="If your presentation is listed" data-content="People can find it on Prez&Polls first page and search engine" data-variation="very wide" data-position="right center">
-              <input type="checkbox" name="isListed" id="isListed" {{isChecked isListed}}>
-              <label for="isListed">Listed presentation</label>
+            <div class=" column">
+              <div class="ui basic segment">
+                <div class="ui right action fluid input">
+                  <input type="text" placeholder="Owner email address" id="ownerEmail">
+                  <button class="ui green icon button addOwnerBtn">
+                    <i class="plus icon"></i>
+                  </button>
+                </div>
+                <table class="ui very basic fluid celled table">
+                  <thead>
+                    <tr>
+                      <th colspan="2" class="center aligned">Owners</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {{#each owners}}
+                    <tr>
+                      <td>
+                        {{email}}
+                      </td>
+                      <td class="center aligned">
+                        <button id="{{userId}}" class="ui compact negative icon button deleteOwnerBtn"><i class="trash icon"></i></button>
+                      </td>
+                    </tr>
+                    {{/each}}
+                  </tbody>
+                </table>
+              </div>
             </div>
-          </div>
-          <div class="field">
-            <div class="ui slider checkbox" data-title="If your presentation is live only" data-content="People can't slide thru your presentation, only you can change the slide they are viewing (viewers can vote for next and previous page)." data-variation="very wide" data-position="right center">
-              <input type="checkbox" name="isLiveOnly" id="isLiveOnly" {{isChecked isLiveOnly}} >
-              <label for="isLiveOnly">Live only presentation</label>
+            <div class="column">
+              <div class="ui basic segment">
+                <div class="ui fluid right action input">
+                  <input type="text" placeholder="User email address" id="userEmail">
+                  <button class="ui green icon button addUserBtn">
+                    <i class="plus icon"></i>
+                  </button>
+                </div>
+                {{#if users}}
+                <table class="ui very basic fluid celled table">
+                  <thead>
+                    <tr>
+                      <th colspan="2" class="center aligned">Users</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {{#each users}}
+                    <tr>
+                      <td>
+                        {{email}}
+                      </td>
+                      <td class="center aligned">
+                        <button id="{{userId}}" class="ui compact negative icon button deleteUserBtn"><i class="trash icon"></i></button>
+                      </td>
+                    </tr>
+                    {{/each}}
+                  </tbody>
+                </table>
+                {{/if}}
+              </div>
             </div>
           </div>
 
@@ -47,7 +114,7 @@
           <div class="field">
             <button class="ui fluid negative large icon labeled button deletePresentationBtn"><i class="trash icon"></i>DELETE PRESENTATION</button>
           </div>
-        </form>
+        </div>
       {{/with}}
     </div>
   </div>

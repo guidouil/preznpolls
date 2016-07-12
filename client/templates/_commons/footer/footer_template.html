@@ -1,15 +1,6 @@
 <template name='footer'>
   <div class="ui bottom fixed inverted borderless icon menu">
     <div class="left menu">
-      {{#if isEditing}}
-      <a class="item" href="{{pathFor 'play' prez=prez}}">
-        <i class="big save icon"></i>
-      </a>
-      {{else}}
-      <a class="item" href="{{pathFor 'edit' prez=prez}}">
-        <i class="big edit icon"></i>
-      </a>
-      {{/if}}
       {{#if isPollSlide}}
       <a class="item viewStat" >
         <b>{{voters}}</b>&nbsp;<i class="big {{activeStat}} pie chart icon"></i>
