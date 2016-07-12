@@ -3,11 +3,11 @@
     <i class="big close link icon closeChat"></i>
 
     <div class="ui minimal comments chatContent">
-      <h3 class="ui dividing header">Public discussion</h3>
+      <h3 class="ui dividing fluid header">Public & Anonymous Discussion</h3>
       {{#each messages}}
         <div class="comment">
           <div class="content">
-            <a class="author">Viewer {{truncate who 4}}</a>
+            <a class="author">Viewer {{truncate who 5 true}}</a>
             <div class="metadata">
               <span class="date">{{fromNow when}}</span>
               {{#if isPrezOwner}}

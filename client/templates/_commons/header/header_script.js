@@ -102,6 +102,9 @@ Template.header.events({
     $('.playSidebar').sidebar({
       transition: 'overlay',
       dimPage: false,
+      onVisible: function () {
+        $('.chatContent').scrollTop($(document).height());
+      },
     }).sidebar('show');
   },
 });

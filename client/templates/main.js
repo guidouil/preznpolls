@@ -101,8 +101,11 @@ Template.registerHelper('plusOne', function (value) {
   return Number(value) + 1;
 });
 
-Template.registerHelper('truncate', function (string, length) {
+Template.registerHelper('truncate', function (string, length, toUpperCase) {
   check(string, String);
   check(length, Number);
-  return string.slice(0, length + 1);
+  if (toUpperCase === true) {
+    string = string.toUpperCase();
+  }
+  return string.slice(0, length);
 });
