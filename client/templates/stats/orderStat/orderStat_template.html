@@ -1,0 +1,13 @@
+<template name='orderStat'>
+  <table class="ui very basic large celled table">
+    <tbody>
+      {{#each usersOrderedAnswers}}
+        <tr>
+          <td class="center aligned">#{{plusOne @index}} <small>({{rank}})</small></td>
+          <td class="ui {{color}} center aligned header">{{text}}</td>
+        </tr>
+      {{/each}}
+    </tbody>
+  </table>
+  <h3 class="ui center aligned header">Average with {{votersCount}} response{{plural votersCount}}</h3>
+</template>

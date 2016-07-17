@@ -169,6 +169,19 @@ Template.pollSlide.events({
         }
       });
 
+      // Ordering question answers
+      $('#answersContainer').children('.orderAnswerBtn').each(function(index, answer) {
+        if (! answers[answer.dataset.question]) {
+          answers[answer.dataset.question] = [];
+        }
+        answers[answer.dataset.question].push({
+          id: answer.id,
+          value: Number(index + 1),
+          text: answer.innerText,
+          time: new Date(),
+        });
+      });
+
       if (Router.current().params.chapter >= 0 && Router.current().params.slide >= 0) {
         prez.chapterViewIndex = Router.current().params.chapter;
         prez.slideViewIndex = Router.current().params.slide;
@@ -264,6 +277,9 @@ Template.pollSlide.events({
       break;
     case 'wordsQuestion':
       stat = 'cloudStat';
+      break;
+    case 'orderingQuestion':
+      stat = 'orderStat';
       break;
     }
     let statField = field.replace('.type', '.stat');

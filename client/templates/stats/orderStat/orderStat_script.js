@@ -1,4 +1,4 @@
-Template.gaugeStat.onCreated(function () {
+Template.orderStat.onCreated(function () {
   let questionIndex = this.data;
   let prez = Presentations.findOne({ _id: Router.current().params.prez });
   if (prez && Router.current().params.chapter >= 0 && Router.current().params.slide >= 0) {
@@ -9,12 +9,13 @@ Template.gaugeStat.onCreated(function () {
   let questionId = prez.chapters[prez.chapterViewIndex].slides[prez.slideViewIndex].questions[questionIndex].questionId;
   this.answers = answers;
   this.questionId = questionId;
+  this.votersCount = new ReactiveVar(0);
 });
 
-Template.gaugeStat.onRendered(function () {
-  let questionIndex = this.data;
-  let template = this;
-  Tracker.autorun(function(){
+Template.orderStat.helpers({
+  usersOrderedAnswers () {
+    let template = Template.instance();
+    let questionIndex = template.data;
     let prez = Presentations.findOne({ _id: Router.current().params.prez });
     let answers = template.answers;
     let questionId = template.questionId;
@@ -35,36 +36,32 @@ Template.gaugeStat.onRendered(function () {
       }
     });
 
-    _.each(answers, function(answer, answerIndex) {
+    let usersOrderedAnswers = [];
+    _.each(answers, function(answer) {
       if (usersAnswers[answer.answerId] && usersAnswers[answer.answerId].length) {
         let answerTotal = 0;
-        _.each(usersAnswers[answer.answerId], function(answer, index) {
-          answerTotal += Number(answer.value);
+        _.each(usersAnswers[answer.answerId], function(userAnswer) {
+          answerTotal += Number(userAnswer.value);
         });
-        let answersCount = usersAnswers[answer.answerId].length
+        let answersCount = usersAnswers[answer.answerId].length;
+        template.votersCount.set(answersCount);
         let answerAverage = Math.round(answerTotal / answersCount * 100) / 100;
-        $('#gauge_' + answer.answerId).html('');
-        let gauge = new JustGage({
-          id: 'gauge_' + answer.answerId,
-          value: answerAverage,
-          min: answer.minValue,
-          max: answer.maxValue,
-          title: answer.text,
-          label: 'Average with\n' + answersCount + ' responses',
-          counter: true,
-          formatNumber: true,
+        usersOrderedAnswers.push({
+          text: answer.text,
+          rank: answerAverage,
+          color: answer.color,
         });
       }
     });
-  });
-});
-
-Template.gaugeStat.helpers({
-  answers () {
-    return Template.instance().answers;
+    return _.sortBy(usersOrderedAnswers, 'rank');
+  },
+  votersCount () {
+    return Template.instance().votersCount.get();
   },
 });
 
-Template.gaugeStat.events({
+Template.orderStat.events({
+});
 
+Template.orderStat.onRendered(function () {
 });
