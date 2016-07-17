@@ -14,7 +14,7 @@ Template.cloudStat.onRendered(function () {
   let template = this;
   let prez = Presentations.findOne({ _id: Router.current().params.prez });
 
-  Tracker.autorun(function(){
+  Tracker.autorun(function(c) {
     let questionId = template.questionId;
     let query = {};
     query[prez._id + '.' + questionId] = {$exists: 1};
@@ -42,12 +42,13 @@ Template.cloudStat.onRendered(function () {
     });
     WordCloud(document.getElementById('wordscloud_' + questionId), {
       list: usersAnswers,
-      gridSize: 8,
+      gridSize: 12,
       weightFactor: 32,
+      fontWeight: 600,
       fontFamily: 'Lato, Helvetica Neue, Arial, Helvetica, sans-serif',
+      shape: 'cloud',
       color: 'random-dark',
-      backgroundColor: '#f0f0f0',
-      rotateRatio: 0.6,
+      rotateRatio: 0.5,
     });
   });
 });
@@ -68,4 +69,12 @@ Template.cloudStat.helpers({
 });
 
 Template.cloudStat.events({
+});
+
+Template.cloudStat.onDestroyed(function () {
+  let comp = Tracker.currentComputation;
+  console.log(comp);
+  if (comp && comp.active) {
+    comp.stop();
+  }
 });

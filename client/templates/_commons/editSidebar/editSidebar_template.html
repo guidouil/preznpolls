@@ -1,5 +1,5 @@
 <template name='editSidebar'>
-  <div class="ui left wide sidebar ui segment presentationSidebar">
+  <div class="ui left wide sidebar segment presentationSidebar">
     {{#with presentation}}
     <i class="big grey setting link icon prezSettings" data-title="Presentation settings" data-position="right center"></i>
       <h1 class="ui header editable" data-field="title" data-title="Presentation title" data-position="right center">{{title}}</h1>
@@ -9,8 +9,9 @@
           <i class="large red delete link icon deleteChapterBtn" data-title="Delete chapter {{plusOne @index}}" data-position="right center" data-index="{{@index}}" ></i>
         {{/unless}}
         <h2 class="ui header editable" data-field="chapters.{{@index}}.title" data-title="Chapter {{plusOne @index}} title" data-position="right center">{{title}}</h2>
-        {{#each slides}}
-          <div class="ui {{isActiveSlide ../order @index}} {{slideColor type}} fluid large compact buttons slideSideBtns">
+        <div id="slidesBtnCOntainer">
+          {{#each slides}}
+          <div class="ui {{isActiveSlide ../order @index}} {{slideColor type}} fluid large compact buttons slideSideBtns" data-index="{{@index}}"  data-chapter="{{../order}}">
             <button class="ui ok labeled icon button sidebarSlide" data-index="{{@index}}"  data-chapter="{{../order}}">
               <i class="{{slideIcon type}} icon"></i>
               {{title}}
@@ -19,61 +20,69 @@
               <i class="delete icon"></i>
             </button>
           </div>
-        {{/each}} <!-- slides end -->
-        <button class="ui secondary fluid large compact labeled icon button addSlide" data-chapter="{{@index}}">
+          {{/each}} <!-- slides end -->
+        </div>
+        <br>
+        <button class="ui fluid large labeled icon button addSlide" data-chapter="{{@index}}">
           <i class="plus icon"></i>
           Add a slide
         </button>
         <div class="ui divider"></div>
       {{/each}} <!-- chapters end -->
-      <button class="ui basic fluid large compact labeled icon button addChapter">
+      <button class="ui fluid large labeled icon button addChapter">
         <i class="plus icon"></i>
         Add a chapter
       </button>
+
     {{/with}}
   </div>
 
   <!-- New slide modal to choose type -->
-  <div class="ui basic modal newSlideType">
+  <div class="ui basic fullscreen modal newSlideType">
     <i class="close icon"></i>
-    <div class="header">
+    <div class="ui huge center aligned header">
       What type of slide do you want to add?
     </div>
     <div class="actions">
-      <div class="ui ok green inverted medium labeled icon button slideTypeBtn"
-        data-content="Large title & description"
-        data-position="top center"
+      <div class="ui ok green inverted massive labeled icon button slideTypeBtn"
+        data-title="Large title & subtitle"
+        data-Content="Usualy this slide is the first of a presentation and it's chapters"
+        data-position="bottom center"
         data-ref="coverSlide">
         <i class="header icon"></i>
         Cover slide
       </div>
-      <div class="ui ok blue inverted medium labeled icon button slideTypeBtn"
-        data-content="Ask questions & get stats"
-        data-position="top center"
+      <div class="ui ok blue inverted massive labeled icon button slideTypeBtn"
+        data-title="Ask questions & get stats"
+        data-content="This is a new kind of slide, it lets you create different kind of polls to engage your audience in real-time"
+        data-position="bottom center"
         data-ref="pollSlide">
         <i class="pie chart icon"></i>
         Poll slide
       </div>
-      <div class="ui ok teal inverted medium labeled icon button slideTypeBtn"
-        data-content="Title & multilines text"
-        data-position="top center"
-        data-ref="textSlide">
-        <i class="file text outline icon"></i>
-        Text slide
-      </div>
-      <div class="ui ok orange inverted medium labeled icon button slideTypeBtn"
-        data-content="Title & large image"
-        data-position="top center"
+      <div class="ui ok orange inverted massive labeled icon button slideTypeBtn"
+        data-title="Title & large image"
+        data-content="This slide let's you put a large image to show your audience some nice stuff (it can be an animated GIF)"
+        data-position="bottom center"
         data-ref="imageSlide">
         <i class="file image outline icon"></i>
         Image slide
       </div>
-      <div class="ui ok red inverted medium labeled icon button slideTypeBtn"
-        data-content="Title & large video"
-        data-position="top center"
+      <div class="ui ok red inverted massive labeled icon button slideTypeBtn"
+        data-title="Title & large video"
+        data-content="This slide let's you put a large video to show your audience a little movie"
+        data-position="bottom center"
         data-ref="videoSlide">
         <i class="film icon"></i>
         Video slide
+      </div>
+      <div class="ui ok teal inverted massive labeled icon button slideTypeBtn"
+        data-title="Title & multilines text"
+        data-content="This is the regular text slide. You can put long text here, but you can be shure most of you audience won't read it..."
+        data-position="bottom center"
+        data-ref="textSlide">
+        <i class="file text outline icon"></i>
+        Text slide
       </div>
     </div>
   </div>

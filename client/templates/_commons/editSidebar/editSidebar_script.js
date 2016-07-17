@@ -1,6 +1,54 @@
 Template.editSidebar.onRendered(function () {
   makeEditable();
   $('.button, .link').popup();
+  let container = document.getElementById('slidesBtnCOntainer');
+  let sort = Sortable.create(container, {
+    animation: 150, // ms, animation speed moving items when sorting, `0` — without animation
+    handle: '.slideSideBtns', // Restricts sort start click/touch to the specified element
+    draggable: '.buttons', // Specifies which items inside the element should be sortable
+    onUpdate: function (evt) {
+      let item = evt.item; // the current dragged HTMLElement
+      let prez = Presentations.findOne({ _id: Router.current().params.prez });
+      if (prez) {
+        let slides = prez.chapters[item.dataset.chapter].slides;
+        let oldIndex = evt.oldIndex;
+        let newIndex = evt.newIndex;
+        if (oldIndex !== newIndex && slides) {
+          let newSlides = [];
+          _.each(slides, function(slide, index) {
+            if ((index < oldIndex && index !== newIndex) || (index < newIndex && index !== oldIndex)) {
+              newSlides.push(slide);
+            } else if (index === newIndex) {
+              if (newIndex > oldIndex) {
+                // current slide pushed before
+                newSlides.push(slide);
+                // moved slide
+                newSlides.push(slides[oldIndex]);
+              } else { // newIndex < oldIndex
+                // moved slide
+                newSlides.push(slides[oldIndex]);
+                // current slide pushed after
+                newSlides.push(slide);
+              }
+            } else if (index > newIndex && index !== oldIndex) {
+              newSlides.push(slide);
+            }
+          });
+          if (newSlides.length > 0) {
+            _.each( newSlides, function(slide, index) {
+              newSlides[index].order = index;
+            });
+            let query = {};
+            query['chapters.' + item.dataset.chapter + '.slides'] = '';
+            Presentations.update({ _id: Router.current().params.prez }, { $unset: query }, function () {
+              query['chapters.' + item.dataset.chapter + '.slides'] = newSlides;
+              Presentations.update({ _id: Router.current().params.prez }, { $set: query });
+            });
+          }
+        }
+      }
+    },
+  });
 });
 
 Template.editSidebar.helpers({
@@ -65,7 +113,7 @@ Template.editSidebar.events({
           let chapters = prez.chapters;
           let currentChapter = chapters[currentChapterIndex];
           currentChapter.slides.push({
-            title: prez.title,
+            title: 'Slide ' + Number(currentChapter.slides.length + 1),
             order: currentChapter.slides.length,
             type: evt[0].dataset.ref,
             color: 'basic',

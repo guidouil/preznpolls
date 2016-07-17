@@ -3,7 +3,7 @@
     <div class="left menu">
       {{#if isPrezOwner}}
         {{#if isEditing}}
-        <a class="item showPrezSidebar">
+        <a class="item showPrezSidebar" data-title="Show presentation edition sidebar">
           <i class="big content icon"></i>
         </a>
         <a class="item" href="{{pathFor 'play' prez=prez}}">
@@ -15,7 +15,7 @@
         </a>
         {{/if}}
       {{else}}
-        <a class="item createPrez" >
+        <a class="item createPrez" data-title="Create a new presentation">
           <i class="big plus icon createPrezIcon"></i>
         </a>
       {{/if}}
@@ -101,6 +101,7 @@
 
   <!-- Prez URL Modal -->
   <div class="ui basic modal prezUrlModal">
+    <i class="close icon"></i>
     <div class="ui huge center aligned header" style="font-size: 5rem;">
       {{prezUrl}}
     </div>

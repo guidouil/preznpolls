@@ -20,4 +20,5 @@ Template.home.onRendered(function () {
   this.subscribe('Presentations');
   this.subscribe('MyPresentations');
   $('.createPrezBigBtn').transition('tada');
+  $('.item').popup();
 });

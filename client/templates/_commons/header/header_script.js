@@ -95,8 +95,14 @@ Template.header.events({
   },
   'click .showPrezSidebar' () {
     $('.presentationSidebar')
-    .sidebar('setting', 'transition', 'scale down')
-    .sidebar('show');
+    .sidebar({
+      transition: 'scale down',
+      onVisible: function () {
+        $('.dropdown').dropdown({
+          direction: 'upward',
+        });
+      },
+    }).sidebar('show');
   },
   'click .showPlaySidebar' () {
     $('.playSidebar').sidebar({
@@ -104,6 +110,7 @@ Template.header.events({
       dimPage: false,
       onVisible: function () {
         $('.chatContent').scrollTop($(document).height());
+        $('#messageInput').focus();
       },
     }).sidebar('show');
   },
@@ -111,6 +118,7 @@ Template.header.events({
 
 Template.header.onRendered(function () {
   $('.dropdown').dropdown();
+  $('.item').popup();
   // cool animations for the + top left icon
   $('.createPrezIcon').addClass('loading');
   setTimeout(function () {

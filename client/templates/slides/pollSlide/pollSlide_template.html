@@ -9,7 +9,7 @@
         <div class="ui {{../color}} segment">
           {{#unless isEditing}}
             {{#if help}}
-              <button class="ui right floated icon compact button questionHelp" data-content="{{help}}" data-position="left center" data-variation="very wide">
+              <button class="ui {{noInverted ../color}} right floated icon compact button questionHelp" data-content="{{help}}" data-position="left center" data-variation="very wide">
                 <i class="help icon "></i>
               </button>
             {{/if}}
@@ -33,15 +33,23 @@
                   </option>
                   <option value="rangeQuestion" {{isQuestionType 'rangeQuestion'}}>
                     <i class="dashboard icon"></i>
-                    Range answer
+                    Range answers
                   </option>
                   <option value="multiPointsQuestion" {{isQuestionType 'multiPointsQuestion'}}>
                     <i class="star half empty icon"></i>
-                    Rating answer
+                    Rating answers
                   </option>
                   <option value="wordsQuestion" {{isQuestionType 'wordsQuestion'}}>
                     <i class="cloud icon"></i>
-                    Words answer
+                    Words answers
+                  </option>
+                  <option value="orderingQuestion" {{isQuestionType 'orderingQuestion'}} disabled="disabled">
+                    <i class="sort content descending icon"></i>
+                    Ordering answers
+                  </option>
+                  <option value="pokerQuestion" {{isQuestionType 'pokerQuestion'}} disabled="disabled">
+                    <i class="database icon"></i>
+                    Poker answers
                   </option>
                 </select>
 
