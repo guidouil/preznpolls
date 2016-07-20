@@ -25,11 +25,12 @@ Template.pollSlide.helpers({
   },
   hasVotedAll () {
     let prez = Presentations.findOne({ _id: Router.current().params.prez });
-    if (prez && Router.current().params.chapter >= 0 && Router.current().params.slide >= 0) {
-      prez.chapterViewIndex = Router.current().params.chapter;
-      prez.slideViewIndex = Router.current().params.slide;
+    let prezIndex = PrezIndexes.findOne({ _id: Router.current().params.prez });
+    if (prezIndex && Router.current().params.chapter >= 0 && Router.current().params.slide >= 0) {
+      prezIndex.chapterViewIndex = Router.current().params.chapter;
+      prezIndex.slideViewIndex = Router.current().params.slide;
     }
-    let questions = prez.chapters[prez.chapterViewIndex].slides[prez.slideViewIndex].questions;
+    let questions = prez.chapters[prezIndex.chapterViewIndex].slides[prezIndex.slideViewIndex].questions;
     let votes = Votes.findOne({ _id: Meteor.userId() });
     if (questions && votes && votes[prez._id]) {
       let allAnswersFound = true;
@@ -61,12 +62,13 @@ Template.pollSlide.events({
   },
   'click .addQuestionBtn' () {
     let prez = Presentations.findOne({ _id: Router.current().params.prez });
-    if (prez) {
+    let prezIndex = PrezIndexes.findOne({ _id: Router.current().params.prez });
+    if (prez && prezIndex) {
       let questionTitle = 'What is the question?';
-      let questions = prez.chapters[prez.chapterViewIndex].slides[prez.slideViewIndex].questions
+      let questions = prez.chapters[prezIndex.chapterViewIndex].slides[prezIndex.slideViewIndex].questions
       let questionsLength = (questions ? questions.length : 0);
       let newQuestion = {};
-      newQuestion['chapters.' + prez.chapterViewIndex + '.slides.' + prez.slideViewIndex + '.questions'] = {
+      newQuestion['chapters.' + prezIndex.chapterViewIndex + '.slides.' + prezIndex.slideViewIndex + '.questions'] = {
         questionId: Random.id(),
         text: questionTitle,
         type: 'singleChoiceQuestion',
@@ -109,11 +111,12 @@ Template.pollSlide.events({
   'click .addAnswerBtn' (event) {
     let questionIndex = event.currentTarget.dataset.ref;
     let prez = Presentations.findOne({ _id: Router.current().params.prez });
-    if (prez) {
-      let answers = prez.chapters[prez.chapterViewIndex].slides[prez.slideViewIndex].questions[questionIndex].answers;
+    let prezIndex = PrezIndexes.findOne({ _id: Router.current().params.prez });
+    if (prez && prezIndex) {
+      let answers = prez.chapters[prezIndex.chapterViewIndex].slides[prezIndex.slideViewIndex].questions[questionIndex].answers;
       let answersLength = (answers ? answers.length : 0);
       let newAnswer = {};
-      newAnswer['chapters.' + prez.chapterViewIndex + '.slides.' + prez.slideViewIndex + '.questions.' + questionIndex + '.answers'] = {
+      newAnswer['chapters.' + prezIndex.chapterViewIndex + '.slides.' + prezIndex.slideViewIndex + '.questions.' + questionIndex + '.answers'] = {
         answerId: Random.id(),
         text: 'Answer ' + Number(answersLength + 1),
         minValue: 0,
@@ -129,7 +132,8 @@ Template.pollSlide.events({
   },
   'click .submitAnswersBtn' () {
     let prez = Presentations.findOne({ _id: Router.current().params.prez });
-    if (Meteor.userId() && prez) {
+    let prezIndex = PrezIndexes.findOne({ _id: Router.current().params.prez });
+    if (Meteor.userId() && prez && prezIndex) {
       $('.submitAnswersBtn').addClass('loading');
       let answers = {};
       // regular question answers
@@ -183,10 +187,10 @@ Template.pollSlide.events({
       });
 
       if (Router.current().params.chapter >= 0 && Router.current().params.slide >= 0) {
-        prez.chapterViewIndex = Router.current().params.chapter;
-        prez.slideViewIndex = Router.current().params.slide;
+        prezIndex.chapterViewIndex = Router.current().params.chapter;
+        prezIndex.slideViewIndex = Router.current().params.slide;
       }
-      let questions = prez.chapters[prez.chapterViewIndex].slides[prez.slideViewIndex].questions;
+      let questions = prez.chapters[prezIndex.chapterViewIndex].slides[prezIndex.slideViewIndex].questions;
       if (questions) {
         _.each(questions, function(question) {
           if (answers[question.questionId]) {
@@ -221,12 +225,12 @@ Template.pollSlide.events({
     $('.deleteQuestionModal').modal({
       onApprove: function() {
         let questionIndex = event.currentTarget.dataset.ref;
-        let prez = Presentations.findOne({ _id: Router.current().params.prez });
-        if (prez) {
+        let prezIndex = PrezIndexes.findOne({ _id: Router.current().params.prez });
+        if (prezIndex) {
           let query = {};
           let queryTwo = {};
-          query['chapters.' + prez.chapterViewIndex + '.slides.' + prez.slideViewIndex + '.questions.' + questionIndex] = '';
-          queryTwo['chapters.' + prez.chapterViewIndex + '.slides.' + prez.slideViewIndex + '.questions'] = null;
+          query['chapters.' + prezIndex.chapterViewIndex + '.slides.' + prezIndex.slideViewIndex + '.questions.' + questionIndex] = '';
+          queryTwo['chapters.' + prezIndex.chapterViewIndex + '.slides.' + prezIndex.slideViewIndex + '.questions'] = null;
           Presentations.update({ _id: Router.current().params.prez }, { $unset: query }, function () {
             Presentations.update({ _id: Router.current().params.prez }, { $pull: queryTwo });
           });
@@ -237,12 +241,12 @@ Template.pollSlide.events({
   'click .deleteAnswerBtn' (event) {
     let questionIndex = event.currentTarget.dataset.index;
     let answerIndex = event.currentTarget.dataset.ref;
-    let prez = Presentations.findOne({ _id: Router.current().params.prez });
-    if (prez) {
+    let prezIndex = PrezIndexes.findOne({ _id: Router.current().params.prez });
+    if (prezIndex) {
       let query = {};
       let queryTwo = {};
-      query['chapters.' + prez.chapterViewIndex + '.slides.' + prez.slideViewIndex + '.questions.' + questionIndex + '.answers.' + answerIndex] = '';
-      queryTwo['chapters.' + prez.chapterViewIndex + '.slides.' + prez.slideViewIndex + '.questions.' + questionIndex + '.answers'] = null;
+      query['chapters.' + prezIndex.chapterViewIndex + '.slides.' + prezIndex.slideViewIndex + '.questions.' + questionIndex + '.answers.' + answerIndex] = '';
+      queryTwo['chapters.' + prezIndex.chapterViewIndex + '.slides.' + prezIndex.slideViewIndex + '.questions.' + questionIndex + '.answers'] = null;
       Presentations.update({ _id: Router.current().params.prez }, { $unset: query }, function () {
         Presentations.update({ _id: Router.current().params.prez }, { $pull: queryTwo });
       });

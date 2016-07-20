@@ -1,5 +1,6 @@
 Template.play.onCreated(function () {
   this.subscribe('Presentation', Router.current().params.prez);
+  this.subscribe('PrezIndex', Router.current().params.prez);
   this.subscribe('Viewers', Router.current().params.prez);
   this.subscribe('Votes', Router.current().params.prez);
   Viewers.update({ _id: Router.current().params.prez }, { $addToSet: { viewers: Meteor.userId() }});
@@ -9,32 +10,35 @@ Template.play.onCreated(function () {
 Template.play.helpers({
   slide () {
     let prez = Presentations.findOne({ _id: Router.current().params.prez });
-    if (prez && prez.chapterViewIndex >= 0 && prez.slideViewIndex >= 0) {
-      let slide = prez.chapters[prez.chapterViewIndex].slides[prez.slideViewIndex];
-      slide.chapterIndex = prez.chapterViewIndex;
-      slide.slideIndex = prez.slideViewIndex;
+    let prezIndex = PrezIndexes.findOne({ _id: Router.current().params.prez });
+    if (prez && prezIndex && prezIndex.chapterViewIndex >= 0 && prezIndex.slideViewIndex >= 0) {
+      let slide = prez.chapters[prezIndex.chapterViewIndex].slides[prezIndex.slideViewIndex];
+      slide.chapterIndex = prezIndex.chapterViewIndex;
+      slide.slideIndex = prezIndex.slideViewIndex;
       return slide;
     }
     return false;
   },
   flip () {
-    let prez = Presentations.findOne({ _id: Router.current().params.prez });
-    if (prez) {
-      return prez.flip;
+    let prezIndex = PrezIndexes.findOne({ _id: Router.current().params.prez });
+    if (prezIndex) {
+      return prezIndex.flip;
     }
     return false;
   },
   chapterPosition () {
     let prez = Presentations.findOne({ _id: Router.current().params.prez });
-    if (prez && prez.chapters && prez.chapters.length > 1) {
-      return prez.chapterViewIndex + 1;
+    let prezIndex = PrezIndexes.findOne({ _id: Router.current().params.prez });
+    if (prez && prez.chapters.length > 1 && prezIndex && prezIndex.chapterViewIndex >= 0) {
+      return prezIndex.chapterViewIndex + 1;
     }
     return false;
   },
   slidePagination () {
     let prez = Presentations.findOne({ _id: Router.current().params.prez });
-    if (prez && prez.chapterViewIndex >= 0 && prez.slideViewIndex >= 0) {
-      return (prez.slideViewIndex + 1) + '/' + prez.chapters[prez.chapterViewIndex].slides.length;
+    let prezIndex = PrezIndexes.findOne({ _id: Router.current().params.prez });
+    if (prez && prezIndex && prezIndex.chapterViewIndex >= 0 && prezIndex.slideViewIndex >= 0) {
+      return (prezIndex.slideViewIndex + 1) + '/' + prez.chapters[prezIndex.chapterViewIndex].slides.length;
     }
     return '';
   },
@@ -43,8 +47,9 @@ Template.play.helpers({
 Template.play.events({
   'click .viewLeft' () {
     let prez = Presentations.findOne({ _id: Router.current().params.prez });
-    if (prez && ! prez.isLiveOnly) {
-      Router.go('view', {prez: prez._id, chapter: prez.chapterViewIndex, slide: prez.slideViewIndex});
+    let prezIndex = PrezIndexes.findOne({ _id: Router.current().params.prez });
+    if (prez && prezIndex && ! prez.isLiveOnly) {
+      Router.go('view', {prez: prez._id, chapter: prezIndex.chapterViewIndex, slide: prezIndex.slideViewIndex});
     } else {
       Viewers.update({ _id: Router.current().params.prez }, { $addToSet: { left: Meteor.userId() }});
       $('.viewLeft').addClass('loading');
@@ -52,8 +57,9 @@ Template.play.events({
   },
   'click .viewRight' () {
     let prez = Presentations.findOne({ _id: Router.current().params.prez });
+    let prezIndex = PrezIndexes.findOne({ _id: Router.current().params.prez });
     if (prez && ! prez.isLiveOnly) {
-      Router.go('view', {prez: prez._id, chapter: prez.chapterViewIndex, slide: prez.slideViewIndex});
+      Router.go('view', {prez: prez._id, chapter: prezIndex.chapterViewIndex, slide: prezIndex.slideViewIndex});
     } else {
       Viewers.update({ _id: Router.current().params.prez }, { $addToSet: { right: Meteor.userId() }});
       $('.viewRight').addClass('loading');

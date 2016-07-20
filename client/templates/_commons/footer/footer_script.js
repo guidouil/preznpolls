@@ -4,8 +4,9 @@ Template.footer.helpers({
   },
   isPollSlide () {
     let prez = Presentations.findOne({ _id: Router.current().params.prez });
-    if (prez && prez.chapterViewIndex >= 0 && prez.slideViewIndex >= 0 && prez.chapters && prez.chapters[prez.chapterViewIndex]) {
-      return prez.chapters[prez.chapterViewIndex].slides[prez.slideViewIndex].type === 'pollSlide';
+    let prezIndex = PrezIndexes.findOne({ _id: Router.current().params.prez });
+    if (prez && prezIndex && prezIndex.chapterViewIndex >= 0 && prezIndex.slideViewIndex >= 0 && prez.chapters && prez.chapters[prezIndex.chapterViewIndex]) {
+      return prez.chapters[prezIndex.chapterViewIndex].slides[prezIndex.slideViewIndex].type === 'pollSlide';
     }
     return false;
   },
@@ -18,8 +19,9 @@ Template.footer.helpers({
   voters () {
     let voters = 0;
     let prez = Presentations.findOne({ _id: Router.current().params.prez });
-    if (prez && prez.chapters[prez.chapterViewIndex].slides[prez.slideViewIndex].questions) {
-      let questions = prez.chapters[prez.chapterViewIndex].slides[prez.slideViewIndex].questions;
+    let prezIndex = PrezIndexes.findOne({ _id: Router.current().params.prez });
+    if (prez && prezIndex && prez.chapters[prezIndex.chapterViewIndex].slides[prezIndex.slideViewIndex].questions) {
+      let questions = prez.chapters[prezIndex.chapterViewIndex].slides[prezIndex.slideViewIndex].questions;
       _.each(questions, function (question) {
         let query = {};
         query[Router.current().params.prez + '.' + question.questionId] = {$exists: 1};
@@ -46,15 +48,16 @@ Template.footer.helpers({
 Template.footer.events({
   'click .previousSlide' () {
     let prez = Presentations.findOne({ _id: Router.current().params.prez });
-    if (prez && prez.chapterViewIndex >= 0 && prez.slideViewIndex >= 0) {
+    let prezIndex = PrezIndexes.findOne({ _id: Router.current().params.prez });
+    if (prez && prezIndex.chapterViewIndex >= 0 && prezIndex.slideViewIndex >= 0) {
       Viewers.update({ _id: Router.current().params.prez }, { $unset: { left: '', right: '' }});
       let flip = 'ping';
-      if (prez.flip === flip) {
+      if (prezIndex.flip === flip) {
         flip = 'pong';
       }
-      if (prez.slideViewIndex === 0) { // first slide of chapter
-        if (prez.chapterViewIndex === 0) { // first chapter ?
-          Presentations.update({ _id: prez._id }, {
+      if (prezIndex.slideViewIndex === 0) { // first slide of chapter
+        if (prezIndex.chapterViewIndex === 0) { // first chapter ?
+          PrezIndexes.update({ _id: prez._id }, {
             $set: {
               chapterViewIndex: prez.chapters.length - 1,
               slideViewIndex: prez.chapters[prez.chapters.length - 1].slides.length - 1,
@@ -62,16 +65,16 @@ Template.footer.events({
             },
           });
         } else { // other chapters
-          Presentations.update({ _id: prez._id }, {
+          PrezIndexes.update({ _id: prez._id }, {
             $set: {
-              chapterViewIndex: prez.chapterViewIndex - 1,
-              slideViewIndex: prez.chapters[prez.chapterViewIndex - 1].slides.length - 1,
+              chapterViewIndex: prezIndex.chapterViewIndex - 1,
+              slideViewIndex: prez.chapters[prezIndex.chapterViewIndex - 1].slides.length - 1,
               flip: flip,
             },
           });
         }
       } else { // regular previous slide in current chapter
-        Presentations.update({ _id: Router.current().params.prez }, {
+        PrezIndexes.update({ _id: Router.current().params.prez }, {
           $inc: { slideViewIndex: -1 },
           $set: { flip: flip },
         });
@@ -80,15 +83,16 @@ Template.footer.events({
   },
   'click .nextSlide' () {
     let prez = Presentations.findOne({ _id: Router.current().params.prez });
-    if (prez && prez.chapterViewIndex >= 0 && prez.slideViewIndex >= 0) {
+    let prezIndex = PrezIndexes.findOne({ _id: Router.current().params.prez });
+    if (prez && prezIndex.chapterViewIndex >= 0 && prezIndex.slideViewIndex >= 0) {
       Viewers.update({ _id: Router.current().params.prez }, { $unset: { right: '', left: '' }});
       let flip = 'ping';
-      if (prez.flip === flip) {
+      if (prezIndex.flip === flip) {
         flip = 'pong';
       }
-      if (prez.slideViewIndex === prez.chapters[prez.chapterViewIndex].slides.length - 1) { // last slide of chapter
-        if (prez.chapterViewIndex === prez.chapters.length - 1) { // last chapter ?
-          Presentations.update({ _id: prez._id }, {
+      if (prezIndex.slideViewIndex === prez.chapters[prezIndex.chapterViewIndex].slides.length - 1) { // last slide of chapter
+        if (prezIndex.chapterViewIndex === prez.chapters.length - 1) { // last chapter ?
+          PrezIndexes.update({ _id: prez._id }, {
             $set: {
               chapterViewIndex: 0,
               slideViewIndex: 0,
@@ -96,16 +100,16 @@ Template.footer.events({
             },
           });
         } else { // other chapters
-          Presentations.update({ _id: prez._id }, {
+          PrezIndexes.update({ _id: prez._id }, {
             $set: {
-              chapterViewIndex: prez.chapterViewIndex + 1,
+              chapterViewIndex: prezIndex.chapterViewIndex + 1,
               slideViewIndex: 0,
               flip: flip,
             },
           });
         }
       } else { // regular next slide in current chapter
-        Presentations.update({ _id: Router.current().params.prez }, {
+        PrezIndexes.update({ _id: Router.current().params.prez }, {
           $inc: { slideViewIndex: 1 },
           $set: { flip: flip },
         });

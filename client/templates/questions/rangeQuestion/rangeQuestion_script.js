@@ -2,12 +2,13 @@ Template.rangeQuestion.onRendered(function () {
   let questionIndex = this.data;
   Tracker.autorun(function () {
     let prez = Presentations.findOne({ _id: Router.current().params.prez });
-    if (prez && Router.current().params.chapter >= 0 && Router.current().params.slide >= 0) {
-      prez.chapterViewIndex = Router.current().params.chapter;
-      prez.slideViewIndex = Router.current().params.slide;
+    let prezIndex = PrezIndexes.findOne({ _id: Router.current().params.prez });
+    if (prezIndex && Router.current().params.chapter >= 0 && Router.current().params.slide >= 0) {
+      prezIndex.chapterViewIndex = Router.current().params.chapter;
+      prezIndex.slideViewIndex = Router.current().params.slide;
     }
-    if (questionIndex >= 0 && prez && prez.chapters[prez.chapterViewIndex].slides[prez.slideViewIndex].questions && prez.chapters[prez.chapterViewIndex].slides[prez.slideViewIndex].questions[questionIndex]) {
-      let answers = prez.chapters[prez.chapterViewIndex].slides[prez.slideViewIndex].questions[questionIndex].answers;
+    if (questionIndex >= 0 && prez && prezIndex && prez.chapters[prezIndex.chapterViewIndex].slides[prezIndex.slideViewIndex].questions && prez.chapters[prezIndex.chapterViewIndex].slides[prezIndex.slideViewIndex].questions[questionIndex]) {
+      let answers = prez.chapters[prezIndex.chapterViewIndex].slides[prezIndex.slideViewIndex].questions[questionIndex].answers;
       if (answers && answers.length) {
         _.each(answers, function(answer) {
           if (answer) {
@@ -33,46 +34,54 @@ Template.rangeQuestion.helpers({
   questionId () {
     let questionIndex = Template.instance().data;
     let prez = Presentations.findOne({ _id: Router.current().params.prez });
-    if (prez && Router.current().params.chapter >= 0 && Router.current().params.slide >= 0) {
-      prez.chapterViewIndex = Router.current().params.chapter;
-      prez.slideViewIndex = Router.current().params.slide;
+    let prezIndex = PrezIndexes.findOne({ _id: Router.current().params.prez });
+    if (prezIndex && Router.current().params.chapter >= 0 && Router.current().params.slide >= 0) {
+      prezIndex.chapterViewIndex = Router.current().params.chapter;
+      prezIndex.slideViewIndex = Router.current().params.slide;
     }
-    if (questionIndex >= 0 && prez && prez.chapters[prez.chapterViewIndex].slides[prez.slideViewIndex].questions && prez.chapters[prez.chapterViewIndex].slides[prez.slideViewIndex].questions[questionIndex]) {
-      return prez.chapters[prez.chapterViewIndex].slides[prez.slideViewIndex].questions[questionIndex].questionId;
+    if (questionIndex >= 0 && prez && prezIndex && prez.chapters[prezIndex.chapterViewIndex].slides[prezIndex.slideViewIndex].questions) {
+      return prez.chapters[prezIndex.chapterViewIndex].slides[prezIndex.slideViewIndex].questions[questionIndex].questionId;
     }
     return false;
   },
   questionText () {
     let questionIndex = Template.instance().data;
     let prez = Presentations.findOne({ _id: Router.current().params.prez });
-    if (questionIndex >= 0 && prez && prez.chapters[prez.chapterViewIndex].slides[prez.slideViewIndex].questions) {
-      return prez.chapters[prez.chapterViewIndex].slides[prez.slideViewIndex].questions[questionIndex].text;
+    let prezIndex = PrezIndexes.findOne({ _id: Router.current().params.prez });
+    if (prezIndex && Router.current().params.chapter >= 0 && Router.current().params.slide >= 0) {
+      prezIndex.chapterViewIndex = Router.current().params.chapter;
+      prezIndex.slideViewIndex = Router.current().params.slide;
+    }
+    if (questionIndex >= 0 && prez && prezIndex && prez.chapters[prezIndex.chapterViewIndex].slides[prezIndex.slideViewIndex].questions) {
+      return prez.chapters[prezIndex.chapterViewIndex].slides[prezIndex.slideViewIndex].questions[questionIndex].text;
     }
     return false;
   },
   answers () {
     let questionIndex = Template.instance().data;
     let prez = Presentations.findOne({ _id: Router.current().params.prez });
-    if (prez && Router.current().params.chapter >= 0 && Router.current().params.slide >= 0) {
-      prez.chapterViewIndex = Router.current().params.chapter;
-      prez.slideViewIndex = Router.current().params.slide;
+    let prezIndex = PrezIndexes.findOne({ _id: Router.current().params.prez });
+    if (prezIndex && Router.current().params.chapter >= 0 && Router.current().params.slide >= 0) {
+      prezIndex.chapterViewIndex = Router.current().params.chapter;
+      prezIndex.slideViewIndex = Router.current().params.slide;
     }
-    if (questionIndex >= 0 && prez && prez.chapters[prez.chapterViewIndex].slides[prez.slideViewIndex].questions && prez.chapters[prez.chapterViewIndex].slides[prez.slideViewIndex].questions[questionIndex]) {
-      return prez.chapters[prez.chapterViewIndex].slides[prez.slideViewIndex].questions[questionIndex].answers;
+    if (questionIndex >= 0 && prez && prezIndex && prez.chapters[prezIndex.chapterViewIndex].slides[prezIndex.slideViewIndex].questions) {
+      return prez.chapters[prezIndex.chapterViewIndex].slides[prezIndex.slideViewIndex].questions[questionIndex].answers;
     }
     return false;
   },
   indexes () {
     let questionIndex = Template.instance().data;
     let prez = Presentations.findOne({ _id: Router.current().params.prez });
-    if (prez && Router.current().params.chapter >= 0 && Router.current().params.slide >= 0) {
-      prez.chapterViewIndex = Router.current().params.chapter;
-      prez.slideViewIndex = Router.current().params.slide;
+    let prezIndex = PrezIndexes.findOne({ _id: Router.current().params.prez });
+    if (prezIndex && Router.current().params.chapter >= 0 && Router.current().params.slide >= 0) {
+      prezIndex.chapterViewIndex = Router.current().params.chapter;
+      prezIndex.slideViewIndex = Router.current().params.slide;
     }
-    if (questionIndex >= 0 && prez && prez.chapters[prez.chapterViewIndex].slides[prez.slideViewIndex].questions) {
+    if (questionIndex >= 0 && prez && prezIndex && prez.chapters[prezIndex.chapterViewIndex].slides[prezIndex.slideViewIndex].questions) {
       return {
-        chapterIndex: prez.chapterViewIndex,
-        slideIndex: prez.slideViewIndex,
+        chapterIndex: prezIndex.chapterViewIndex,
+        slideIndex: prezIndex.slideViewIndex,
         questionIndex: questionIndex,
       };
     }

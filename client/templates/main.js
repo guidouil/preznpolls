@@ -28,12 +28,12 @@ Template.registerHelper('isEditingOr', function (value) {
 });
 
 Template.registerHelper('currentIndexes', function (chapterOrSlide) {
-  let prez = Presentations.findOne({ _id: Router.current().params.prez });
-  if (prez) {
+  let prezIndex = PrezIndexes.findOne({ _id: Router.current().params.prez });
+  if (prezIndex) {
     if (chapterOrSlide === 'chapter') {
-      return prez.chapterViewIndex;
+      return prezIndex.chapterViewIndex;
     }
-    return prez.slideViewIndex;
+    return prezIndex.slideViewIndex;
   }
   return 0;
 });

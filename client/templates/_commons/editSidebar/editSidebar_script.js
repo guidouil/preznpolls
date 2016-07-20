@@ -56,8 +56,8 @@ Template.editSidebar.helpers({
     return Presentations.findOne({ _id: Router.current().params.prez });
   },
   isActiveSlide (chapterIndex, slideIndex) {
-    let prez = Presentations.findOne({ _id: Router.current().params.prez });
-    if (prez && prez.chapterViewIndex === chapterIndex && prez.slideViewIndex === slideIndex) {
+    let prezIndex = PrezIndexes.findOne({ _id: Router.current().params.prez });
+    if (prezIndex && prezIndex.chapterViewIndex === chapterIndex && prezIndex.slideViewIndex === slideIndex) {
       return 'inverted';
     }
     return '';
@@ -185,9 +185,11 @@ Template.editSidebar.events({
           color: 'basic',
         }],
       });
-      Presentations.update({ _id: Router.current().params.prez }, { $set: {
+      PrezIndexes.update({ _id: Router.current().params.prez }, {$set: {
         chapterViewIndex: prez.chapters.length - 1,
         slideViewIndex: 0,
+      }});
+      Presentations.update({ _id: Router.current().params.prez }, { $set: {
         chapters: chapters,
       }}, function () {
         $('.presentationSidebar').sidebar('hide');
@@ -195,12 +197,12 @@ Template.editSidebar.events({
     }
   },
   'click .sidebarSlide' (event) {
-    let prez = Presentations.findOne({ _id: Router.current().params.prez });
+    let prezIndex = PrezIndexes.findOne({ _id: Router.current().params.prez });
     let flip = 'ping';
-    if (prez.flip === flip) {
+    if (prezIndex.flip === flip) {
       flip = 'pong';
     }
-    Presentations.update({ _id: Router.current().params.prez }, { $set: {
+    PrezIndexes.update({ _id: Router.current().params.prez }, { $set: {
       chapterViewIndex: event.currentTarget.dataset.chapter,
       slideViewIndex: event.currentTarget.dataset.index,
       flip: flip,

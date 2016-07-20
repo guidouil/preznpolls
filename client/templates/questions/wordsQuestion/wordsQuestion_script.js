@@ -2,12 +2,13 @@ Template.wordsQuestion.helpers({
   questionId () {
     let questionIndex = Template.instance().data;
     let prez = Presentations.findOne({ _id: Router.current().params.prez });
-    if (prez && Router.current().params.chapter >= 0 && Router.current().params.slide >= 0) {
-      prez.chapterViewIndex = Router.current().params.chapter;
-      prez.slideViewIndex = Router.current().params.slide;
+    let prezIndex = PrezIndexes.findOne({ _id: Router.current().params.prez });
+    if (prezIndex && Router.current().params.chapter >= 0 && Router.current().params.slide >= 0) {
+      prezIndex.chapterViewIndex = Router.current().params.chapter;
+      prezIndex.slideViewIndex = Router.current().params.slide;
     }
-    if (questionIndex >= 0 && prez && prez.chapters[prez.chapterViewIndex].slides[prez.slideViewIndex].questions) {
-      return prez.chapters[prez.chapterViewIndex].slides[prez.slideViewIndex].questions[questionIndex].questionId;
+    if (questionIndex >= 0 && prez && prezIndex && prez.chapters[prezIndex.chapterViewIndex].slides[prezIndex.slideViewIndex].questions) {
+      return prez.chapters[prezIndex.chapterViewIndex].slides[prezIndex.slideViewIndex].questions[questionIndex].questionId;
     }
     return false;
   },

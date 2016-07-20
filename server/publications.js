@@ -23,6 +23,10 @@ Meteor.publish('Presentation', function (prezId) {
   return Presentations.find({ _id: prezId, isPublic: true });
 });
 
+Meteor.publish('PrezIndex', function (prezId) {
+  return PrezIndexes.find({ _id: prezId });
+});
+
 Meteor.publish('Viewers', function (prezId) {
   return Viewers.find({ _id: prezId });
 });

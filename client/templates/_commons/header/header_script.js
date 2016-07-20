@@ -67,6 +67,9 @@ Template.header.events({
               }],
             }],
           });
+          PrezIndexes.insert({
+            _id: prezId,
+          });
           Viewers.insert({
             _id: prezId,
             viewers: [],

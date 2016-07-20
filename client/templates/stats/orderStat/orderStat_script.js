@@ -1,12 +1,13 @@
 Template.orderStat.onCreated(function () {
   let questionIndex = this.data;
   let prez = Presentations.findOne({ _id: Router.current().params.prez });
-  if (prez && Router.current().params.chapter >= 0 && Router.current().params.slide >= 0) {
-    prez.chapterViewIndex = Router.current().params.chapter;
-    prez.slideViewIndex = Router.current().params.slide;
+  let prezIndex = PrezIndexes.findOne({ _id: Router.current().params.prez });
+  if (prezIndex && Router.current().params.chapter >= 0 && Router.current().params.slide >= 0) {
+    prezIndex.chapterViewIndex = Router.current().params.chapter;
+    prezIndex.slideViewIndex = Router.current().params.slide;
   }
-  let answers = prez.chapters[prez.chapterViewIndex].slides[prez.slideViewIndex].questions[questionIndex].answers;
-  let questionId = prez.chapters[prez.chapterViewIndex].slides[prez.slideViewIndex].questions[questionIndex].questionId;
+  let answers = prez.chapters[prezIndex.chapterViewIndex].slides[prezIndex.slideViewIndex].questions[questionIndex].answers;
+  let questionId = prez.chapters[prezIndex.chapterViewIndex].slides[prezIndex.slideViewIndex].questions[questionIndex].questionId;
   this.answers = answers;
   this.questionId = questionId;
   this.votersCount = new ReactiveVar(0);
