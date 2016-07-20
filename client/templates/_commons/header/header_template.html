@@ -25,9 +25,15 @@
         </a>
       {{/if}}
     </div>
-    <a class="center header item" href="{{pathFor 'home'}}">
-      <i class="big pied piper icon"></i>
-    </a>
+    {{#if isHome}}
+      <div class="center header item">
+        <i class="big pied piper icon"></i>
+      </div>
+    {{else}}
+      <a class="center header item" href="{{pathFor 'home'}}">
+        <i class="big pied piper icon"></i>
+      </a>
+    {{/if}}
     <div class="right menu">
       {{#if isPlaying}}
         <a class="item showPlaySidebar">
