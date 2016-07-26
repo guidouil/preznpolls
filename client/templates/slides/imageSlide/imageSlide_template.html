@@ -8,8 +8,7 @@
     {{#if isEditing}}
       <div class="ui basic center aligned segment">
         <div class="field">
-          <small>Image url</small>
-          <p class="editable" data-field="chapters.{{chapterIndex}}.slides.{{slideIndex}}.image" data-title="Image slide image url" data-position="top center">{{image}}</p>
+          <div class="ui fluid icon labeled button editImageBtn" data-field="chapters.{{chapterIndex}}.slides.{{slideIndex}}.image"><i class="image icon"></i>Slide main image</div>
         </div>
       </div>
     {{/if}}
@@ -23,8 +22,7 @@
         <div class="ui two column grid">
           <div class="column">
             <div class="field">
-              <small>Background image url</small>
-              <p class="editable" data-content="Image slide background image url" data-position="bottom center" data-field="chapters.{{chapterIndex}}.slides.{{slideIndex}}.backgroundImage">{{backgroundImage}}</p>
+              <div class="ui fluid icon labeled button editImageBtn" data-field="chapters.{{chapterIndex}}.slides.{{slideIndex}}.backgroundImage"><i class="image icon"></i>Background image</div>
             </div>
           </div>
           <div class="column">

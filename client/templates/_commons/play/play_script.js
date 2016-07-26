@@ -3,6 +3,7 @@ Template.play.onCreated(function () {
   this.subscribe('PrezIndex', Router.current().params.prez);
   this.subscribe('Viewers', Router.current().params.prez);
   this.subscribe('Votes', Router.current().params.prez);
+  this.subscribe('Images');
   Viewers.update({ _id: Router.current().params.prez }, { $addToSet: { viewers: Meteor.userId() }});
   Meteor.call('addPrezViewer', Router.current().params.prez);
 });

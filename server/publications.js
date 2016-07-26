@@ -40,3 +40,7 @@ Meteor.publish('Votes', function (prezId) {
   query[prezId] = { $exists: 1 };
   return Votes.find(query);
 });
+
+Meteor.publish('Images', function () {
+  return Images.find().cursor;
+});

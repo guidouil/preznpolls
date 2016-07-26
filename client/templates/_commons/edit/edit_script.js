@@ -3,6 +3,7 @@ Template.edit.onCreated(function () {
   this.subscribe('PrezIndex', Router.current().params.prez);
   this.subscribe('Viewers', Router.current().params.prez);
   this.subscribe('Votes', Router.current().params.prez);
+  this.subscribe('Images');
 });
 
 Template.edit.helpers({
@@ -15,7 +16,7 @@ Template.edit.helpers({
   slide () {
     let prez = Presentations.findOne({ _id: Router.current().params.prez });
     let prezIndex = PrezIndexes.findOne({ _id: Router.current().params.prez });
-    if (prez && prezIndex.chapterViewIndex >= 0 && prezIndex.slideViewIndex >= 0 && prez.chapters && prez.chapters[prezIndex.chapterViewIndex] && prez.chapters[prezIndex.chapterViewIndex].slides) {
+    if (prez && prezIndex && prezIndex.chapterViewIndex >= 0 && prezIndex.slideViewIndex >= 0 && prez.chapters && prez.chapters[prezIndex.chapterViewIndex] && prez.chapters[prezIndex.chapterViewIndex].slides) {
       let slide = prez.chapters[prezIndex.chapterViewIndex].slides[prezIndex.slideViewIndex];
       slide.chapterIndex = prezIndex.chapterViewIndex;
       slide.slideIndex = prezIndex.slideViewIndex;
@@ -33,7 +34,16 @@ Template.edit.helpers({
 });
 
 Template.edit.events({
-
+  'click .editImageBtn' (event) {
+    Session.set('imageField', event.currentTarget.dataset.field);
+    $('.mediaSidebar')
+    .sidebar({
+      transition: 'scale down',
+      onVisible: function () {
+        $('.mediaTabs .item').tab();
+      },
+    }).sidebar('show');
+  },
 });
 
 Template.edit.onRendered(function () {

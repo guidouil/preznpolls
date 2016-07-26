@@ -1,0 +1,50 @@
+<template name='mediaSidebar'>
+  <div class="ui right very wide sidebar segment mediaSidebar">
+    <div class="ui top attached tabular menu mediaTabs">
+      <a class="item active" data-tab="photos">Photos from PEXELS</a>
+      <a class="item" data-tab="gifs">GIFs fom GIPHY</a>
+      <a class="item" data-tab="uploads">Your uploads</a>
+    </div>
+    <div class="ui bottom attached tab segment mediaTab active" data-tab="photos">
+      <div class="ui fluid icon input">
+        <input type="text" placeholder="Search a photo keyword or a color" id="searchPexels">
+        <i class="search link icon searchPexels"></i>
+      </div>
+      <br>
+      <div class="grid">
+        {{#each pexels}}
+        <div class="grid-item"><img src="{{src.tiny}}" alt="{{photographer}}" width="140" height="100" class="pexel"/></div>
+        {{/each}}
+      </div>
+    </div>
+    <div class="ui bottom attached tab segment mediaTab" data-tab="gifs">
+      <div class="ui fluid icon input">
+        <input type="text" placeholder="Search by gif keywords" id="searchGiphy">
+        <i class="search link icon searchGiphy"></i>
+      </div>
+      <br>
+      <div class="grid">
+        {{#each giphy}}
+        <div class="grid-item"><img src="{{images.downsized.url}}" alt="{{slug}}" class="giphy"/></div>
+        {{/each}}
+      </div>
+    </div>
+    <div class="ui bottom attached tab segment mediaTab" data-tab="uploads">
+      <div class="ui fluid action input">
+        <input type="text" readonly class="uploadImage imageText">
+        <input type="file" id="imageInput">
+        <div class="ui icon button uploadImage">
+          <i class="cloud upload icon"></i>
+        </div>
+      </div>
+      {{#with currentUpload}}
+        <div class="ui indicating progress" data-value="{{progress.get}}" data-total="100" id="uploadProgress">
+          <div class="bar">
+            <div class="progress"></div>
+          </div>
+          <div class="label">Uploading {{file.name}}</div>
+        </div>
+      {{/with}}
+    </div>
+  </div>
+</template>
