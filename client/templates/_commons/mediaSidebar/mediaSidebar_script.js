@@ -112,7 +112,7 @@ Template.mediaSidebar.events({
         } else {
           let imageField = Session.get('imageField');
           let query = {};
-          query[imageField] = Images.link(fileRef);
+          query[imageField] = Meteor.absoluteUrl() + fileRef.path.replace('/data/', '');
           Presentations.update({ _id: Router.current().params.prez }, { $set: query });
         }
         template.currentUpload.set(false);
