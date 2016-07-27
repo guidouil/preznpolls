@@ -1,6 +1,6 @@
 <template name='settings'>
   {{#if isPrezOwner}}
-  <div class="ui container">
+  <div class="ui container transitions-content">
     <div class="ui basic segment">
       {{#with presentation}}
         <h1 class="ui center alligned header">Presentation settings</h1>
@@ -19,7 +19,7 @@
           <button class="ui positive fluid icon labeled button disabled setPrezId"><i class="check icon"></i>Apply URL change</button>
 
           <h3 class="ui dividing header">Access controls</h3>
-          <div class="ui three column grid">
+          <div class="ui three column stackable grid">
             <div class="column">
               <div class="ui basic segment">
                 <div class="field">
@@ -107,8 +107,8 @@
           <h3 class="ui dividing header">Data management</h3>
           <div class="field">
             <div class="ui fluid large buttons">
-              <div class="ui red basic button resetViews">Reset presentations views</div>
-              <div class="ui red button resetVotes">Reset presentation answers</div>
+              <div class="ui red basic button resetViews">Reset views</div>
+              <div class="ui red button resetVotes">Reset answers</div>
             </div>
           </div>
           <div class="field">
