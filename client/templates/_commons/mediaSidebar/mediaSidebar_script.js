@@ -1,5 +1,6 @@
 Template.mediaSidebar.onCreated(function () {
   let template = this;
+  template.subscribe('MyImages');
   template.pexels = new ReactiveVar(false);
   template.giphy = new ReactiveVar(false);
   template.currentUpload = new ReactiveVar(false);
@@ -30,6 +31,12 @@ Template.mediaSidebar.helpers({
   },
   currentUpload () {
     return Template.instance().currentUpload.get();
+  },
+  myUploads () {
+    return Images.find({ userId: Meteor.userId() });
+  },
+  toUrl (path) {
+    return Meteor.absoluteUrl() + path.replace('/data/', '');
   },
 });
 
@@ -79,6 +86,14 @@ Template.mediaSidebar.events({
   'click .giphy' () {
     let imageField = Session.get('imageField');
     Meteor.call('downloadImage', this.images.original.url, Router.current().params.prez, imageField, function () {
+      $('.mediaSidebar').sidebar('hide');
+    });
+  },
+  'click .uploaded' () {
+    let imageField = Session.get('imageField');
+    let query = {};
+    query[imageField] = Meteor.absoluteUrl() + this.path.replace('/data/', '');
+    Presentations.update({ _id: Router.current().params.prez }, { $set: query }, function () {
       $('.mediaSidebar').sidebar('hide');
     });
   },

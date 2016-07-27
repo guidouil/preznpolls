@@ -41,6 +41,9 @@ Meteor.publish('Votes', function (prezId) {
   return Votes.find(query);
 });
 
-Meteor.publish('Images', function () {
-  return Images.find().cursor;
+Meteor.publish('MyImages', function () {
+  if (this.userId) {
+    return Images.find({ userId: this.userId }).cursor;
+  }
+  return false;
 });

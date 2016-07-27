@@ -2,7 +2,6 @@ Template.view.onCreated(function () {
   this.subscribe('Presentation', Router.current().params.prez);
   this.subscribe('Viewers', Router.current().params.prez);
   this.subscribe('Votes', Router.current().params.prez);
-  this.subscribe('Images');
   Viewers.update({ _id: Router.current().params.prez }, { $addToSet: { viewers: Meteor.userId() }});
   this.flip = new ReactiveVar('ping');
 });
