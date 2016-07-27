@@ -3,7 +3,16 @@
     <div class="transitions-container editContainer"  style="height:100%;">
       {{> UI.dynamic template=flip data=slide}}
     </div>
-    {{> footer}}
+    <div class="ui large compact icon buttons pagination-buttons">
+      <div class="ui button previousSlide"><i class="angle double left icon"></i></div>
+      <div class="ui disabled button">
+        {{#if chapterPosition}}
+        C.{{chapterPosition}} -
+        {{/if}}
+        {{slidePagination}}
+      </div>
+      <div class="ui button nextSlide"><i class="angle double right icon"></i></div>
+    </div>
   {{else}}
     {{> notFound}}
   {{/if}}

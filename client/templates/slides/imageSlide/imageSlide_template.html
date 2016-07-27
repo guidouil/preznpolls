@@ -4,14 +4,14 @@
     <div class="ui {{color}} center aligned segment">
       <h1 class="ui header editable" data-field="chapters.{{chapterIndex}}.slides.{{slideIndex}}.title" data-title="Image slide title" data-position="top center">{{title}}</h1>
       <img class="ui massive centered image" src="{{image}}">
-    </div>
-    {{#if isEditing}}
+      {{#if isEditing}}
       <div class="ui basic center aligned segment">
         <div class="field">
           <div class="ui fluid icon labeled button editImageBtn" data-field="chapters.{{chapterIndex}}.slides.{{slideIndex}}.image"><i class="image icon"></i>Slide main image</div>
         </div>
       </div>
-    {{/if}}
+      {{/if}}
+    </div>
     {{#if isEditingOr description}}
       <div class="ui {{color}} center aligned segment">
         <h3 class="ui header editable" data-field="chapters.{{chapterIndex}}.slides.{{slideIndex}}.description" data-content="Image slide additional text" data-position="top center">{{description}}</h3>

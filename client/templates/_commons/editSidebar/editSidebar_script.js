@@ -70,7 +70,7 @@ Template.editSidebar.helpers({
     case 'textSlide':
       return 'file text outline';
     case 'imageSlide':
-      return 'file image outline';
+      return 'image';
     case 'videoSlide':
       return 'film';
     case 'pollSlide':

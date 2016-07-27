@@ -4,7 +4,33 @@
 
     <div class="ui basic segment">
       <div class="ui column stackable grid">
+
+        <div class="eleven wide column">
+
+          <h2 class="ui header">Your presentations</h2>
+          {{#if myPresentations}}
+          <div class="ui stackable four column grid">
+            {{#each myPresentations}}
+              <div class="column">{{> miniPrez}}</div>
+            {{/each}}
+          </div>
+          {{else}}
+          <button class="ui large fluid positive icon labeled button createPrezBigBtn"><i class="plus icon"></i>Create a presentation</button>
+          {{/if}}
+
+          <div class="ui divider"></div>
+
+          <h2 class="ui header">Public presentations</h2>
+          <div class="ui stackable four column grid">
+            {{#each presentations}}
+              <div class="column">{{> miniPrez}}</div>
+            {{/each}}
+          </div>
+
+        </div>
+
         <div class="five wide column">
+
           <h1 class="ui center aligned header">Welcome to Prez&Polls!</h1>
           <h2 class="ui center aligned header">A new way to engage your audience in real time.</h2>
           <p class="ui header">
@@ -31,32 +57,9 @@
           <p class="ui tiny center aligned header">
             Prez&Polls is still in early alpha.
           </p>
-        </div>
-
-        <div class="eleven wide column">
-
-          <h2 class="ui header">Your presentations</h2>
-          {{#if myPresentations}}
-          <div class="ui stackable four column grid">
-            {{#each myPresentations}}
-              <div class="column">{{> miniPrez}}</div>
-            {{/each}}
-          </div>
-          {{else}}
-          <button class="ui large fluid positive icon labeled button createPrezBigBtn"><i class="plus icon"></i>Create a presentation</button>
-          {{/if}}
-
-          <div class="ui divider"></div>
-
-          <h2 class="ui header">Public presentations</h2>
-          <div class="ui stackable four column grid">
-            {{#each presentations}}
-              <div class="column">{{> miniPrez}}</div>
-            {{/each}}
-          </div>
-
 
         </div>
+
       </div>
     </div>
 

@@ -17,7 +17,7 @@
               <i class="{{slideIcon type}} icon"></i>
               {{title}}
             </button>
-            <button class="ui compact icon button deleteSlideBtn"  data-index="{{@index}}"  data-chapter="{{../order}}" data-title="Delete this slide" data-position="right center">
+            <button class="ui compact icon button deleteSlideBtn"  data-index="{{@index}}"  data-chapter="{{../order}}" data-title="Delete this {{type}}" data-position="right center">
               <i class="delete icon"></i>
             </button>
           </div>
@@ -65,7 +65,7 @@
         data-content="This slide let's you put a large image to show your audience some nice stuff (it can be an animated GIF)"
         data-position="bottom center"
         data-ref="imageSlide">
-        <i class="file image outline icon"></i>
+        <i class="image icon"></i>
         Image slide
       </div>
       <div class="ui ok red inverted massive labeled icon button slideTypeBtn"
