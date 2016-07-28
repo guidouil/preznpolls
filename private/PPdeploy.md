@@ -4,7 +4,7 @@ rm -rf preznpolls-source
 rm -rf builds
 git clone https://github.com/guidouil/preznpolls.git preznpolls-source
 cd preznpolls-source
-meteor npm install --save moment highcharts sweetalert2 autoprefixer
+meteor npm install --save moment highcharts autoprefixer
 meteor build ../builds/. --server-only
 cd ../builds/
 tar xzf preznpolls-source.tar.gz
