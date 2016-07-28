@@ -4,22 +4,6 @@ Template.mediaSidebar.onCreated(function () {
   template.pexels = new ReactiveVar(false);
   template.giphy = new ReactiveVar(false);
   template.currentUpload = new ReactiveVar(false);
-  Meteor.call('getPopularPexels', function (error, result) {
-    if (error) {
-      console.error(error);
-    }
-    if (result && result.statusCode === 200) {
-      template.pexels.set(result.data.photos);
-    }
-  });
-  Meteor.call('getPopularGiphy', function (error, result) {
-    if (error) {
-      console.error(error);
-    }
-    if (result && result.statusCode === 200) {
-      template.giphy.set(result.data.data);
-    }
-  });
 });
 
 Template.mediaSidebar.helpers({
@@ -41,6 +25,16 @@ Template.mediaSidebar.helpers({
 });
 
 Template.mediaSidebar.events({
+  'click .popularPexels' (e, template) {
+    Meteor.call('getPopularPexels', function (error, result) {
+      if (error) {
+        console.error(error);
+      }
+      if (result && result.statusCode === 200) {
+        template.pexels.set(result.data.photos);
+      }
+    });
+  },
   'click .searchPexels' () {
     let query = $('#searchPexels').val();
     let template = Template.instance();
@@ -58,6 +52,16 @@ Template.mediaSidebar.events({
       event.stopPropagation();
       $('.searchPexels').click();
     }
+  },
+  'click .popularGiphy' (e, template) {
+    Meteor.call('getPopularGiphy', function (error, result) {
+      if (error) {
+        console.error(error);
+      }
+      if (result && result.statusCode === 200) {
+        template.giphy.set(result.data.data);
+      }
+    });
   },
   'click .searchGiphy' () {
     let query = $('#searchGiphy').val();
