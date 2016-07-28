@@ -1,49 +1,13 @@
 <template name='mediaSidebar'>
   <div class="ui right very wide sidebar segment mediaSidebar">
     <div class="ui top attached tabular menu mediaTabs">
-      <a class="item active" data-tab="photos">Photos from PEXELS</a>
+      <a class="item active" data-tab="uploads">Your Uploads</a>
+      <a class="item" data-tab="photos">Photos from PEXELS</a>
       <a class="item" data-tab="gifs">GIFs fom GIPHY</a>
-      <a class="item" data-tab="uploads">Your uploads</a>
     </div>
-    <div class="ui bottom attached tab segment mediaTab active" data-tab="photos">
-      <div class="ui fluid icon input">
-        <input type="text" placeholder="Search a photo keyword or a color" id="searchPexels">
-        <i class="search link icon searchPexels"></i>
-      </div>
-      <br>
-      <div class="ui fluid button popularPexels">Load popular PEXELS</div>
-      <div class="grid">
-        {{#each pexels}}
-        <div class="grid-item">
-          <img src="{{src.tiny}}" alt="{{photographer}}" width="140" height="100" class="pexel"/>
-        </div>
-        {{/each}}
-      </div>
-      <div class="ui small header powered">
-        Powered by <a href="https://www.pexels.com/" target="_blanck" class="">PEXELS</a>
-      </div>
-    </div>
-    <div class="ui bottom attached tab segment mediaTab" data-tab="gifs">
-      <div class="ui fluid icon input">
-        <input type="text" placeholder="Search by gif keywords" id="searchGiphy">
-        <i class="search link icon searchGiphy"></i>
-      </div>
-      <br>
-      <div class="ui fluid button popularGiphy">Load popular GIPHY</div>
-      <div class="grid">
-        {{#each giphy}}
-        <div class="grid-item">
-          <img src="{{images.downsized.url}}" alt="{{slug}}"  width="140" height="100" class="giphy"/>
-        </div>
-        {{/each}}
-      </div>
-      <div class="ui small header powered">
-        Powered by <a href="http://giphy.com/" target="_blanck" class="">GIPHY</a>
-      </div>
-    </div>
-    <div class="ui bottom attached tab segment mediaTab" data-tab="uploads">
+    <div class="ui bottom attached tab segment mediaTab active" data-tab="uploads">
       <div class="ui fluid action input">
-        <input type="text" readonly class="uploadImage imageText">
+        <input type="text" readonly class="uploadImage imageText" placeholder="Click here to upload an image. Max 10MB.">
         <input type="file" id="imageInput">
         <div class="ui icon button uploadImage">
           <i class="cloud upload icon"></i>
@@ -61,9 +25,46 @@
       <div class="grid">
         {{#each myUploads}}
         <div class="grid-item">
+          <i class="red large link close icon deleteImage"></i>
           <img src="{{toUrl path}}" alt="{{name}}" width="140" height="100" class="uploaded"/>
         </div>
         {{/each}}
+      </div>
+    </div>
+    <div class="ui bottom attached tab segment mediaTab" data-tab="photos">
+      <div class="ui fluid icon input">
+        <input type="text" placeholder="Search a photo keyword or a color" id="searchPexels">
+        <i class="search link icon searchPexels"></i>
+      </div>
+      <br>
+      <div class="ui fluid button popularPexels">Load popular PEXELS</div>
+      <div class="grid">
+        {{#each pexels}}
+        <div class="grid-item">
+          <img src="{{src.tiny}}" alt="{{photographer}}" width="140" height="100" class="pexel"/>
+        </div>
+        {{/each}}
+      </div>
+      <div class="ui small header powered">
+        Powered by <a href="https://www.pexels.com/" target="_blank" class="">PEXELS</a>
+      </div>
+    </div>
+    <div class="ui bottom attached tab segment mediaTab" data-tab="gifs">
+      <div class="ui fluid icon input">
+        <input type="text" placeholder="Search GIF by keywords or mêmes ツ" id="searchGiphy">
+        <i class="search link icon searchGiphy"></i>
+      </div>
+      <br>
+      <div class="ui fluid button popularGiphy">Load popular GIPHY</div>
+      <div class="grid">
+        {{#each giphy}}
+        <div class="grid-item">
+          <img src="{{images.downsized.url}}" alt="{{slug}}"  width="140" height="100" class="giphy"/>
+        </div>
+        {{/each}}
+      </div>
+      <div class="ui small header powered">
+        Powered by <a href="http://giphy.com/" target="_blank">GIPHY</a>
       </div>
     </div>
   </div>

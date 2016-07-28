@@ -4,6 +4,7 @@
   height: 90px;
   background: #e6e5e4;
   border: 1px solid #b6b5b4;
+  position: relative;
 }
 .mediaTab {
   min-height: 95%;
@@ -15,4 +16,10 @@
   position: absolute;
   bottom: 5px;
   right: 5px;
+}
+.deleteImage {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: inline;
 }

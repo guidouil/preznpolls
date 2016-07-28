@@ -140,6 +140,9 @@ Template.mediaSidebar.events({
       upload.start();
     }
   },
+  'click .deleteImage' () {
+    Images.remove({_id: this._id});
+  },
 });
 
 Template.mediaSidebar.onRendered(function () {
