@@ -11,3 +11,8 @@
 .ui.action.input input[type="file"] {
   display: none;
 }
+.powered {
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+}
