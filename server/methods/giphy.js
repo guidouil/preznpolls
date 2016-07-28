@@ -1,6 +1,6 @@
 let Giphy = {};
 
-Giphy.k = 'dc6zaTOxFJmzC';
+Giphy.k = '3o6Zt1qkTxX6ARlPTu'.replace(/T/g, 'F');
 
 Meteor.methods({
   getPopularGiphy: function () {
