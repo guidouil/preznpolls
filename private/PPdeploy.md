@@ -1,3 +1,4 @@
+```sh
 # NOT AS ROOT
 cd
 rm -rf preznpolls-source
@@ -21,3 +22,4 @@ export PORT=3000
 export ROOT_URL='http://preznpolls.com'
 forever start --append --uid "preznpolls" preznpolls/main.js
 date
+```
